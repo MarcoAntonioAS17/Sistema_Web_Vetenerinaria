@@ -1,0 +1,70 @@
+@import url(citas-prox.css);
+
+.contenedor{
+    width: 59%;
+    height: 450px;
+    margin-left: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#contenedor-inicio{
+    margin-top: 20px;
+    background-color: #eee;
+}
+
+.opcion{
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    
+    width: 30%;
+    height: 200px;
+    padding: 20px;
+    
+}
+
+.icono{
+    width: 7em;
+    height: 7em; 
+}
+
+p{
+    font-family: arial;
+    width: 100%;
+}
+
+h1{
+    font-family: arial;
+    font-style: oblique;
+    margin-top: 1em;
+}
+
+#opc1{
+    background-color: #7a70d6;
+}
+
+#opc2{
+    background-color: #70a9d6;
+}
+
+#opc3{
+    background-color: #7ad6c1;
+}
+
+#opc4{
+    background-color: #70d6c1;
+}
+
+#opc5{
+    background-color: #70d67f;
+}
+
+#opc6{
+    background-color: #a4d670;
+}
