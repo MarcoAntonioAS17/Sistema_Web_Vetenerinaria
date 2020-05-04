@@ -36,22 +36,79 @@
         </label>
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
-
-    <div class="sidebar">
+	
+	<div class="sidebar">
         
         <div class="logo">
            <img src="../img/Logo-Extend.svg">
         </div>
             <ul class="menu select">
-                <li class="title">INICIO</li>
-                <li class="active"><a href="Inicio.jsp"><i class="icon-home icon"></i>Inicio</a></li>
-                <li class="title">INFORMACIÓN</li>
-                <li><a href="#">Acerca de... <i class="icon-chevron-small-right icon-right icon"></i></a>
+                <li class="title">MENU</li>
+                
+                <li class="active">
+                    <a href="./index.html">
+                    <i class="icon-home icon"></i>Inicio</a>
+                </li>
+                
+                <li class="title">ADMINISTRAR VENTAS</li>
+                <li>
+                   <a href="">Ventas<i class="icon-chevron-small-right icon-right icon"></i>
+                   </a>
                     <ul>
                         <li>
                             <a href="#">
                                 <i class="sub_menu"></i>
-                                Pacientes
+                                Ventas Realizadas
+                            </a>
+                            <a href="#">
+                                <i class="sub_menu"></i>
+                                Nueva Venta
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                   <a href="">Citas<i class="icon-chevron-small-right icon-right icon"></i>
+                   </a>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="sub_menu"></i>
+                                Ver Citas
+                            </a>
+                            <a href="#">
+                                <i class="sub_menu"></i>
+                                Agendar Cita
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                   <a href="">Clientes<i class="icon-chevron-small-right icon-right icon"></i>
+                   </a>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="sub_menu"></i>
+                                Ver Clientes
+                            </a>
+                            <a href="#">
+                                <i class="sub_menu"></i>
+                                Mascotas
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="title">ADMINISTRACIÓN DE INVENTARIO</li>
+                <li>
+                   <a href="">Compras<i class="icon-chevron-small-right icon-right icon"></i>
+                   </a>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="sub_menu"></i>
+                                Ver Compras
                             </a>
                             <a href="#">
                                 <i class="sub_menu"></i>
@@ -60,25 +117,27 @@
                         </li>
                     </ul>
                 </li>
-                <li ><a href="#">Citas </a></li>
-                <li><a href="#">Productos<i class="icon-chevron-small-right icon-right icon"></i></a>
+                <li>
+                   <a href="">Inventario<i class="icon-chevron-small-right icon-right icon"></i>
+                   </a>
                     <ul>
                         <li>
                             <a href="#">
                                 <i class="sub_menu"></i>
-                                Alimentos
+                                Consultar Inventario
                             </a>
                             <a href="#">
                                 <i class="sub_menu"></i>
-                                Artículos
+                                Categorias
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li ><a href="Compras.jsp">Compras</a></li>
-                <li ><a href="ventas.jsp">Ventas</a></li>
+                <li class="title">SISTEMA</li>
+                <li ><a href="">Acceso al sistema</a></li>
             </ul>
     </div>
+	
     <div id="contenido">
         <div id="contenedor-inicio" class="contenedor">
             <div id="opc1" class="opcion">
