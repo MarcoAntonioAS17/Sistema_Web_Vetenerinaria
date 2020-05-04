@@ -24,15 +24,18 @@
     
 <body>
     
-        <input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="">
+    <input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="">
+    <div id="label_sup">
         <label id="hamburger" for="abrir-cerrar">
-           
             <div class="button">
                 <div class="menu_button"></div>
                 <div class="menu_button"></div>
                 <div class="menu_button"></div>
+                
             </div>
         </label>
+        <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
+    </div>
 
     <div class="sidebar">
         
