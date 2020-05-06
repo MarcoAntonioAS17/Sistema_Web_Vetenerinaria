@@ -110,7 +110,7 @@
                                 <i class="sub_menu"></i>
                                 Ver Compras
                             </a>
-                            <a href="#">
+                            <a href="Compras.jsp">
                                 <i class="sub_menu"></i>
                                 Proveedores
                             </a>
