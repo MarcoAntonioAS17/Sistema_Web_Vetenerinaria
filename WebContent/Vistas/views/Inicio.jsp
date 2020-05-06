@@ -61,7 +61,7 @@
                                 <i class="sub_menu"></i>
                                 Ventas Realizadas
                             </a>
-                            <a href="#">
+                            <a href="Ventas.jsp">
                                 <i class="sub_menu"></i>
                                 Nueva Venta
                             </a>
@@ -107,7 +107,7 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="Compras.jsp">
                                 <i class="sub_menu"></i>
                                 Ver Compras
                             </a>
@@ -123,7 +123,7 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="Inventario.jsp">
+                            <a href="Inventario.html">
                                 <i class="sub_menu"></i>
                                 Consultar Inventario
                             </a>

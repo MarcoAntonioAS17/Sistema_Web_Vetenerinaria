@@ -11,7 +11,7 @@
 
     <!--- Custom CSS for this page --->
     <link rel="stylesheet" href="../icons/style.css">
-    <link rel="stylesheet" href="../CSS/Proveedores.css">
+    <link rel="stylesheet" href="../CSS/proveedores.css">
 </head>
     
 <body>
@@ -154,7 +154,7 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
-    <script type="text/javascript" src="../scripts/proveedores.js"></script>
+    <script type="text/javascript" src="../scripts/script.js"></script>
     
 </body>
 </html>

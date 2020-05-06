@@ -1,4 +1,11 @@
-.icon-btn{
-    font-size: .7rem;
-    transition: color 300ms;
+@import url("formulario.css");
+@import url("style.css");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
 }
