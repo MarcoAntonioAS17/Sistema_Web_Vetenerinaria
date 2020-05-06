@@ -1,0 +1,71 @@
+
+h1{
+    font-family: helvetica;
+    font-style: normal;
+    text-align: center;
+    width: 100%;
+    background-color: #70a9d6;
+}    
+
+table{
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    width: 95%;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-collapse: collapse;
+}
+table a{
+    margin-left: 10px;
+}
+
+table a img{
+	padding-top: 7px;
+	padding-bottom: 5px;
+}
+
+th, tr{
+    padding-left: 10px;
+}
+
+tr{
+    height: 30px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color:#daeffe;
+}
+	
+tbody tr:nth-child(even) {
+    background-color:#fff;
+	
+}
+tbody tr:hover{
+    background-color: #70D6C1; 
+}
+
+form#busqueda{    
+    margin: auto;
+    margin-top: 10px;
+    width: 95%;
+    padding: 10px;
+    font-size: 12pt;
+}
+
+form#busqueda > *{
+    margin-left: 10px;
+    border: 0px;
+}
+
+form#busqueda > input, form#busqueda > select{
+    border-bottom: 1px solid #aaa;
+    padding-left: 10px;
+}
+
+
+form#busqueda > select{
+    border: 1px solid  #aaa;
+    border-radius: 10px;
+    padding-left: 10px;
+}

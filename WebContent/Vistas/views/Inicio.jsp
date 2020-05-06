@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,6 +14,7 @@
 
     
     <!--- Custom CSS for this page --->
+    <link rel="stylesheet" href="../icons/style.css">
     <link rel="stylesheet" href="../CSS/inicio.css">
     <link rel="stylesheet" href="../CSS/opciones.css">
     <link rel="stylesheet" href="../CSS/style.css">
@@ -46,7 +47,7 @@
                 <li class="title">MENU</li>
                 
                 <li class="active">
-                    <a href="./index.html">
+                    <a href="Inicio.jsp">
                     <i class="icon-home icon"></i>Inicio</a>
                 </li>
                 
@@ -100,7 +101,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="title">ADMINISTRACIÓN DE INVENTARIO</li>
+                <li class="title">ADMINISTRACIÃ“N DE INVENTARIO</li>
                 <li>
                    <a href="">Compras<i class="icon-chevron-small-right icon-right icon"></i>
                    </a>
@@ -110,7 +111,7 @@
                                 <i class="sub_menu"></i>
                                 Ver Compras
                             </a>
-                            <a href="Compras.jsp">
+                            <a href="Proveedores.jsp">
                                 <i class="sub_menu"></i>
                                 Proveedores
                             </a>
@@ -122,7 +123,7 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="Inventario.jsp">
                                 <i class="sub_menu"></i>
                                 Consultar Inventario
                             </a>

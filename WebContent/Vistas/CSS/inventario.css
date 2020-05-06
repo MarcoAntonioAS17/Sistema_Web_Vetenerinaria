@@ -1,0 +1,15 @@
+@import url(style.css);
+@import url(../icons/style.css);
+@import url(tables.css);
+
+#contenido1{
+    margin-top: 70px;
+}
+
+.contenido{
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    padding-bottom: 20px;
+     -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,.5);
+}
