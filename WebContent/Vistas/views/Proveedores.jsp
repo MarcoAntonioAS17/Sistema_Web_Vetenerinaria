@@ -10,7 +10,6 @@
     <title>Proveedores</title>
 
     <!--- Custom CSS for this page --->
-    <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../icons/style.css">
     <link rel="stylesheet" href="../CSS/Proveedores.css">
 </head>
@@ -135,17 +134,17 @@
     
     <form action="" class="formulario">
         <h5>AGREGAR PROVEEDORES</h5>
-      <input type="text" class="formulario__input">  
-        <label for="" class="formulario__label">Clave de Proveedor</label>
+      <input id="Clv_Pro" name="Clv_Pro" type="text" class="formulario__input" required="required">  
+        <label for="Clv_Pro" class="formulario__label">Clave de Proveedor</label>
         
-        <input type="text" class="formulario__input">  
-        <label for="" class="formulario__label">Nombre</label>
+        <input id="Nombre_Pro" name="Nombre_Pro" type="text" class="formulario__input" required="required">  
+        <label for="Nombre_Pro" class="formulario__label">Nombre del Proveedor</label>
         
-        <input type="number" class="formulario__input">  
-        <label for="" class="formulario__label">Telefono</label>
+        <input id="Tel_Pro" name="Tel_Pro" type="number" class="formulario__input">  
+        <label for="Tel_Pro" class="formulario__label">Telefono</label>
         
-        <input type="email" class="formulario__input">   
-        <label for="" class="formulario__label">Correo</label>
+        <input id="Email_Pro" name="Email_Pro" type="email" class="formulario__input">   
+        <label for="Email_Pro" class="formulario__label">Correo</label>
         
         <div >
             <button id="guardar" type="submit" class="guardar">Guardar</button>
