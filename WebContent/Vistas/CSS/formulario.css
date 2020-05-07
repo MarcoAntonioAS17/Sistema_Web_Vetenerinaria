@@ -1,4 +1,5 @@
 h5{
+	text-align: center;
     margin: 0;
     color: rgba(13,27,62,0.7);
     font-weight: bold;
@@ -29,14 +30,43 @@ h5{
     font-size: 1.1em;
 }
 
-.formulario__input { 
+.input-40, .label-input-40{
+	display: inline-block;
+	width: 45%;
+	font-size: 1.1em;
+}
+
+.input-30{
+	display: inline-block;
+	width: 30%;
+	font-size: 1.1em;
+}
+
+.label-input-30{
+	display: inline-block;
+	width: 30%;
+	font-size: 1.3em;
+}
+#date-time{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+#cont-producto{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.formulario__input, .input-40, .input-30 { 
     padding: 10px;
     background: rgba(0,0,0,0.1);
     border: 1px solid rgba(0,0,0,0.3);
     margin-bottom: 30px
 }
 
-.formulario__input:focus {
+.formulario__input:focus ,.input-40:focus, .input-30:focus {
     outline: 1px solid rgba(0,0,0,0.7);
 }
 
@@ -52,9 +82,21 @@ h5{
     transition: all 0.2s;
 }
 
-.guardar{
+.label-input-40 {
+    padding-left: 15px;
+    color: rgba(0,0,0,0.5); 
+}
+
+.label-input-30 {
+	padding-top: 5px;
+    padding-left: 15px;
+    color: black; 
+}
+
+.agregar{
+	cursor:pointer;
     margin-top: .10rem;
-    width: 200px;
+    width: 30%;
     height: 33px;
     border-radius: .25rem;
     border: 1px solid transparent;
@@ -62,20 +104,29 @@ h5{
     background-color: #70D6C1;
     border-color: #70D6C1;
     font-size: .9rem;
-    margin-left: 19rem
 }
 
-.cancelar{
+.guardar, .cancelar{
+	cursor:pointer;
     margin-top: .10rem;
-    width: 200px;
+    width: 18%;
     height: 33px;
     border-radius: .25rem;
     border: 1px solid transparent;
     color: #fff;
+    font-size: .9rem;
+}
+
+.guardar{
+    background-color: #70D6C1;
+    border-color: #70D6C1;
+    margin-left: 31%;
+}
+
+.cancelar{
     background-color: #d92550;
     border-color: #d92550;
-    font-size: .9rem;
-    margin-left: 2rem
+    margin-left: 2%;
 }
 
 .fijar{

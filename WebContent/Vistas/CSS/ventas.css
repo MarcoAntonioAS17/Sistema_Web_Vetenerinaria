@@ -1,5 +1,6 @@
 @import url("formulario.css");
 @import url("style.css");
+@import url("tables.css");
 
 * {
     box-sizing: border-box;

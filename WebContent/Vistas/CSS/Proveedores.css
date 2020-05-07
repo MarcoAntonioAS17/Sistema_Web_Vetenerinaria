@@ -1,5 +1,6 @@
 @import url("formulario.css");
 @import url("style.css");
+@import url("tables.css");
 
 * {
     box-sizing: border-box;
@@ -10,3 +11,15 @@ body {
     font-family: sans-serif;
 }
 
+.contenido{
+	margin-top: 20px;
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    padding-bottom: 20px;
+     -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,.5);
+}
+
+h1{
+	background-color: #70D6C1 !important; 
+}

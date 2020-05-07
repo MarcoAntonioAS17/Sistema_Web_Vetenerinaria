@@ -1,5 +1,6 @@
 @import url("formulario.css");
 @import url("style.css");
+@import url("tables.css");
 
 * {
     box-sizing: border-box;
@@ -8,4 +9,16 @@
 body {
     margin: 0;
     font-family: sans-serif;
+}
+
+h1{
+	background-color: #70d67f !important;
+}
+
+tbody tr:nth-child(odd) {
+    background-color:#c4ffcc !important;
+}
+
+tbody tr:hover{
+    background-color: #70d67f !important; 
 }

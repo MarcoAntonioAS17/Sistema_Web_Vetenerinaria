@@ -14,4 +14,16 @@ $(document).ready(function(){
     $(".menu li ul li a").click(function () {
         window.location.href = $(this).attr("href");
      });
+    
+    
+});
+
+$(document).on("mousedown",function(e) {
+    
+	var menu = $(".sidebar");
+	var checkbox = $("#abrir-cerrar"); 
+	
+    if(!menu.is(e.target) && menu.has(e.target).length === 0 && checkbox.is(":checked")){
+    	checkbox.prop("checked",false);
+    }
 });

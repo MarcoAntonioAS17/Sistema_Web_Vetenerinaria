@@ -11,12 +11,12 @@
 
     <!--- Custom CSS for this page --->
     <link rel="stylesheet" href="../icons/style.css">
-    <link rel="stylesheet" href="../CSS/proveedores.css">
+    <link rel="stylesheet" href="../CSS/Proveedores.css">
 </head>
     
 <body>
 	
-	<input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="">
+	<input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="" >
     <div id="label_sup">
         <label id="hamburger" for="abrir-cerrar">
             <div class="button">
@@ -28,6 +28,7 @@
         </label>
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
+	
 	
 	<div class="sidebar">
         
@@ -52,7 +53,7 @@
                                 <i class="sub_menu"></i>
                                 Ventas Realizadas
                             </a>
-                            <a href="#">
+                            <a href="Ventas.jsp">
                                 <i class="sub_menu"></i>
                                 Nueva Venta
                             </a>
@@ -98,7 +99,7 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="Compras.jsp">
                                 <i class="sub_menu"></i>
                                 Ver Compras
                             </a>
@@ -129,11 +130,74 @@
                 <li ><a href="">Acceso al sistema</a></li>
             </ul>
     </div>
-
+    
     <br><br><br><br>
     
+    <div class="contenido"  >
+        <h1>Proveedores</h1>
+            <form id="busqueda">
+              <label>Buscar</label>
+              <select id="opciones" name="opciones">
+                   <option value="Codigo">Codigo</option>
+                  <option value="Nombre">Nombre</option>
+                  <option value="Precio Venta">Precio Venta</option>
+                  <option value="Precio Compra">Precio Compra</option>
+                  <option value="Categoria">Categoria</option>
+                  <option value="Proveedor">Proveedor</option>
+                  <option value="Caducidad">Caducidad</option>
+                  <option value="Descripcion">Descripcion</option>
+              </select>
+            
+               <input id="busqueda" type="search" placeholder="Busqueda"> 
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Clave del Proveedor</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo Electronico</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                        <td>120</td>
+                        <td>Purina</td>
+                        <td>2291002013</td>
+                        <td>contacto@proplan.com</td>
+                        <td>
+                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
+                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
+                       </td>
+                    </tr>
+                    <tr>
+                        <td>120</td>
+                        <td>Purina</td>
+                        <td>2291002013</td>
+                        <td>contacto@proplan.com</td>
+                        <td>
+                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
+                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
+                       </td>
+                    </tr>
+                    <tr>
+                        <td>120</td>
+                        <td>Purina</td>
+                        <td>2291002013</td>
+                        <td>contacto@proplan.com</td>
+                        <td>
+                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
+                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
+                       </td>
+                    </tr>
+                </tbody>
+            </table>
+        
+    </div>
+    <br>
     <form action="" class="formulario">
-        <h5>AGREGAR PROVEEDORES</h5>
+        <h5>AGREGAR PROVEEDOR</h5>
       <input id="Clv_Pro" name="Clv_Pro" type="text" class="formulario__input" required="required">  
         <label for="Clv_Pro" class="formulario__label">Clave de Proveedor</label>
         
@@ -151,6 +215,8 @@
             <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
         </div>
     </form>
+
+	
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>

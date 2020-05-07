@@ -5,6 +5,7 @@ h1{
     text-align: center;
     width: 100%;
     background-color: #70a9d6;
+    margin-bottom: 5px;
 }    
 
 table{
@@ -15,6 +16,7 @@ table{
     border: 1px solid #ddd;
     padding: 5px;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 table a{
     margin-left: 10px;

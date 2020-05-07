@@ -123,7 +123,7 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="Inventario.html">
+                            <a href="Inventario.jsp">
                                 <i class="sub_menu"></i>
                                 Consultar Inventario
                             </a>

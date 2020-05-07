@@ -26,8 +26,8 @@
         </label>
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
-    
-    <div class="sidebar">
+   
+	<div class="sidebar">
         
         <div class="logo">
            <img src="../img/Logo-Extend.svg">
@@ -50,7 +50,7 @@
                                 <i class="sub_menu"></i>
                                 Ventas Realizadas
                             </a>
-                            <a href="#">
+                            <a href="Ventas.jsp">
                                 <i class="sub_menu"></i>
                                 Nueva Venta
                             </a>
@@ -96,7 +96,7 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="Compras.jsp">
                                 <i class="sub_menu"></i>
                                 Ver Compras
                             </a>
@@ -127,6 +127,7 @@
                 <li ><a href="">Acceso al sistema</a></li>
             </ul>
     </div>
+	
    
     <div id="contenido1" class="contenido"  >
         <h1>Inventario</h1>
@@ -206,6 +207,38 @@
             </table>
         
     </div>
+    
+    <form action="" class="formulario">
+        <h5>AGREGAR PRODUCTO</h5>
+      <input id="Clv_Pro" name="Clv_Pro" type="number" class="formulario__input" required="required">  
+        <label for="Clv_Pro" class="formulario__label">Código del producto</label>
+        
+        <input id="Nombre_Pro" name="Nombre_Pro" type="text" class="formulario__input" required="required">  
+        <label for="Nombre_Pro" class="formulario__label">Nombre del producto</label>
+        
+        <input id="Categoria" name="Categoria" type="text" class="formulario__input">  
+        <label for="Categoria" class="formulario__label">Categoria</label>
+        
+        <input id="Precio_V" name="Precio_V" type="number" class="formulario__input" required="required">   
+        <label for="Precio_V" class="formulario__label">Previo de Venta</label>
+		
+		<input id="Precio_C" name="Precio_C" type="number" class="formulario__input" required="required">   
+        <label for="Precio_C" class="formulario__label">Previo de Compra</label>
+        
+        <input id="Fecha_C" name="Fecha_C" type="date" class="formulario__input">   
+        <label for="Fecha_C" class="formulario__label">Fecha de Caducidad</label>
+        
+        <input id="Descrip" name="Descrip" type="text" class="formulario__input">   
+        <label for="Descrip" class="formulario__label">Descripción</label>
+        
+        <input id="Proveedor" name="Proveedor" type="text" class="formulario__input">   
+        <label for="Proveedor" class="formulario__label">Proveedor</label>
+                
+        <div >
+            <button id="guardar" type="submit" class="guardar">Guardar</button>
+            <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
+        </div>
+    </form>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
