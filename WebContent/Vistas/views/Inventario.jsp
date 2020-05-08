@@ -46,7 +46,7 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="Historial_Ventas.jsp">
                                 <i class="sub_menu"></i>
                                 Ventas Realizadas
                             </a>
