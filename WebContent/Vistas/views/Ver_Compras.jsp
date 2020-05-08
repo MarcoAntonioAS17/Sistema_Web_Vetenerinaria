@@ -7,11 +7,11 @@
     <link rel="icon" type="imagen/png" href="../img/Logo.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Historial Ventas</title>
+    <title>Compras</title>
 
     <!--- Custom CSS for this page --->
     <link rel="stylesheet" href="../icons/style.css">
-    <link rel="stylesheet" href="../CSS/historial_ventas.css">
+    <link rel="stylesheet" href="../CSS/Ver_Compras.css">
 </head>
     
 <body>
@@ -133,12 +133,12 @@
     <br><br><br><br>
     
    <div id="contenido1" class="contenido"  >
-        <h1>Historial de ventas</h1>
+        <h1>Historial de compras</h1>
             <form id="busqueda">
               <label>Buscar</label>
               <select id="opciones" name="opciones">
-                   <option value="Codigo">Codigo Venta</option>
-                  <option value="Cliente">Cliente</option>
+                   <option value="Codigo">Codigo Compra</option>
+                  <option value="Cliente">Proveedor</option>
                   <option value="Fecha">Fecha</option>
                   <option value="Hora">Hora</option>
                   <option value="Producto">Producto</option>
@@ -153,8 +153,8 @@
             <table>
                 <thead>
                     <tr>
-                    	<th>Código de Venta</th>
-                    	<th>Cliente</th>
+                    	<th>Código de Compra</th>
+                    	<th>Proveedor</th>
                     	<th>Fecha</th>
                     	<th>Hora</th>
                         <th>Código del Producto</th>
@@ -168,7 +168,7 @@
                 <tbody>
                    <tr>
                    		<td>001</td>
-                   		<td>Felipe Ramirez</td>
+                   		<td>ProPlan</td>
                    		<td>10/02/2020</td>
                    		<td>12:00</td>
                         <td>72931038</td>
@@ -183,7 +183,7 @@
                     </tr>
                     <tr>
                     	<td>001</td>
-                   		<td>Felipe Ramirez</td>
+                   		<td>Proplan</td>
                    		<td>10/02/2020</td>
                    		<td>12:00</td>
                         <td>72931038</td>
@@ -198,7 +198,7 @@
                     </tr>
                     <tr>
                     	<td>001</td>
-                   		<td>Felipe Ramirez</td>
+                   		<td>ProPlan</td>
                    		<td>10/02/2020</td>
                    		<td>12:00</td>
                         <td>72931038</td>
