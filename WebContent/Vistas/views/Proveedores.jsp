@@ -119,7 +119,7 @@
                                 <i class="sub_menu"></i>
                                 Consultar Inventario
                             </a>
-                            <a href="#">
+                            <a href="Categorias.jsp">
                                 <i class="sub_menu"></i>
                                 Categorias
                             </a>
