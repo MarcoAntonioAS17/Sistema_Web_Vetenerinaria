@@ -15,5 +15,4 @@ $(document).ready(function(){
 	   $(this).attr({'value': h + ':' + m});
 	 });
 	 
-    alert(fechatotal + " \n" + time);
 });

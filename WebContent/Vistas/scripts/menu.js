@@ -6,7 +6,7 @@ $(document).ready(function(){
            $(this).children('ul').slideUp();
        }else{
            $('.menu li ul').slideUp();
-        //    $('.menu li').removeClass('active');
+           $('.menu li').removeClass('active');
            $(this).addClass('active');
            $(this).children('ul').slideDown();
        }

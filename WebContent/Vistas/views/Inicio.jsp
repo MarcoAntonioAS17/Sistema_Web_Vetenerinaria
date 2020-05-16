@@ -15,7 +15,6 @@
     
     <!--- Custom CSS for this page --->
     <link rel="stylesheet" href="../icons/style.css">
-    <link rel="stylesheet" href="../CSS/inicio.css">
     <link rel="stylesheet" href="../CSS/opciones.css">
     <link rel="stylesheet" href="../CSS/style.css">
     
