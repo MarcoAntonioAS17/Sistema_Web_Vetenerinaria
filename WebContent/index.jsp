@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
+    
+<%
+	HttpSession user_session = request.getSession(false);
+	String mensaje = (String) user_session.getAttribute("mensaje");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,13 +35,13 @@
                   
                 <div id="opcion-login">
                     <h1>BIENVENIDO</h1>
-                    <h2>Ingrese su cuenta y contraseña</h2>
-                    <form action="views/Inicio.jsp"  >
+                    <h2>Ingrese su cuenta y contraseÃ±a</h2>
+                    <form action="SInicio" method="post"  >
                         <p>USUARIO</p>
-                        <input type="text" name="Usuario" placeholder="Usuario">
+                        <input type="text" name="Usuario" placeholder="Usuario" required="required">
                         
-                        <p>CONTRASEÑA</p>
-                        <input type="password" name="Password" placeholder="Contraseña">
+                        <p>CONTRASEÃ‘A</p>
+                        <input type="password" name="Password" placeholder="ContraseÃ±a" required="required">
                         
                         <input type="submit" name="Ingresar" value="Entrar" >
                     </form>
@@ -48,8 +53,8 @@
                         <p>CUENTA DE USUARIO</p>
                         <input type="text" name="Usuario_Nuevo" placeholder="Usuario">
                         
-                        <p>CONTRASEÑA</p>
-                        <input type="password" name="Password_Nuevo" placeholder="Contraseña">
+                        <p>CONTRASEÃ‘A</p>
+                        <input type="password" name="Password_Nuevo" placeholder="ContraseÃ±a">
                         
                         <input type="submit" name="Guardar" value="Guardar">
                     </form>
@@ -62,8 +67,16 @@
     </main>
     
     <script>
+	    
+    	
         $(document).ready(function(){
             
+        	<%
+        	if(mensaje != null && mensaje != ""){
+        	%>
+        	alert("<%=mensaje%>");
+        	
+        	<%}%>
             /*Clic en Ingresar*/
             $("#login").change(function(){
 

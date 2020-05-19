@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="UTF-8"%>
+    
+<%
+	HttpSession user_session = request.getSession(false);
+	String usuario = (String) user_session.getAttribute("usuario");
+	if(usuario == null){
+		response.sendRedirect("../../index.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +20,6 @@
     
     <title>Inicio</title>
 
-    
     <!--- Custom CSS for this page --->
     <link rel="stylesheet" href="../icons/style.css">
     <link rel="stylesheet" href="../CSS/opciones.css">
@@ -135,6 +142,7 @@
                 </li>
                 <li class="title">SISTEMA</li>
                 <li ><a href="">Acceso al sistema</a></li>
+                <li class="title" ><a >Salir</a></li>
             </ul>
     </div>
 	
@@ -218,6 +226,8 @@
 
         </div>
     </div>
+    
+  
     
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
