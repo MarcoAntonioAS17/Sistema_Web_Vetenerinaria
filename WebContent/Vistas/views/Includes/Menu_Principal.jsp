@@ -96,6 +96,5 @@
                 </li>
                 <li class="title">SISTEMA</li>
                 <li ><a href="">Acceso al sistema</a></li>
-                <li class="title" ><a >Salir</a></li>
-            </ul>
+
 </div>

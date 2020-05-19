@@ -9,7 +9,9 @@ public class Conexion {
     public Conexion() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+
             this.con = DriverManager.getConnection("jdbc:mysql://localhost:3306/veterinaria", "root", "2351043820");
+
         } catch (Exception var2) {
             var2.printStackTrace();
         }
