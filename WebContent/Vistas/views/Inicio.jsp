@@ -6,19 +6,15 @@
     <meta charset="UTF-8">
     <link rel="icon" type="imagen/png" href="../img/Logo.svg">
     
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <title>Inicio</title>
-
     
     <!--- Custom CSS for this page --->
     <link rel="stylesheet" href="../icons/style.css">
     <link rel="stylesheet" href="../CSS/opciones.css">
     <link rel="stylesheet" href="../CSS/style.css">
-    
-
     
 </head>
     
@@ -37,7 +33,7 @@
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
 	
-	<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>
+	<jsp:include page="Includes/Menu_Principal.html"></jsp:include>
 	
     <div id="contenido">
         <div id="contenedor-inicio" class="contenedor">

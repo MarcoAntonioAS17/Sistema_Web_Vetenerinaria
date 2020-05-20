@@ -50,11 +50,11 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="Clientes.jsp">
                                 <i class="sub_menu"></i>
                                 Ver Clientes
                             </a>
-                            <a href="#">
+                            <a href="Mascotas.jsp">
                                 <i class="sub_menu"></i>
                                 Mascotas
                             </a>
