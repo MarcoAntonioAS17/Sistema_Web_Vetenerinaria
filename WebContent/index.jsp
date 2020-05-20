@@ -38,12 +38,14 @@
                     <h2>Ingrese su cuenta y contraseña</h2>
                     <form action="SInicio" method="post"  >
                         <p>USUARIO</p>
-                        <input type="text" name="Usuario" placeholder="Usuario" required="required">
+                        <input id="Usuario" type="text" name="Usuario" placeholder="Usuario" required="required">
                         
                         <p>CONTRASEÑA</p>
-                        <input type="password" name="Password" placeholder="Contraseña" required="required">
+                        <input id="Password" type="password" name="Password" placeholder="Contraseña" required="required">
                         
-                        <input type="submit" name="Ingresar" value="Entrar" >
+                       <!-- <button id="guardar" type="button" name="accion" value="Agregar" class="guardar">Agregar</button>
+                        <input id="Ingresar" type="submit" name="Ingresar" value="Entrar" >-->
+                        <button id="Ingresar" type="button" name="Ingresar" >Ingresa</button>
                     </form>
                 </div>
                 <div id="opcion-new">
@@ -70,13 +72,34 @@
 	    
     	
         $(document).ready(function(){
-            
-        	<%
-        	if(mensaje != null && mensaje != ""){
-        	%>
-        	alert("<%=mensaje%>");
+   
+			$('#Ingresar').click(function(e){
+				var usuariovar = $("#Usuario").val();
+				var passwordvar = $("#Password").val();
+				$("#Password").css({"border-color":"white","color":"white"});
+				$("#Usuario").css({"border-color":"white","color":"white"});
+				if(passwordvar == "" || usuariovar==""){
+					if(passwordvar == ""){
+						$("#Password").css({"border-color":"red","color":"red"});
+					}
+					if(usuariovar==""){
+						$("#Usuario").css({"border-color":"red","color":"red"});
+					}
+					return;
+				}
+				
+				$.post("SInicio",{
+				 Usuario: usuariovar,
+				 Password: passwordvar
+				},function(responseText){
+				 	if(responseText == "true"){
+				 		$(location).attr('href',"http://localhost:8080/SistemaWebVeterinaria/Vistas/views/Inicio.jsp");
+				 	}else{
+				 		alert("Usuario o contraseña incorrecto");
+				 	}
+				});
+			});
         	
-        	<%}%>
             /*Clic en Ingresar*/
             $("#login").change(function(){
 

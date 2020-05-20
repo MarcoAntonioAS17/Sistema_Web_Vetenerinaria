@@ -27,21 +27,43 @@ public class Servlet_Categorias extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
+		
+		
 		String accion = request.getParameter("accion");
 		
-		if(accion.equals("Agregar")) {
+		if(accion.equals("agregar")) {
 			String nombre = request.getParameter("Nombre_cat");
-			
+
 			CategoriaDAO cat = new CategoriaDAO();
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
 			
 			if(cat.add(nombre)) {
-				response.sendRedirect("Vistas/views/Categorias.jsp");
+				response.getWriter().write("true");
 			}else {
-				response.sendRedirect("Vistas/views/Categorias.jsp");
+				response.getWriter().write("false");
 			}
+		}else {
+			if(accion.equals("eliminar")) {
+				int idcat = Integer.parseInt(request.getParameter("IDCategoria"));
+
+				CategoriaDAO cat = new CategoriaDAO();
+				response.setContentType("text/html");
+				response.setCharacterEncoding("UTF-8");
+				
+				if(cat.delete(idcat)) {
+					response.getWriter().write("true");
+				}else {
+					response.getWriter().write("false");
+				}
+			}
+			
+			
 		}
-		 
+		
+		
+	
+		
 	}
 
 }

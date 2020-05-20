@@ -63,8 +63,7 @@
                         <td><%=cat.getIDCategoria() %></td>
                         <td><%=cat.getNombre()%></td>
                         <td>
-                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
+                        	<button class="button_cat" value="<%=cat.getIDCategoria()%>"> <img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></button>
                        </td>
                     </tr>
                     <%} %>
@@ -74,7 +73,7 @@
         
     </div>
     <br>
-    <form action="../../Categorias" class="formulario" method="post">
+    <form class="formulario" method="post" >
 
         <h5>Agregar Categoria</h5>
         
@@ -82,15 +81,63 @@
         <label for="Nombre_cat" class="formulario__label">Nombre de la Categoria</label>
         
         <div >
-            <input id="guardar" name="accion" value="Agregar" type="submit" class="guardar">
+            <button id="guardar" type="button" name="accion" value="Agregar" class="guardar">Agregar</button>
             <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
         </div>
     </form>
+    
+    
 	
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
     
+    <script type="text/javascript">
+    
+    	//Guardar datos en BD
+	   $(document).ready(function(){
+		   
+	       $('#guardar').click(function(e){
+	    	   var categoriavar = $("#Nombre_cat").val();
+	    	   $("#Nombre_cat").css({"border-color":"white","color":"white"});
+	    	   if(categoriavar == ""){
+	    		   $("#Nombre_cat").css({"border-color":"red","color":"red"});
+	    		   return;
+	    	   }
+	          $.post("../../Categorias",{
+	        	  accion : "agregar",
+	        	  Nombre_cat : categoriavar
+	          },function(responseText){
+	        	  
+	        	  if(responseText == "true"){
+	        		  alert("Categoria agregado con exito");
+	        	  }else{
+	        		  alert("Error al agregar");
+	        	  }
+	        	  location.reload();
+	          });
+	       });
+	       
+	       $('.button_cat').click(function(e){
+	    	   var codvar = $(this).val();
+	    	   
+	    	   $.post("../../Categorias",{
+	    		   accion : "eliminar",
+	    		   IDCategoria : codvar
+	    	   },function(responseText){
+	    		   if(responseText == "true"){
+		        		  alert("Categoria elimanada con exito");
+		        	  }else{
+		        		  alert("Error al elimar");
+		        	  }
+		        	  location.reload();
+	    	   });
+	       });
+    	});
+    	
+    	
+	   
+    </script>
 </body>
 </html>

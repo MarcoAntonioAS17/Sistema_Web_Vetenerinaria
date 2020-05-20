@@ -63,7 +63,7 @@ input[type=text], input[type=password]{
     height: 30px;
 }
 
-input[type=submit]{
+#Ingresar, input[type=submit]{
     margin-top: 30px;
     color: white;
     width: 150px;

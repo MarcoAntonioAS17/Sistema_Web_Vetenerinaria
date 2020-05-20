@@ -26,7 +26,7 @@ public class Servlet_Inicio extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	
@@ -41,13 +41,22 @@ public class Servlet_Inicio extends HttpServlet {
     	if(admindao.autenticacion(admin)) {
     		
     		sesion_user.setAttribute("usuario",admin.getUserName() );
-    		sesion_user.setAttribute("mensaje", "");
-    		response.sendRedirect("Vistas/views/Inicio.jsp");
+    		
+    		response.setContentType("text/html");
+    		response.setCharacterEncoding("UTF-8");
+    		//response.sendRedirect("Vistas/views/Inicio.jsp");
+    		response.getWriter().write("true");
+    		
     		
     	}else {
     		sesion_user.setAttribute("usuario", null);
-    		sesion_user.setAttribute("mensaje", "Usuario o contraseña incorrectos.");
-    		response.sendRedirect("index.jsp");
+    		
+    		response.setContentType("text/html");
+    		response.setCharacterEncoding("UTF-8");
+    		//response.sendRedirect("index.jsp");
+    		response.getWriter().write("false");
+    		
+    		
     	}
     	
 	}

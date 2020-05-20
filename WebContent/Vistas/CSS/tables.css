@@ -18,6 +18,19 @@ table{
     border-collapse: collapse;
     margin-bottom: 20px;
 }
+
+table button{
+	background: none;
+	border: 0;
+    margin-left: 10px;
+}
+
+table button img{
+	padding-top: 7px;
+	padding-bottom: 5px;
+}
+
+/*-- Codigo a eliminar*/
 table a{
     margin-left: 10px;
 }
@@ -26,6 +39,7 @@ table a img{
 	padding-top: 7px;
 	padding-bottom: 5px;
 }
+/*-- fin eliminar-->*/
 
 th, tr{
     padding-left: 10px;

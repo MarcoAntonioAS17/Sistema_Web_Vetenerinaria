@@ -59,24 +59,6 @@ public class CategoriaDAO extends Conexion{
         return true;
     }
 
-    public boolean edit(Categoria cate) {
-        
-
-        try {
-        	this.query = "UPDATE categorias SET Nombre= ? WHERE IDProveedor= ?;";
-        	ps = getConnection().prepareStatement(query);
-            ps.setInt(2, cate.getIDCategoria());
-            ps.setString(1, cate.getNombre());
-            
-            this.ps.executeUpdate();
-        } catch (Exception var4) {
-            var4.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
-
     public boolean delete(int ID) {
        
 
@@ -84,8 +66,8 @@ public class CategoriaDAO extends Conexion{
         	this.query = "DELETE FROM categorias WHERE idCategorias = ?;";
         	ps = getConnection().prepareStatement(query);
             ps.setInt(1, ID);
-            
             this.ps.executeUpdate();
+            
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
