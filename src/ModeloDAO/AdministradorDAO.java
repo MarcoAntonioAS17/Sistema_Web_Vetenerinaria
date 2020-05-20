@@ -5,18 +5,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Config.Conexion;
+import Modelo.Administrador;
 
 public class AdministradorDAO extends Conexion{
 	
-	public boolean autenticacion(String user, String password) {
+	public boolean autenticacion(Administrador admin) {
 		PreparedStatement ps = null;
 		ResultSet rs= null;
 		
 		try {
 			String query = "SELECT * FROM administradores WHERE BINARY UserName = ? and BINARY Password = ?;";
 			ps =  getConnection().prepareStatement(query);
-			ps.setString(1, user);
-			ps.setString(2, password);
+			ps.setString(1, admin.getUserName());
+			ps.setString(2, admin.getPassword());
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {

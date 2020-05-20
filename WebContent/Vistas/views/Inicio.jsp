@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="UTF-8"%>
-    
+  
+
 <%
 	HttpSession user_session = request.getSession(false);
 	String usuario = (String) user_session.getAttribute("usuario");
 	if(usuario == null){
 		response.sendRedirect("../../index.jsp");
-	}
+	} 
 %>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

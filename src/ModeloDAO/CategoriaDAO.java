@@ -1,6 +1,5 @@
 package ModeloDAO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,9 +8,8 @@ import java.util.List;
 import Config.Conexion;
 import Modelo.Categoria;
 
-public class CategoriaDAO {
-	Conexion conex = new Conexion();
-	 Connection con;
+public class CategoriaDAO extends Conexion{
+	
     PreparedStatement ps;
     ResultSet rs;
     Categoria E_Cat = new Categoria();
@@ -27,8 +25,7 @@ public class CategoriaDAO {
     	this.query = "SELECT * FROM categorias;";
     	
     	try {
-    		this.con = this.conex.getConnection();
-            this.ps = this.con.prepareStatement(query);
+            ps = getConnection().prepareStatement(query);
             this.rs = this.ps.executeQuery();
             
             while(this.rs.next()) {
@@ -44,14 +41,15 @@ public class CategoriaDAO {
     	return datos;
     }
 
-    public boolean add(Categoria new_cat) {
-        this.query = "INSERT INTO categorias(idCategorias, Nombre) VALUES ('" + 
-        				new_cat.getIDCategoria()+ "','" + 
-        				new_cat.getNombre() + "');";
+    public boolean add(String nombre) {
+        
 
         try {
-            this.con = this.conex.getConnection();
-            this.ps = this.con.prepareStatement(query);
+        	this.query = "INSERT INTO categorias(Nombre) VALUES ( ?);";
+        	ps = getConnection().prepareStatement(query);
+            
+            ps.setString(1, nombre);
+            
             this.ps.executeUpdate();
         } catch (Exception var4) {
             var4.printStackTrace();
@@ -62,11 +60,14 @@ public class CategoriaDAO {
     }
 
     public boolean edit(Categoria cate) {
-        this.query = "UPDATE categorias SET Nombre='" + cate.getNombre() + "' WHERE IDProveedor=" + cate.getIDCategoria() + ";";
+        
 
         try {
-            this.con = this.conex.getConnection();
-            this.ps = this.con.prepareStatement(query);
+        	this.query = "UPDATE categorias SET Nombre= ? WHERE IDProveedor= ?;";
+        	ps = getConnection().prepareStatement(query);
+            ps.setInt(2, cate.getIDCategoria());
+            ps.setString(1, cate.getNombre());
+            
             this.ps.executeUpdate();
         } catch (Exception var4) {
             var4.printStackTrace();
@@ -77,11 +78,13 @@ public class CategoriaDAO {
     }
 
     public boolean delete(int ID) {
-        this.query = "DELETE FROM categorias WHERE idCategorias = " + ID;
+       
 
         try {
-            this.con = this.conex.getConnection();
-            this.ps = this.con.prepareStatement(query);
+        	this.query = "DELETE FROM categorias WHERE idCategorias = ?;";
+        	ps = getConnection().prepareStatement(query);
+            ps.setInt(1, ID);
+            
             this.ps.executeUpdate();
         } catch (Exception var4) {
             var4.printStackTrace();
