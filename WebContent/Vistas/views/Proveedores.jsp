@@ -1,3 +1,7 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="Modelo.Proveedor"%>
+<%@page import="java.util.List"%>
+<%@page import="ModeloDAO.ProveedorDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -36,21 +40,7 @@
     
     <div class="contenido"  >
         <h1>Proveedores</h1>
-            <form id="busqueda">
-              <label>Buscar</label>
-              <select id="opciones" name="opciones">
-                   <option value="Codigo">Codigo</option>
-                  <option value="Nombre">Nombre</option>
-                  <option value="Precio Venta">Precio Venta</option>
-                  <option value="Precio Compra">Precio Compra</option>
-                  <option value="Categoria">Categoria</option>
-                  <option value="Proveedor">Proveedor</option>
-                  <option value="Caducidad">Caducidad</option>
-                  <option value="Descripcion">Descripcion</option>
-              </select>
-            
-               <input id="busqueda" type="search" placeholder="Busqueda"> 
-            </form>
+           
             <table>
                 <thead>
                     <tr>
@@ -62,36 +52,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                	<%
+                		ProveedorDAO prove = new ProveedorDAO();
+                		List<Proveedor> list = prove.listar();
+                		Iterator<Proveedor> iter = list.iterator();
+                		Proveedor pro=null;
+                		while(iter.hasNext()){
+                			pro=iter.next();
+                	%>
                    <tr>
-                        <td>120</td>
-                        <td>Purina</td>
-                        <td>2291002013</td>
-                        <td>contacto@proplan.com</td>
+                        <td><%=pro.getIDProveedor() %></td>
+                        <td><%=pro.getNombre() %></td>
+                        <td><%=pro.getTelefono() %></td>
+                        <td><%=pro.getCorreo() %></td>
                         <td>
-                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
+                        	<button class="editar_pro" value="<%=pro.getIDProveedor()%>"> <img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></button>
+                        	<button class="eliminar_pro" value="<%=pro.getIDProveedor()%>"> <img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></button>
                        </td>
                     </tr>
-                    <tr>
-                        <td>120</td>
-                        <td>Purina</td>
-                        <td>2291002013</td>
-                        <td>contacto@proplan.com</td>
-                        <td>
-                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    <tr>
-                        <td>120</td>
-                        <td>Purina</td>
-                        <td>2291002013</td>
-                        <td>contacto@proplan.com</td>
-                        <td>
-                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
+                    <%} %>
+                   
                 </tbody>
             </table>
         
@@ -112,7 +92,7 @@
         <label for="Email_Pro" class="formulario__label">Correo</label>
         
         <div >
-            <button id="guardar" type="submit" class="guardar">Guardar</button>
+            <button id="guardar" type="button" class="guardar">Guardar</button>
             <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
         </div>
     </form>
@@ -122,6 +102,72 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
+    
+     <script type="text/javascript">
+    
+    	//Guardar datos en BD
+	   $(document).ready(function(){
+		   
+	       $('#guardar').click(function(e){
+	    	   var idProveedor = $("#Clv_Pro").val();
+	    	   var Nombre_Pro = $("#Nombre_Pro").val();
+	    	   var Tel_Pro = $("#Tel_Pro").val();
+	    	   var Email_Pro = $("#Email_Pro").val();
+	    	   
+	    	   if(idProveedor == "" || Nombre_Pro ==""){
+	    		   if(idProveedor == ""){
+						$("#Clv_Pro").css({"border-color":"red","color":"red"});
+					}
+					if(Nombre_Pro==""){
+						$("#Nombre_Pro").css({"border-color":"red","color":"red"});
+					}
+					alert("Faltan campos por acompletar");
+	    		   return;
+	    	   }
+	          $.post("../../Proveedores",{
+	        	  accion : "agregar",
+	        	  Proveedor : idProveedor,
+	        	  Nombre_Pro : Nombre_Pro,
+	        	  Telefono : Tel_Pro,
+	        	  Email: Email_Pro
+	          },function(responseText){
+	        	  
+	        	  if(responseText == "true"){
+	        		  alert("Proveedor agregado con exito");
+	        	  }else{
+	        		  alert("Error al agregar");
+	        	  }
+	        	  location.reload();
+	        	  limpiar_campos();
+	          });
+	       });
+	       
+	       $('.eliminar_pro').click(function(e){
+	    	   var codvar = $(this).val();
+	    	   
+	    	   $.post("../../Proveedores",{
+	    		   accion : "eliminar",
+	    		   IDProveedor : codvar
+	    	   },function(responseText){
+	    		   if(responseText == "true"){
+		        		  alert("Proveedor elimanado con exito");
+		        	  }else{
+		        		  alert("Error al elimar");
+		        	  }
+		        	  location.reload();
+	    	   });
+	       });
+	       
+    	});
+    	
+    	function limpiar_campos(){
+    		$("#Clv_Pro").val("");
+    	   	$("#Nombre_Pro").val("");
+    	   	$("#Tel_Pro").val("");
+    	   	$("#Email_Pro").val("");
+    	}
+    	
+    </script>
     
 </body>
 </html>

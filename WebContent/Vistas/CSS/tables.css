@@ -20,6 +20,7 @@ table{
 }
 
 table button{
+	cursor: pointer;
 	background: none;
 	border: 0;
     margin-left: 10px;
