@@ -1,7 +1,7 @@
+
 @import url("formulario.css");
 @import url("style.css");
 @import url("tables.css");
-@import url("citas-prox.css");
 
 * {
     box-sizing: border-box;
@@ -14,7 +14,7 @@ body {
 
 .contenido{
 	margin-top: 20px;
-    width: 60%;
+    width: 80%;
     margin: auto;
     background-color: white;
     padding-bottom: 20px;
