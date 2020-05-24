@@ -120,6 +120,5 @@
     <script type="text/javascript" src="../scripts/script.js"></script>
     <script type="text/javascript" src="../scripts/fecha-tiempo.js"></script>
     
-    
 </body>
 </html>

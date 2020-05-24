@@ -17,7 +17,6 @@
     <meta charset="UTF-8">
     <link rel="icon" type="imagen/png" href="../img/Logo.svg">
     
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
@@ -27,8 +26,6 @@
     <link rel="stylesheet" href="../icons/style.css">
     <link rel="stylesheet" href="../CSS/opciones.css">
     <link rel="stylesheet" href="../CSS/style.css">
-    
-
     
 </head>
     

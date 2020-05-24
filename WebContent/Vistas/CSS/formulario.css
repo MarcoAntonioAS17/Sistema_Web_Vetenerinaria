@@ -94,7 +94,7 @@ h5{
     color: black; 
 }
 
-.agregar{
+.buscar, .agregar{
 	cursor:pointer;
     margin-top: .10rem;
     width: 30%;
@@ -106,6 +106,7 @@ h5{
     border-color: #70D6C1;
     font-size: .9rem;
 }
+
 
 .guardar, .cancelar, .actualizar{
 	cursor:pointer;
