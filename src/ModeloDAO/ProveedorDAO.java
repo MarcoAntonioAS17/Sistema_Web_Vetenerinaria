@@ -19,6 +19,28 @@ public class ProveedorDAO extends Conexion{
     	
     }
     
+    public Proveedor select_one(int IDProveedor){
+    	Proveedor new_pro = new Proveedor();
+    	this.query = "SELECT * FROM Proveedores WHERE idProveedores=?;";
+    	
+    	try {
+            ps = getConnection().prepareStatement(query);
+            ps.setInt(1,IDProveedor);
+            this.rs = this.ps.executeQuery();
+            
+            while(this.rs.next()) {
+        	new_pro.setIDProveedor(this.rs.getInt("idProveedores"));
+        	new_pro.setNombre(this.rs.getString("Proveedor_Nombre"));
+        	new_pro.setTelefono(this.rs.getString("Telefono"));
+        	new_pro.setCorreo(this.rs.getString("Correo"));
+            }
+    	
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    }
+    	return new_pro;
+    }
+    
     public List<Proveedor> listar(){
     	List<Proveedor> datos = new ArrayList<Proveedor>();
     	
@@ -103,4 +125,7 @@ public class ProveedorDAO extends Conexion{
         return true;
     }
 	
+    
 }
+
+

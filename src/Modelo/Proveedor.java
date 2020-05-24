@@ -1,5 +1,6 @@
 package Modelo;
 
+
 public class Proveedor {
 	
 	private int IDProveedor;
@@ -38,5 +39,16 @@ public class Proveedor {
 	public void setCorreo(String correo) {
 		Correo = correo;
 	}
+	
+	public String crear_JSON(){
+    	String lista = new String("{ \"IDProveedor\": \""+String.format("%d", this.IDProveedor)
+    			+"\", \"Nombre\":\""+this.Nombre
+    			+"\", \"Telefono\":\""+this.Telefono
+    			+"\", \"Correo\":\""+this.Correo
+    			+"\"}");
+    	
+    	
+    	return lista;
+    }
 	
 }

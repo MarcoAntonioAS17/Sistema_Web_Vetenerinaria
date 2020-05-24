@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import Modelo.Proveedor;
-import ModeloDAO.CategoriaDAO;
 import ModeloDAO.ProveedorDAO;
 
 /**
@@ -59,6 +59,34 @@ public class Servlet_Proveedores extends HttpServlet {
 					response.getWriter().write("true");
 				}else {
 					response.getWriter().write("false");
+				}
+			}else {
+				if(accion.equals("editar1")) {
+					int idpro = Integer.parseInt(request.getParameter("IDProveedor"));
+					proveedor = dao.select_one(idpro);
+					
+					response.setContentType("text/html");
+					response.setCharacterEncoding("UTF-8");
+				    response.getWriter().write(proveedor.crear_JSON());
+				    return;
+					
+				}else {
+					if(accion.equals("editar")) {
+						proveedor.setIDProveedor(Integer.parseInt(request.getParameter("Proveedor")));
+						proveedor.setNombre(request.getParameter("Nombre_Pro"));
+						proveedor.setTelefono(request.getParameter("Telefono"));
+						proveedor.setCorreo(request.getParameter("Email"));
+						
+						response.setContentType("text/html");
+						response.setCharacterEncoding("UTF-8");
+						
+						if(dao.edit(proveedor)) 
+							response.getWriter().write("true");
+						else 
+							response.getWriter().write("false");
+						
+						
+					}
 				}
 			}
 			

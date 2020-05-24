@@ -107,7 +107,7 @@ h5{
     font-size: .9rem;
 }
 
-.guardar, .cancelar{
+.guardar, .cancelar, .actualizar{
 	cursor:pointer;
     margin-top: .10rem;
     width: 18%;
@@ -118,10 +118,14 @@ h5{
     font-size: .9rem;
 }
 
-.guardar{
+.guardar, .actualizar{
     background-color: #70D6C1;
     border-color: #70D6C1;
     margin-left: 31%;
+}
+
+.actualizar{
+	display: none;
 }
 
 .cancelar{
