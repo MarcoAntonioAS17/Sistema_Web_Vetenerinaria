@@ -37,18 +37,21 @@
 	       
 	       $('.eliminar_pro').click(function(e){
 	    	   var codvar = $(this).val();
+	    	   var confirma = confirm("¿Estás seguro que deseas eliminar el registro?");
 	    	   
-	    	   $.post("../../Proveedores",{
-	    		   accion : "eliminar",
-	    		   IDProveedor : codvar
-	    	   },function(responseText){
-	    		   if(responseText == "true"){
-		        		  alert("Proveedor elimanado con exito");
-		        	  }else{
-		        		  alert("Error al elimar");
-		        	  }
-		        	  location.reload();
-	    	   });
+	    	   if(confirma==true) {
+		    	   $.post("../../Proveedores",{
+		    		   accion : "eliminar",
+		    		   IDProveedor : codvar
+		    	   },function(responseText){
+		    		   if(responseText == "true"){
+			        		  alert("Proveedor elimanado con exito");
+			        	  }else{
+			        		  alert("Error al elimar");
+			        	  }
+			        	  location.reload();
+		    	   });
+	    	   }
 	       });
 	       
 	       $('.editar_pro').click(function(e){

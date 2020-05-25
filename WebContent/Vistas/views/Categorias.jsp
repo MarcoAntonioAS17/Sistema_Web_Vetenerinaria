@@ -3,7 +3,7 @@
 <%@page import="ModeloDAO.CategoriaDAO"%>
 <%@ page import="java.util.Iterator" %>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -115,26 +115,34 @@
 	        	  }else{
 	        		  alert("Error al agregar");
 	        	  }
+	        	  limpiar_campos();
 	        	  location.reload();
 	          });
 	       });
 	       
 	       $('.button_cat').click(function(e){
 	    	   var codvar = $(this).val();
+	    	   var confirma = confirm("¿Estás seguro que deseas eliminar el registro?");
 	    	   
-	    	   $.post("../../Categorias",{
-	    		   accion : "eliminar",
-	    		   IDCategoria : codvar
-	    	   },function(responseText){
-	    		   if(responseText == "true"){
-		        		  alert("Categoria elimanada con exito");
-		        	  }else{
-		        		  alert("Error al elimar");
-		        	  }
-		        	  location.reload();
-	    	   });
+	    	   if(confirma==true) {
+		    	   $.post("../../Categorias",{
+		    		   accion : "eliminar",
+		    		   IDCategoria : codvar
+		    	   },function(responseText){
+		    		   if(responseText == "true"){
+			        		  alert("Categoria elimanada con exito");
+			        	  }else{
+			        		  alert("Error al elimar");
+			        	  }
+			        	  location.reload();
+		    	   });
+	    	   }
 	       });
     	});
+    	
+	   function limpiar_campos(){
+		   $("#Nombre_cat").val("");
+	   	}
     	
     	
 	   

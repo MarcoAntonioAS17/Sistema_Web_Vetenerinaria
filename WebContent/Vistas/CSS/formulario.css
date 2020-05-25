@@ -25,7 +25,7 @@ h5{
     color: rgba(0,0,0,0.7);
 }
 
-.formulario__input, .formulario__label {
+.formulario__input, .formulario__label, .formulario__label_fija{
     display: block;
     width: 100%; 
     font-size: 1.1em;
@@ -75,11 +75,17 @@ h5{
     margin-top: -90px;   
 }
 
+.formulario__label_fija {
+    padding-left: 15px;
+    padding-bottom: 5px;
+    margin-top: -20px;
+}
+
 .formulario__label {
     padding-left: 15px;
     position: absolute;
     margin-top: -60px;
-    color: rgba(0,0,0,0.5); 
+    color: rgba(0,0,0,0.9); 
     transition: all 0.2s;
 }
 

@@ -1,5 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@page import="ModeloDAO.ProductoDAO"%>
+<%@page import="Modelo.Producto"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+
+<%@ page import="Modelo.Categoria" %>
+<%@page import="ModeloDAO.CategoriaDAO"%>
+
+<%@page import="Modelo.Proveedor"%>
+<%@page import="ModeloDAO.ProveedorDAO"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -50,99 +61,112 @@
             <table>
                 <thead>
                     <tr>
-                        <th>C骴igo</th>
+                        <th>C贸digo</th>
                         <th>Nombre</th>
+                        <th>Cantidad</th>
                         <th>Precio Ven.</th>
                         <th>Precio Com.</th>
-                        <th>Categor韆</th>
+                        <th>Categor铆a</th>
                         <th>Proveedor</th>
                         <th>Caducidad</th>
-                        <th>Descripci髇</th>
+                        <th>Descripci贸n</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                	<%
+                		ProductoDAO dao = new ProductoDAO();
+                		List<Producto> list = dao.listar();
+                		Iterator<Producto> iter = list.iterator();
+                		Producto pro=null;
+                		while(iter.hasNext()){
+                			pro=iter.next();
+                	%>
                    <tr>
-                        <td>7283018392</td>
-                        <td>Proplan Adulto</td>
-                        <td>$1200</td>
-                        <td>$1000</td>
-                        <td>Alimento Premium</td>
-                        <td>Purina</td>
-                        <td>2/10/2021</td>
-                        <td>Alimento para perros, bolsa de 12 kg.</td>
+                        <td><%=pro.getIDProducto() %></td>
+                        <td><%=pro.getNombre() %></td>
+                        <td><%=pro.getCantidad() %></td>
+                        <td> $<%=pro.getPrecio_V() %></td>
+                        <td> $<%=pro.getPrecio_C() %></td>
+                        <td><%=pro.getS_Categoria() %></td>
+                        <td><%=pro.getS_Proveedor() %></td>
+                        <td><%=pro.getCaducidad() %></td>
+                        <td><%=pro.getDescripcion() %></td>
                         <td>
-                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
+                        	<button class="editar_pro" value="<%=pro.getIDProducto() %>"> <img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></button>
+                        	<button class="eliminar_pro" value="<%=pro.getIDProducto()%>"> <img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></button>
                        </td>
                     </tr>
-                    <tr>
-                        <td>7283018392</td>
-                        <td>Proplan Adulto</td>
-                        <td>$1200</td>
-                        <td>$1000</td>
-                        <td>Alimento Premium</td>
-                        <td>Purina</td>
-                        <td>2/10/2021</td>
-                        <td>Alimento para perros, bolsa de 12 kg.</td>
-                        <td>
-                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    <tr>
-                        <td>7283018392</td>
-                        <td>Proplan Adulto</td>
-                        <td>$1200</td>
-                        <td>$1000</td>
-                        <td>Alimento Premium</td>
-                        <td>Purina</td>
-                        <td>2/10/2021</td>
-                        <td>Alimento para perros, bolsa de 12 kg.</td>
-                        <td>
-                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
+                    <%} %>
                 </tbody>
             </table>
         
     </div>
     
     <form action="" class="formulario">
-        <h5>AGREGAR PRODUCTO</h5>
+        <h5 id="title_form">AGREGAR PRODUCTO</h5>
       <input id="Clv_Pro" name="Clv_Pro" type="number" class="formulario__input" required="required">  
-        <label for="Clv_Pro" class="formulario__label">C骴igo del producto</label>
+        <label for="Clv_Pro" class="formulario__label">C贸digo del producto</label>
         
         <input id="Nombre_Pro" name="Nombre_Pro" type="text" class="formulario__input" required="required">  
         <label for="Nombre_Pro" class="formulario__label">Nombre del producto</label>
         
-        <input id="Categoria" name="Categoria" type="text" class="formulario__input">  
-        <label for="Categoria" class="formulario__label">Categoria</label>
+        <label class="formulario__label_fija">Categoria</label>
+        <select id="Categorias" name="opciones" class="formulario__input">
+        	<%
+           		CategoriaDAO daocat = new CategoriaDAO();
+           		List<Categoria> listcat = daocat.listar();
+           		Iterator<Categoria> itercat = listcat.iterator();
+           		Categoria cat=null;
+           		while(itercat.hasNext()){
+           			cat=itercat.next();
+           	%>
+               <option value="<%=cat.getIDCategoria() %>"><%=cat.getNombre()%></option>
+               
+           <%} %>
+        </select>
+        <input id="Cantidad" name="Cantidad" type="number" class="formulario__input" required="required">   
+        <label for="Cantidad" class="formulario__label">Cantidad</label>
         
         <input id="Precio_V" name="Precio_V" type="number" class="formulario__input" required="required">   
-        <label for="Precio_V" class="formulario__label">Previo de Venta</label>
+        <label for="Precio_V" class="formulario__label">Precio de Venta</label>
 		
 		<input id="Precio_C" name="Precio_C" type="number" class="formulario__input" required="required">   
-        <label for="Precio_C" class="formulario__label">Previo de Compra</label>
+        <label for="Precio_C" class="formulario__label">Precio de Compra</label>
         
+        <label for="Fecha_C" class="formulario__label_fija">Fecha de Caducidad</label>
         <input id="Fecha_C" name="Fecha_C" type="date" class="formulario__input">   
-        <label for="Fecha_C" class="formulario__label">Fecha de Caducidad</label>
+        
+        <label class="formulario__label_fija">Proveedor</label>
+        <select id="Proveedores" name="opciones" class="formulario__input">
+        	<%
+	        	ProveedorDAO provedao = new ProveedorDAO();
+	    		List<Proveedor> listprove = provedao.listar();
+	    		Iterator<Proveedor> iterprove = listprove.iterator();
+	    		Proveedor prove=null;
+	    		while(iterprove.hasNext()){
+    			prove=iterprove.next();
+           	%>
+               <option value="<%=prove.getIDProveedor() %>"><%=prove.getNombre()%></option>
+               
+           <%} %>
+        </select>
         
         <input id="Descrip" name="Descrip" type="text" class="formulario__input">   
-        <label for="Descrip" class="formulario__label">Descripci髇</label>
-        
-        <input id="Proveedor" name="Proveedor" type="text" class="formulario__input">   
-        <label for="Proveedor" class="formulario__label">Proveedor</label>
+        <label for="Descrip" class="formulario__label">Descripci贸n</label>
                 
         <div >
-            <button id="guardar" type="submit" class="guardar">Guardar</button>
-            <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
+            <button id="actualizar" type="button" class="actualizar">Actualizar</button>
+            <button id="guardar" type="button" class="guardar">Guardar</button>
+            <button id="cancelar" type="reset" onclick="limpiar_campos()" class="cancelar">Cancelar</button>
         </div>
     </form>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
+    <script type="text/javascript" src="../scripts/script.js"></script>
+    <script type="text/javascript" src="../scripts/Productos.js"></script>
+    
     
 </body>
 </html>
