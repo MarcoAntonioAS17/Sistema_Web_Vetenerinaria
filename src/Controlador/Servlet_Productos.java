@@ -37,6 +37,17 @@ public class Servlet_Productos extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String accion = request.getParameter("accion");
 		
+		if(accion.equals("mostrar")) {
+			String busq=request.getParameter("search");
+			int valor = Integer.parseInt(request.getParameter("valor"));
+			
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			
+			response.getWriter().write(dao.Listar_JSON(valor, busq));
+			return;
+		}
+		
 		if(accion.equals("agregar")) {
 			producto.setIDProducto(request.getParameter("idProducto"));
 			producto.setNombre(request.getParameter("Nombre"));

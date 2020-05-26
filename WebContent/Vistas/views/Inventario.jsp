@@ -46,17 +46,18 @@
             <form id="busqueda">
               <label>Buscar</label>
               <select id="opciones" name="opciones">
-                   <option value="Codigo">Codigo</option>
-                  <option value="Nombre">Nombre</option>
-                  <option value="Precio Venta">Precio Venta</option>
-                  <option value="Precio Compra">Precio Compra</option>
-                  <option value="Categoria">Categoria</option>
-                  <option value="Proveedor">Proveedor</option>
-                  <option value="Caducidad">Caducidad</option>
-                  <option value="Descripcion">Descripcion</option>
+                   <option value="1">Codigo</option>
+                  <option value="2">Nombre</option>
+                  <option value="9">Cantidad</option>
+                  <option value="3">Precio Venta</option>
+                  <option value="4">Precio Compra</option>
+                  <option value="7">Categoria</option>
+                  <option value="8">Proveedor</option>
+                  <option value="5">Caducidad</option>
+                  <option value="6">Descripcion</option>
               </select>
             
-               <input id="busqueda" type="search" placeholder="Busqueda"> 
+               <input id="busqueda_input" type="search" placeholder="Busqueda"> 
             </form>
             <table>
                 <thead>
@@ -74,30 +75,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                	<%
-                		ProductoDAO dao = new ProductoDAO();
-                		List<Producto> list = dao.listar();
-                		Iterator<Producto> iter = list.iterator();
-                		Producto pro=null;
-                		while(iter.hasNext()){
-                			pro=iter.next();
-                	%>
-                   <tr>
-                        <td><%=pro.getIDProducto() %></td>
-                        <td><%=pro.getNombre() %></td>
-                        <td><%=pro.getCantidad() %></td>
-                        <td> $<%=pro.getPrecio_V() %></td>
-                        <td> $<%=pro.getPrecio_C() %></td>
-                        <td><%=pro.getS_Categoria() %></td>
-                        <td><%=pro.getS_Proveedor() %></td>
-                        <td><%=pro.getCaducidad() %></td>
-                        <td><%=pro.getDescripcion() %></td>
-                        <td>
-                        	<button class="editar_pro" value="<%=pro.getIDProducto() %>"> <img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></button>
-                        	<button class="eliminar_pro" value="<%=pro.getIDProducto()%>"> <img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></button>
-                       </td>
-                    </tr>
-                    <%} %>
+                	
+                     
                 </tbody>
             </table>
         

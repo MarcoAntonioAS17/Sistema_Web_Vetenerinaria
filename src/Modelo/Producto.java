@@ -93,6 +93,8 @@ public class Producto {
 				+"\", \"Descripcion\":\""+this.Descripcion
 				+"\", \"Categoria\":\""+String.format("%d", this.R_Categoria)
 				+"\", \"Proveedor\":\""+String.format("%d", this.R_Proveedor)
+				+"\", \"R_Proveedor\":\""+ this.S_Proveedor
+				+"\", \"R_Categoria\":\""+ this.S_Categoria
 				+"\"}");
 		
 		return lista;
