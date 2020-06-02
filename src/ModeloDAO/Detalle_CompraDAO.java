@@ -101,6 +101,125 @@ public class Detalle_CompraDAO extends Conexion{
 		return ID;
 	}
 	
+	public int consultar_inventario(String Codigo) {
+			
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int cant=0;
+
+		this.query = "SELECT cantidad from productos where idProductos = ?;";
+		
+		try {
+			ps=getConnection().prepareStatement(this.query);
+            ps.setString(1,Codigo);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+            	cant=rs.getInt("cantidad");
+            }
+            
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return cant;
+	}
+	
+	public boolean modificar_inventario(String Codigo, int Cantidad) {
+		PreparedStatement ps=null;
+
+		this.query = "UPDATE productos set cantidad = ? where idProductos = ?;";
+		
+		try {
+			ps=getConnection().prepareStatement(this.query);
+            ps.setInt(1, Cantidad);
+			ps.setString(2,Codigo);
+            ps.executeUpdate();
+            
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean eliminar_producto(String producto, int CodVenta) {
+		PreparedStatement ps=null;
+		try {
+        	this.query = "delete from detalle_compras where R_Producto = ? and R_Compra = ?;";
+        	ps = getConnection().prepareStatement(query);
+            ps.setString(1, producto);
+            ps.setInt(2, CodVenta);
+            ps.executeUpdate();
+            
+        } catch (Exception var4) {
+            var4.printStackTrace();
+            return false;
+        }
+
+		return true;
+	}
+	
+	public void modificar_cantidad(String Codigo, int Compra, int Cantidad) {
+		
+		PreparedStatement ps=null;
+
+		this.query = "UPDATE detalle_compras SET cantidad=? where R_Producto = ? and R_Compra = ?;";
+		
+		try {
+			ps=getConnection().prepareStatement(this.query);
+            ps.setInt(1, Cantidad);
+			ps.setString(2,Codigo);
+            ps.setInt(3, Compra);
+            ps.executeUpdate();
+            
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return;
+		}
+		return;
+	}
+
+	public int consultar_cantidad(String Codigo, int Compra) {
+		
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int cant=0;
+
+		this.query = "SELECT cantidad from detalle_compras where R_Producto = ? and R_Compra = ?;";
+		
+		try {
+			ps=getConnection().prepareStatement(this.query);
+            ps.setString(1,Codigo);
+            ps.setInt(2, Compra);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+            	cant=rs.getInt("cantidad");
+            }
+            
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return cant;
+	}
+
+	public boolean eliminar_productos(int CodVenta) {
+		PreparedStatement ps=null;
+		try {
+        	this.query = "delete from detalle_compras where R_Compra = ?;";
+        	ps = getConnection().prepareStatement(query);
+            ps.setInt(1, CodVenta);
+            ps.executeUpdate();
+            
+        } catch (Exception var4) {
+            var4.printStackTrace();
+            return false;
+        }
+
+		return true;
+	}
 	
 
 }

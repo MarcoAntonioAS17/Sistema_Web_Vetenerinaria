@@ -167,10 +167,6 @@ function editar_inicio(codvar){
 	          });
 }
 
-function funcion(){
-	$("tbody").empty();
-}
-
 function mostrar_registros(opcion,busqueda){
 
 	$.post("../../Productos",{

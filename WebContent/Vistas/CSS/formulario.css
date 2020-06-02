@@ -43,11 +43,24 @@ h5{
 	font-size: 1.1em;
 }
 
+.input-20{
+	display: inline-block;
+	width: 18%;
+	font-size: 1.1em;
+}
+
 .label-input-30{
 	display: inline-block;
 	width: 30%;
 	font-size: 1.3em;
 }
+
+.label-input-20{
+	display: inline-block;
+	width: 18%;
+	font-size: 1.3em;
+}
+
 #date-time{
 	display: flex;
 	flex-wrap: wrap;
@@ -60,14 +73,14 @@ h5{
 	justify-content: space-around;
 }
 
-.formulario__input, .input-40, .input-30 { 
+.formulario__input, .input-40, .input-30, .input-20 { 
     padding: 10px;
     background: rgba(0,0,0,0.1);
     border: 1px solid rgba(0,0,0,0.3);
     margin-bottom: 30px
 }
 
-.formulario__input:focus ,.input-40:focus, .input-30:focus {
+.formulario__input:focus ,.input-40:focus, .input-30:focus, .input-20:focus {
     outline: 1px solid rgba(0,0,0,0.7);
 }
 
@@ -94,16 +107,30 @@ h5{
     color: rgba(0,0,0,0.5); 
 }
 
-.label-input-30 {
+.label-input-30, .label-input-20 {
+	text-align: right;
 	padding-top: 5px;
     padding-left: 15px;
     color: black; 
 }
 
-.buscar, .agregar{
+.buscar{
 	cursor:pointer;
     margin-top: .10rem;
     width: 30%;
+    height: 33px;
+    border-radius: .25rem;
+    border: 1px solid transparent;
+    color: #fff;
+    background-color: #70D6C1;
+    border-color: #70D6C1;
+    font-size: .9rem;
+}
+
+.agregar{
+	cursor:pointer;
+    margin-top: .10rem;
+    width: 18%;
     height: 33px;
     border-radius: .25rem;
     border: 1px solid transparent;
