@@ -66,7 +66,11 @@
         
         <div id="cont-producto">
 	        <label for="Clv_Prod" class="label-input-20">Código del producto</label>
-	        <input id="Clv_Prod" name="Clv_Pro" type="number" class="input-20" placeholder="Código">
+	        
+	        <input  id="Clv_Prod" list="list_prod" class="input-20" placeholder="Código">
+	        <datalist id="list_prod">
+	        	
+	        </datalist>
 	        
 	        <label for="Cantidad" class="label-input-20">Cantidad</label>
 	        <input id="Cantidad" type="number" class="input-20" placeholder="Cantidad">  

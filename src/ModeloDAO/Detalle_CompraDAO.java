@@ -221,6 +221,34 @@ public class Detalle_CompraDAO extends Conexion{
 		return true;
 	}
 	
+	public String producto_x_proveedor(int IDProveedor) {
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		String retorno = new String("[");
+		
+		this.query = "SELECT idProductos, Nombre FROM veterinaria.productos WHERE R_Proveedor=?";
+    	
+    	try {
+            ps = getConnection().prepareStatement(query);
+            ps.setInt(1,IDProveedor);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	
+            	String lista = new String("{\"Codigo\": \""+rs.getInt("idProductos")
+        				+"\", \"Nombre\":\""+rs.getString("Nombre")
+        				+"\"}");
+            	retorno+=lista;
+            	if(!rs.isLast())
+            		retorno+= ",";
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    }
+    	retorno+="]";
+		return retorno;
+	}
 
 }
 

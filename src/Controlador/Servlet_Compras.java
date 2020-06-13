@@ -132,12 +132,19 @@ public class Servlet_Compras extends HttpServlet {
 			retorno=dao_detalle.eliminar_productos(Dcompra.getR_Compra());
 			if(retorno)
 				retorno=dao.eliminar_compra(Dcompra.getR_Compra());
-				
 			
 			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(""+retorno);
 			
+		}else {if(accion.equals("cargar_productos")) {
+			
+			int Cod_Pro = Integer.parseInt(request.getParameter("Proveedor"));
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(dao_detalle.producto_x_proveedor(Cod_Pro));
+				
+			}
 		}
 		}
 		}

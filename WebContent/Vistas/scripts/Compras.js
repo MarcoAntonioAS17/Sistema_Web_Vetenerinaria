@@ -1,9 +1,12 @@
 
+var contador =true;
+
 $(document).ready(function(){
 	
-	var contador =true;
+	contador=true;
 	var Total;
 	$("#Cantidad").val("1");
+	cargar_productos($("#Clv_Pro").val());
 	
 	ocultar_elementos();
 	$('#guardar').click(function(e){
@@ -24,17 +27,17 @@ $(document).ready(function(){
 		
 		if(confirma == true){
 			limpiar_campos();
-			$.post("../../Compras",{
-		 		accion : "cancelar_compra"
-			},function(responseText){
-				if(responseText != "false"){
-					alert("La compra ha sido cancelada");
-					location.reload();
-				}else{
-					  alert("Error al cancelar producto");
-					  return;
-				}
-			});
+		$.post("../../Compras",{
+	 		accion : "cancelar_compra"
+		},function(responseText){
+			if(responseText != "false"){
+				alert("La compra ha sido cancelada");
+				location.reload();
+			}else{
+				  alert("Error al cancelar producto");
+				  return;
+			}
+		});
 			
 		}else{
 			return;
@@ -104,6 +107,11 @@ $(document).ready(function(){
 	 	}
 	   	
 	});
+	
+	$("#Clv_Pro").change(function(e){
+		cargar_productos($(this).val());
+		
+	});
 });
 
 function mostrar_registros(responseJson){
@@ -136,8 +144,25 @@ function mostrar_registros(responseJson){
 	return suma;
 }
 
+function cargar_productos(vProveedor){
+	$("datalist").empty();
+	$.post("../../Compras",{
+		accion : "cargar_productos",
+		Proveedor: vProveedor
+	},function(responseJson){
+		var datos = JSON.parse(responseJson);
+
+		for(var i in datos){
+			$("datalist").append(
+				"<option value="+datos[i].Codigo+">"+datos[i].Codigo+", "+datos[i].Nombre+"</option>"
+				);
+		}
+	}
+	);
+}
+
 function eliminar(varProducto, varCantidad){
-	alert("Eliminaras del carrito todos los productos con codigo "+varProducto);
+
 	$.post("../../Compras",{
  		accion : "borrar_producto",
 		Producto: varProducto,
@@ -162,3 +187,5 @@ function ocultar_elementos(){
 	$('#tabla').hide(500);
 
 }
+
+
