@@ -54,7 +54,7 @@ public class ClientesDAO extends Conexion {
             	new_Cte.setIDClient(this.rs.getInt("idClientes"));
             	new_Cte.setNombreC(this.rs.getString("Nombre"));
             	new_Cte.setTelefonoC(this.rs.getString("Telefono"));
-            	new_Cte.setCorreoC(this.rs.getString("Correo"));
+            	new_Cte.setEmailC(this.rs.getString("Correo"));
             	datos.add(new_Cte);
             }
     	
@@ -73,7 +73,7 @@ public class ClientesDAO extends Conexion {
             ps.setInt(4, clients.getIDClient());
             ps.setString(1, clients.getNombreC());
             ps.setString(2, clients.getTelefonoC());
-            ps.setString(3, clients.getCorreoC());
+            ps.setString(3, clients.getEmailC());
             
             this.ps.executeUpdate();
         } catch (Exception var4) {
@@ -92,7 +92,7 @@ public class ClientesDAO extends Conexion {
             ps.setInt(1, New_Ctes.getIDClient());
             ps.setString(2, New_Ctes.getNombreC());
             ps.setString(3, New_Ctes.getTelefonoC());
-            ps.setString(4, New_Ctes.getCorreoC());
+            ps.setString(4, New_Ctes.getEmailC());
             
             this.ps.executeUpdate();
         } catch (Exception var4) {

@@ -78,8 +78,7 @@ public class Servlet_Clientes extends HttpServlet {
 						if(dao.edit(cliente)) 
 							response.getWriter().write("true");
 						else 
-							response.getWriter().write("false");
-						
+							response.getWriter().write("false");	
 					}
 				}
 			}

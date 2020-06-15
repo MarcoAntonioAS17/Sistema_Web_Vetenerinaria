@@ -19,15 +19,15 @@ public class Clientes {
 		return IDClient;
 	}
 	
-	public int setIDClient(int idClient) {
+	public void setIDClient(int idClient) {
 		IDClient = idClient;
 	}
 	
-	public int getTelefonoC() {
+	public String getTelefonoC() {
 		return TelefonoC;
 	}
 	
-	public int setTelefonoC(int TelefonoCte) {
+	public void setTelefonoC(String TelefonoCte) {
 		TelefonoC = TelefonoCte;
 	}
 	
