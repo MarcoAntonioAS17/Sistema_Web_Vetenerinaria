@@ -55,7 +55,7 @@
             </div>
             <div id="opc2" class="opcion">
                 <img class="icono" src="../img/producto-icono.png" alt="icono-contacto">
-                <h1>20</h1>
+                <h1 id="Prod_Tot"></h1>
                 <p>Productos</p>
             </div>
             <div id="opc3" class="opcion">
@@ -65,12 +65,12 @@
             </div>
             <div id="opc4" class="opcion">
                 <img class="icono" src="../img/caducar-icono.png" alt="icono-contacto">
-                <h1>0</h1>
+                <h1 id="caducar"></h1>
                 <p>Productos a caducar</p>
             </div>
             <div id="opc5" class="opcion">
                 <img class="icono" src="../img/agotarse-icono.png" alt="icono-contacto">
-                <h1>20</h1>
+                <h1 id="Agotarse"></h1>
                 <p>Proximos a agotarse</p>
             </div>
             <div id="opc6" class="opcion">
@@ -131,6 +131,7 @@
     
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
+    <script type="text/javascript" src="../scripts/Inicio.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </body>

@@ -87,4 +87,44 @@ public class CompraDAO extends Conexion{
 	    }
     	
 	}
+	
+	public String mostrar_compras() {
+		
+		String retorno = new String("[");
+		this.query = "select idCompras, Proveedor_Nombre, Fecha, Hora, round(sum(detalle_compras.Cantidad*productos.Precio_Compra),2) as Total from detalle_compras " + 
+				"inner join compras on R_Compra=idCompras " + 
+				"inner join proveedores on R_Proveedor=idProveedores " + 
+				"inner join productos on R_Producto=idProductos " + 
+				"group by idCompras " + 
+				"order by idCompras;";
+		
+		try {
+            ps = getConnection().prepareStatement(query);
+            this.rs = this.ps.executeQuery();
+            
+            while(this.rs.next()) {
+            	Compras new_comp = new Compras();
+            	Detalle_CompraDAO dao_detalles = new Detalle_CompraDAO();
+            	new_comp.setIdCompra(this.rs.getInt("idCompras"));
+            	new_comp.setS_Proveedor(this.rs.getString("Proveedor_Nombre"));
+            	new_comp.setFecha(this.rs.getDate("Fecha"));
+            	new_comp.setHora(this.rs.getTime("Hora"));
+            	new_comp.setTotal(this.rs.getFloat("Total"));
+            	
+            	retorno+= new_comp.crear_JSON();
+            	retorno+="\"Compras\":";
+            	retorno+=dao_detalles.Listar_JSON_Ver_Compras(new_comp.getIdCompra());
+            	retorno+="}";
+            	if(!this.rs.isLast())
+            		retorno+= ",";
+            }
+    	
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    }
+    	retorno+="]";
+    	return retorno;
+	}
+	
+	
 }

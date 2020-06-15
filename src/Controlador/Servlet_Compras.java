@@ -144,7 +144,14 @@ public class Servlet_Compras extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(dao_detalle.producto_x_proveedor(Cod_Pro));
 				
-			}
+		}else{
+			if(accion.equals("mostrar_compras")) {
+		}
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			System.out.println(dao.mostrar_compras());
+			response.getWriter().write(dao.mostrar_compras());
+		}
 		}
 		}
 		}

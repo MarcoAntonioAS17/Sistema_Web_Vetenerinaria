@@ -52,6 +52,42 @@ public class Detalle_CompraDAO extends Conexion{
 		return retorno;
 	}
 	
+	public String Listar_JSON_Ver_Compras(int IDCompra) {
+
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		String retorno = new String("[");
+		
+		this.query = "SELECT R_Producto, productos.Nombre, detalle_compras.Cantidad, productos.Precio_Compra "
+				+ "FROM veterinaria.detalle_compras " + 
+				"INNER JOIN productos ON detalle_compras.R_Producto=productos.idProductos where R_Compra=?;";
+    	
+    	try {
+            ps = getConnection().prepareStatement(query);
+            ps.setInt(1,IDCompra);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	Detalle_Compras dcompra = new Detalle_Compras();
+            	dcompra.setR_Producto(rs.getString("R_Producto"));
+            	dcompra.setNombre_Producto(rs.getString("Nombre"));
+            	dcompra.setCantidad(rs.getInt("Cantidad"));
+            	dcompra.setPrecio(rs.getFloat("Precio_Compra"));
+            	
+            	retorno+= dcompra.crear_JSON_Ver_Compras();
+            	if(!rs.isLast())
+            		retorno+= ",";
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    }
+    	retorno+="]";
+		return retorno;
+	}
+	
+	
+	
 	public boolean add(Detalle_Compras Dcompra) {
 		PreparedStatement ps=null;
 		

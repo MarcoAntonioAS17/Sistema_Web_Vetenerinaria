@@ -69,6 +69,10 @@
                         <li>
                             <a href="Compras.jsp">
                                 <i class="sub_menu"></i>
+                                Nueva Compra
+                            </a>
+                            <a href="Ver_Compras.jsp">
+                                <i class="sub_menu"></i>
                                 Ver Compras
                             </a>
                             <a href="Proveedores.jsp">
@@ -97,5 +101,5 @@
                 <li class="title">SISTEMA</li>
                 <li ><a href="">Acceso al sistema</a></li>
                 <li class="title" ><a href="../../index.jsp" >Salir</a></li>
-
+			</ul>
 </div>

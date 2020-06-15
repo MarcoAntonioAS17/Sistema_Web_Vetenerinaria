@@ -1,0 +1,6 @@
+      
+#reporte tr.odd td { 
+ 
+    cursor:pointer;
+    border-top: 1px solid #ddd;
+}
