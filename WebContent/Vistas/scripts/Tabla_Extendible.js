@@ -10,5 +10,7 @@ function extender(ID){
 	
 	var codigo = "#R"+ID;
 	$(codigo).next("tr").toggle();
+	var codigoB = ".but_"+ID;
+	$(codigoB).toggle();
     	
 }

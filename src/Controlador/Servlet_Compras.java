@@ -149,7 +149,6 @@ public class Servlet_Compras extends HttpServlet {
 		}
 			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
-			System.out.println(dao.mostrar_compras());
 			response.getWriter().write(dao.mostrar_compras());
 		}
 		}

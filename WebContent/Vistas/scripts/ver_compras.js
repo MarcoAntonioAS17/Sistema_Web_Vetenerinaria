@@ -13,15 +13,21 @@ function mostrar_registros(responseJson){
 	var datos = JSON.parse(responseJson);
 	var i=0;
 	var suma=0+1-1;
+	
+	const options2 = { style: 'currency', currency: 'USD' };
+	const numberFormat2 = new Intl.NumberFormat('en-US', options2);
+	
 	for(i in datos){
 		$("#tbody1").append("<tr id=\"R"+datos[i].Codigo+"\" onclick=\"extender("+datos[i].Codigo+")\" class=\"odd\">" +
 				"<td>"+datos[i].Codigo+"</td>" +
 				"<td>"+datos[i].Nombre+"</td>" +
 				"<td>"+datos[i].Fecha+"</td>" +
 				"<td>"+datos[i].Hora+"</td>" +
-				"<td> $"+datos[i].Total+"</td>"+
+				"<td> "+numberFormat2.format(datos[i].Total)+"</td>"+
+				
 				"<td>"+
-				"<button onclick=\"mas("+datos[i].Codigo+")\" type=\"button\" class=\"editar_pro\"> <img width=\"25px\"  alt=\"icono-mas-info\" src=\"../img/mas-icono.svg\"></button>"+
+				"<button type=\"button\" class=\"editar_pro but_"+datos[i].Codigo+"\"> <img width=\"25px\"  alt=\"icono-mas-info\" src=\"../img/mas-icono.svg\"></button>"+
+				"<button type=\"button\" class=\"editar_pro bt-menos but_"+datos[i].Codigo+"\"> <img width=\"25px\"  alt=\"icono-menos-info\" src=\"../img/menos-icono.svg\"></button>"+
 				"</td>"+
                 "</tr>");
 		suma+=parseInt(datos[i].Total,10);
@@ -44,12 +50,12 @@ function mostrar_registros(responseJson){
 		var codigoT="#Tb"+datos[i].Codigo;
 		
 		for(j in datos[i].Compras){
-			$(codigoT).append("<tr >" +
+			$(codigoT).append("<tr class=\"odd\" >" +
 					"<td>"+datos[i].Compras[j][0]+"</td>" +
 					"<td>"+datos[i].Compras[j][1]+"</td>" +
 					"<td>"+datos[i].Compras[j][2]+"</td>" +
-					"<td>"+datos[i].Compras[j][3]+"</td>" +
-					"<td> $"+datos[i].Compras[j][3]*datos[i].Compras[j][2]+"</td>"+
+					"<td>"+numberFormat2.format(datos[i].Compras[j][3])+"</td>" +
+					"<td> "+numberFormat2.format(datos[i].Compras[j][3]*datos[i].Compras[j][2])+"</td>"+
 					"</tr>");
 		}
 		
