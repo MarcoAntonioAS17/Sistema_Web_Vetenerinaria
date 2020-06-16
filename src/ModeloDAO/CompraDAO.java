@@ -2,13 +2,14 @@ package ModeloDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import Config.Conexion;
 import Modelo.Compras;
 import Modelo.Detalle_Compras;
 
-public class CompraDAO extends Conexion{
+public class CompraDAO {
 	
 	PreparedStatement ps;
 	ResultSet rs;
@@ -20,11 +21,11 @@ public class CompraDAO extends Conexion{
 	}
 	
 	 public boolean add(Compras nueva) {
-
+		 Conexion conect = new Conexion();
         try {
         	this.query = "INSERT INTO  compras (R_Proveedor, Fecha, Hora)"+ 
         				"values (?,?,?);";
-        	ps = getConnection().prepareStatement(query);
+        	ps = conect.getConnection().prepareStatement(query);
             
             ps.setInt(1, nueva.getR_Proveedor());
             
@@ -43,10 +44,11 @@ public class CompraDAO extends Conexion{
 	 }
 	 
 	 public boolean eliminar_compra(int CodCompra) {
+		 Conexion conect = new Conexion();
 			PreparedStatement ps=null;
 			try {
 	        	this.query = "delete from compras where idCompras = ?;";
-	        	ps = getConnection().prepareStatement(query);
+	        	ps = conect.getConnection().prepareStatement(query);
 	            ps.setInt(1, CodCompra);
 	            ps.executeUpdate();
 	            
@@ -59,7 +61,7 @@ public class CompraDAO extends Conexion{
 		}
 	
 	public void regresar_inventario(int IDCompra) {
-
+		Conexion conect = new Conexion();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		Detalle_Compras dcompra = new Detalle_Compras();
@@ -69,7 +71,7 @@ public class CompraDAO extends Conexion{
 		this.query = "SELECT Cantidad, R_Producto FROM detalle_compras where R_Compra=?;";
     	
     	try {
-            ps = getConnection().prepareStatement(query);
+            ps = conect.getConnection().prepareStatement(query);
             ps.setInt(1,IDCompra);
             rs = ps.executeQuery();
             
@@ -88,40 +90,76 @@ public class CompraDAO extends Conexion{
     	
 	}
 	
-	public String mostrar_compras() {
+	public String mostrar_compras(int key, String busq) {
+		
+		Conexion conect = new Conexion();
+		
+		PreparedStatement ps2 = null;
+		ResultSet rs2 = null;
 		
 		String retorno = new String("[");
-		this.query = "select idCompras, Proveedor_Nombre, Fecha, Hora, round(sum(detalle_compras.Cantidad*productos.Precio_Compra),2) as Total from detalle_compras " + 
+		this.query = "select idCompras, Proveedor_Nombre, Fecha, date_add(hora, Interval 1 hour) as Horas, round(sum(detalle_compras.Cantidad*productos.Precio_Compra),2) as Total from detalle_compras " + 
 				"inner join compras on R_Compra=idCompras " + 
 				"inner join proveedores on R_Proveedor=idProveedores " + 
-				"inner join productos on R_Producto=idProductos " + 
-				"group by idCompras " + 
-				"order by idCompras;";
+				"inner join productos on R_Producto=idProductos " ;
+		switch (key) {
+			case 1:
+					this.query+="where idCompras like ? ";
+				break;
+			case 2:
+				this.query+="where Proveedor_Nombre like ? ";
+				break;	
+			case 3:
+				this.query+="where Fecha like ? ";
+				break;
+			case 4:
+				this.query+="where Hora like ? ";
+				break;
 		
+			default:
+				this.query+="";
+				break;
+		}
+		
+		this.query+="group by idCompras order by idCompras;";
 		try {
-            ps = getConnection().prepareStatement(query);
-            this.rs = this.ps.executeQuery();
+            ps2 = conect.getConnection().prepareStatement(query);
+            ps2.setString(1,"%"+busq+"%");
+            rs2 = ps2.executeQuery();
             
-            while(this.rs.next()) {
+            while(rs2.next()) {
             	Compras new_comp = new Compras();
             	Detalle_CompraDAO dao_detalles = new Detalle_CompraDAO();
-            	new_comp.setIdCompra(this.rs.getInt("idCompras"));
-            	new_comp.setS_Proveedor(this.rs.getString("Proveedor_Nombre"));
-            	new_comp.setFecha(this.rs.getDate("Fecha"));
-            	new_comp.setHora(this.rs.getTime("Hora"));
-            	new_comp.setTotal(this.rs.getFloat("Total"));
+            	new_comp.setIdCompra(rs2.getInt("idCompras"));
+            	new_comp.setS_Proveedor(rs2.getString("Proveedor_Nombre"));
+            	new_comp.setFecha(rs2.getDate("Fecha"));
+            	new_comp.setHora(rs2.getTime("Horas"));
+            	new_comp.setTotal(rs2.getFloat("Total"));
             	
             	retorno+= new_comp.crear_JSON();
             	retorno+="\"Compras\":";
             	retorno+=dao_detalles.Listar_JSON_Ver_Compras(new_comp.getIdCompra());
             	retorno+="}";
-            	if(!this.rs.isLast())
+            	if(!rs2.isLast())
             		retorno+= ",";
             }
     	
 	    } catch (Exception var4) {
 	        var4.printStackTrace();
-	    }
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps2 != null)
+					ps2.close();
+				if(rs2 != null)
+					rs2.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
     	retorno+="]";
     	return retorno;
 	}

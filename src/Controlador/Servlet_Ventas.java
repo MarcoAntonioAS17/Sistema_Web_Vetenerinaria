@@ -59,7 +59,9 @@ public class Servlet_Ventas extends HttpServlet {
 				return;
 			}
 			
+			
 			compra.setIdCompra(dao_detalle.buscar_compra(compra.getFecha(),compra.getHora()));
+			
 			
 			Dcompra.setR_Producto(request.getParameter("Producto"));
 			Dcompra.setCantidad(Integer.parseInt(request.getParameter("Cantidad")));

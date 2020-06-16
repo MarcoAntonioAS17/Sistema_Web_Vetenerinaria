@@ -146,10 +146,14 @@ public class Servlet_Compras extends HttpServlet {
 				
 		}else{
 			if(accion.equals("mostrar_compras")) {
+				response.setContentType("text/html");
+				response.setCharacterEncoding("UTF-8");
+				int opcion = Integer.parseInt(request.getParameter("valor"));
+				String busq = request.getParameter("search");
+				
+				response.getWriter().write(dao.mostrar_compras(opcion,busq));
 		}
-			response.setContentType("text/html");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(dao.mostrar_compras());
+			
 		}
 		}
 		}

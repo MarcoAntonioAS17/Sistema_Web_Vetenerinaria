@@ -38,13 +38,13 @@
             <form id="busqueda">
               <label>Buscar</label>
               <select id="opciones" name="opciones">
-                   <option value="Codigo">Codigo Compra</option>
-                  <option value="Cliente">Proveedor</option>
-                  <option value="Fecha">Fecha</option>
-                  <option value="Hora">Hora</option>
+                   <option value="1">Codigo Compra</option>
+                  <option value="2">Proveedor</option>
+                  <option value="3">Fecha</option>
+                  <option value="4">Hora</option>
               </select>
             
-               <input id="busqueda" type="search" placeholder="Busqueda"> 
+               <input id="busqueda_input" type="search" placeholder="Busqueda"> 
             </form>
             
          
