@@ -31,7 +31,7 @@ public class ClientesDAO extends Conexion {
         	new_Cte.setIDClient(this.rs.getInt("idClientes"));
         	new_Cte.setNombreC(this.rs.getString("Nombre"));
         	new_Cte.setTelefonoC(this.rs.getString("Telefono"));
-        	new_Cte.setCorreoC(this.rs.getString("Correo"));
+        	new_Cte.setEmailC(this.rs.getString("Correo"));
             }
             
     	} catch (Exception var4) {
