@@ -48,6 +48,7 @@ public class Servlet_Compras extends HttpServlet {
 			try {
 				SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd");
 				compra.setFecha(objSDF.parse(request.getParameter("Fecha")));
+			
 				objSDF = new SimpleDateFormat("hh:mm");
 				compra.setHora(objSDF.parse(request.getParameter("Hora")));
 			} catch (ParseException e) {
