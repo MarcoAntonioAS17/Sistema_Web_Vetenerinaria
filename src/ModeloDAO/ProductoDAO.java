@@ -129,12 +129,20 @@ public class ProductoDAO extends Conexion{
     	return datos;
     }
 
-    public boolean add(Producto nuevo_pro) {
+    public boolean add(Producto nuevo_pro, boolean opcion) {
 
         try {
-        	this.query = "INSERT INTO  productos (idProductos, Nombre, Cantidad, Precio_Venta, "
-        			+ "Precio_Compra, Caducidad, Descripcion, R_Categoria, R_Proveedor)"+ 
-        				"values (?,?,?,?,?,? ,?,?,?)";
+        	
+        	if(opcion) {
+        		this.query = "INSERT INTO  productos (idProductos, Nombre, Cantidad, Precio_Venta, "
+            			+ "Precio_Compra, Caducidad, Descripcion, R_Categoria, R_Proveedor)"+ 
+            				"values (?,?,?,?,?,? ,?,?,?)";
+        	}else {
+        		this.query = "INSERT INTO  productos (idProductos, Nombre, Cantidad, Precio_Venta, "
+            			+ "Precio_Compra, Descripcion, R_Categoria, R_Proveedor)"+ 
+            				"values (?,?,?,?,?,? ,?,?)";
+        	}
+        	
         	ps = getConnection().prepareStatement(query);
             
             ps.setString(1, nuevo_pro.getIDProducto());
@@ -142,13 +150,17 @@ public class ProductoDAO extends Conexion{
             ps.setInt(3, nuevo_pro.getCantidad());
             ps.setFloat(4,nuevo_pro.getPrecio_V());
             ps.setFloat(5,nuevo_pro.getPrecio_C());
-            SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd"); 
-            
-            ps.setString(6,String.format(objSDF.format((nuevo_pro.getCaducidad()))));
-            ps.setString(7, nuevo_pro.getDescripcion());
-            ps.setInt(8, nuevo_pro.getR_Categoria());
-            ps.setInt(9, nuevo_pro.getR_Proveedor());
-            
+            if(opcion) {
+            	SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd"); 
+            	ps.setString(6,String.format(objSDF.format((nuevo_pro.getCaducidad()))));
+                ps.setString(7, nuevo_pro.getDescripcion());
+                ps.setInt(8, nuevo_pro.getR_Categoria());
+                ps.setInt(9, nuevo_pro.getR_Proveedor());
+            }else {
+            	ps.setString(6, nuevo_pro.getDescripcion());
+                ps.setInt(7, nuevo_pro.getR_Categoria());
+                ps.setInt(8, nuevo_pro.getR_Proveedor());
+            }
             
             this.ps.executeUpdate();
         } catch (Exception var4) {
@@ -206,26 +218,39 @@ public class ProductoDAO extends Conexion{
     	return new_product;
     }
     
-    public boolean edit(Producto product) {
+    public boolean edit(Producto product, boolean opcion) {
         
         try {
         	
-        	this.query = "UPDATE  productos SET Nombre =?, Cantidad = ?, Precio_Venta = ?, "
-        			+ "Precio_Compra = ? , Caducidad = ?, Descripcion = ?, R_Categoria = ?, R_Proveedor = ? "
-        			+ "WHERE idProductos = ?;";
+        	if(opcion)
+        		this.query = "UPDATE  productos SET Nombre =?, Cantidad = ?, Precio_Venta = ?, "
+            			+ "Precio_Compra = ? , Caducidad = ?, Descripcion = ?, R_Categoria = ?, R_Proveedor = ? "
+            			+ "WHERE idProductos = ?;";
+        	else
+        		this.query = "UPDATE  productos SET Nombre =?, Cantidad = ?, Precio_Venta = ?, "
+            			+ "Precio_Compra = ? , Caducidad = NULL, Descripcion = ?, R_Categoria = ?, R_Proveedor = ? "
+            			+ "WHERE idProductos = ?;";
+        		
         	ps = getConnection().prepareStatement(query);
             
-        	ps.setString(9, product.getIDProducto());
             ps.setString(1,product.getNombre());
             ps.setInt(2, product.getCantidad());
             ps.setFloat(3,product.getPrecio_V());
             ps.setFloat(4,product.getPrecio_C());
-            SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd"); 
-            
-            ps.setString(5,String.format(objSDF.format((product.getCaducidad()))));
-            ps.setString(6, product.getDescripcion());
-            ps.setInt(7, product.getR_Categoria());
-            ps.setInt(8, product.getR_Proveedor());
+            if(opcion) {
+            	SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd"); 
+                
+                ps.setString(5,String.format(objSDF.format((product.getCaducidad()))));
+                ps.setString(6, product.getDescripcion());
+                ps.setInt(7, product.getR_Categoria());
+                ps.setInt(8, product.getR_Proveedor());
+                ps.setString(9, product.getIDProducto());
+            }else {
+            	ps.setString(5, product.getDescripcion());
+                ps.setInt(6, product.getR_Categoria());
+                ps.setInt(7, product.getR_Proveedor());
+                ps.setString(8, product.getIDProducto());
+            }
             
             this.ps.executeUpdate();
         } catch (Exception var4) {

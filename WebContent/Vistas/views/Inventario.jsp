@@ -1,5 +1,4 @@
-<%@page import="ModeloDAO.ProductoDAO"%>
-<%@page import="Modelo.Producto"%>
+
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 
