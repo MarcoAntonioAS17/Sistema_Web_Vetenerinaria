@@ -10,8 +10,6 @@ import Modelo.Mascotas;
 
 public class MascotasDAO {
 	
-	
-    Mascotas E_Masco = new Mascotas();
     String query;
     
     public MascotasDAO() {
@@ -248,4 +246,5 @@ public class MascotasDAO {
     	retorno+="]";
     	return retorno;
 	}
+
 }

@@ -77,8 +77,6 @@
     <br>
     <form action="" class="formulario">
         <h1 id="title_form">AGREGAR CLIENTE</h1><br><br>
-            <input id="Clv_C" name="Clv_C" type="text" class="formulario__input" required="required">  
-            <label for="Clv_C" class="formulario__label">Clave del Cliente</label>
             
             <input id="Nom_Cte" name="Nom_Cte" type="text" class="formulario__input" required="required"> 
             <label for="Nom_Cte" class="formulario__label">Nombre del Cliente</label>

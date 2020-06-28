@@ -86,13 +86,12 @@ public class ClientesDAO extends Conexion {
     public boolean add(Clientes New_Ctes) {
        
         try {
-        	this.query = "INSERT INTO Clientes (idClientes, Nombre, Telefono, Correo) "
-        			+ "VALUES ( ?, ?, ?, ?);";
+        	this.query = "INSERT INTO Clientes (Nombre, Telefono, Correo) "
+        			+ "VALUES ( ?, ?, ?);";
         	ps = getConnection().prepareStatement(query);
-            ps.setInt(1, New_Ctes.getIDClient());
-            ps.setString(2, New_Ctes.getNombreC());
-            ps.setString(3, New_Ctes.getTelefonoC());
-            ps.setString(4, New_Ctes.getEmailC());
+            ps.setString(1, New_Ctes.getNombreC());
+            ps.setString(2, New_Ctes.getTelefonoC());
+            ps.setString(3, New_Ctes.getEmailC());
             
             this.ps.executeUpdate();
         } catch (Exception var4) {

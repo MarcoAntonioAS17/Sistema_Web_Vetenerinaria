@@ -42,6 +42,12 @@ public class Compras {
 		S_Proveedor = s_Proveedor;
 	}
 	
+	public float getTotal() {
+		return Total;
+	}
+	public void setTotal(float total) {
+		Total = total;
+	}
 	public String crear_JSON() {
 		String lista = new String("{ "
 				+ "\"Codigo\":\""+this.IdCompra
@@ -52,12 +58,6 @@ public class Compras {
 				+"\",");
 		
 		return lista;
-	}
-	public float getTotal() {
-		return Total;
-	}
-	public void setTotal(float total) {
-		Total = total;
 	}
 	
 }

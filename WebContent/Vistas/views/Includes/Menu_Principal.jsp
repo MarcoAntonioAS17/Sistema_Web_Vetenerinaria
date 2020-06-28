@@ -34,13 +34,13 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="Ver_Citas.jsp">
                                 <i class="sub_menu"></i>
-                                Ver Citas
+                                Citas actuales
                             </a>
-                            <a href="#">
+                            <a href="Todas_Citas.jsp">
                                 <i class="sub_menu"></i>
-                                Agendar Cita
+                                Todas las Citas
                             </a>
                         </li>
                     </ul>
