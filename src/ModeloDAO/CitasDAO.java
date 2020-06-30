@@ -203,7 +203,7 @@ public class CitasDAO {
 		this.query = "SELECT idCitas, clientes.Nombre, Fecha, date_add(Hora, Interval 1 hour) as Horas, citas.Tipo, mascotas.Nombre, Notas FROM veterinaria.citas " + 
 				"inner join clientes on R_Cliente =idClientes " + 
 				"inner join mascotas on  R_Mascota=idMascotas " + 
-				"where Fecha > now() " +
+				"where datediff(Fecha,now()) >=0 " +
 				"order by fecha; ";
 		
 		try {
@@ -248,7 +248,7 @@ public class CitasDAO {
     	return retorno;
 	}
     
-public String mostrar_citas_todas() {
+    public String mostrar_citas_todas() {
 		
 		Conexion conect = new Conexion();
 		PreparedStatement ps = null;
@@ -342,5 +342,227 @@ public String mostrar_citas_todas() {
 		
     	retorno+="]";
     	return retorno;
+    }
+    
+    public String mostrar_citas_hoy(int opc) {
+		
+		Conexion conect = new Conexion();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String retorno = new String("[");
+		this.query = "SELECT idCitas, clientes.Nombre, Fecha, date_add(Hora, Interval 1 hour) as Horas, citas.Tipo, mascotas.Nombre, Notas FROM veterinaria.citas " + 
+				"inner join clientes on R_Cliente =idClientes " + 
+				"inner join mascotas on  R_Mascota=idMascotas " + 
+				"where  (datediff(Fecha,now()) = 0) ";
+		switch (opc) {
+		case 1:
+			this.query+=" and citas.Tipo like '%Esteti%' ";
+			break;
+		case 2:
+			this.query+=" and citas.Tipo like '%Consul%' ";
+			break;
+		case 3:
+			this.query+=" and citas.Tipo like '%Vacuna%' ";
+			break;
+		case 4:
+			this.query+=" and citas.Tipo like '%Opera%' ";
+			break;
+		case 5:
+			this.query+=" and citas.Tipo like '%Otro%' ";
+			break;
+		default:
+			break;
+		}
+		this.query+="order by fecha;";
+		
+		try {
+            ps = conect.getConnection().prepareStatement(query);
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	Cita new_cita = new Cita();
+            	
+            	new_cita.setID(rs.getInt(1));
+            	new_cita.setS_Cliente(rs.getString(2));
+            	new_cita.setFecha(rs.getDate(3));
+            	new_cita.setHora(rs.getTime(4));
+            	new_cita.setTipo(rs.getString(5));
+            	new_cita.setS_Mascota(rs.getString(6));
+            	new_cita.setNotas(rs.getString(7));
+            	
+            	retorno+= new_cita.crear_JSON();
+            	
+            	if(!rs.isLast())
+            		retorno+= ",";
+            }
+    	
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+    	retorno+="]";
+    	return retorno;
+	}
+    	
+    public String mostrar_citas_semana(int opc) {
+		
+		Conexion conect = new Conexion();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String retorno = new String("[");
+		this.query = "SELECT idCitas, clientes.Nombre, Fecha, date_add(Hora, Interval 1 hour) as Horas, citas.Tipo, mascotas.Nombre, Notas FROM veterinaria.citas " + 
+				"inner join clientes on R_Cliente =idClientes " + 
+				"inner join mascotas on  R_Mascota=idMascotas " + 
+				"where  (datediff(Fecha,now())  between 0 and 7) "; 
+		switch (opc) {
+		case 1:
+			this.query+=" and citas.Tipo like '%Esteti%' ";
+			break;
+		case 2:
+			this.query+=" and citas.Tipo like '%Consul%' ";
+			break;
+		case 3:
+			this.query+=" and citas.Tipo like '%Vacuna%' ";
+			break;
+		case 4:
+			this.query+=" and citas.Tipo like '%Opera%' ";
+			break;
+		case 5:
+			this.query+=" and citas.Tipo like '%Otro%' ";
+			break;
+		default:
+			break;
+		}
+		this.query+="order by fecha;";
+		
+		try {
+            ps = conect.getConnection().prepareStatement(query);
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	Cita new_cita = new Cita();
+            	
+            	new_cita.setID(rs.getInt(1));
+            	new_cita.setS_Cliente(rs.getString(2));
+            	new_cita.setFecha(rs.getDate(3));
+            	new_cita.setHora(rs.getTime(4));
+            	new_cita.setTipo(rs.getString(5));
+            	new_cita.setS_Mascota(rs.getString(6));
+            	new_cita.setNotas(rs.getString(7));
+            	
+            	retorno+= new_cita.crear_JSON();
+            	
+            	if(!rs.isLast())
+            		retorno+= ",";
+            }
+    	
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+    	retorno+="]";
+    	return retorno;
+	}
+    
+    public String mostrar_citas_mes(int opc) {
+
+		Conexion conect = new Conexion();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String retorno = new String("[");
+		this.query = "SELECT idCitas, clientes.Nombre, Fecha, date_add(Hora, Interval 1 hour) as Horas, citas.Tipo, mascotas.Nombre, Notas FROM veterinaria.citas " + 
+				"inner join clientes on R_Cliente =idClientes " + 
+				"inner join mascotas on  R_Mascota=idMascotas " + 
+				"where  (datediff(Fecha,now())  between 0 and 30) ";
+		switch (opc) {
+		case 1:
+			this.query+=" and citas.Tipo like '%Esteti%' ";
+			break;
+		case 2:
+			this.query+=" and citas.Tipo like '%Consul%' ";
+			break;
+		case 3:
+			this.query+=" and citas.Tipo like '%Vacuna%' ";
+			break;
+		case 4:
+			this.query+=" and citas.Tipo like '%Opera%' ";
+			break;
+		case 5:
+			this.query+=" and citas.Tipo like '%Otro%' ";
+			break;
+		default:
+			break;
+		}
+		this.query+="order by fecha;";
+		try {
+            ps = conect.getConnection().prepareStatement(query);
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	Cita new_cita = new Cita();
+            	
+            	new_cita.setID(rs.getInt(1));
+            	new_cita.setS_Cliente(rs.getString(2));
+            	new_cita.setFecha(rs.getDate(3));
+            	new_cita.setHora(rs.getTime(4));
+            	new_cita.setTipo(rs.getString(5));
+            	new_cita.setS_Mascota(rs.getString(6));
+            	new_cita.setNotas(rs.getString(7));
+            	
+            	retorno+= new_cita.crear_JSON();
+            	
+            	if(!rs.isLast())
+            		retorno+= ",";
+            }
+    	
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+    	retorno+="]";
+    	return retorno;
+	
     }
 }

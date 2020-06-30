@@ -62,7 +62,7 @@
         
     </div>
     <br>
-    <form action="" class="formulario">
+    <form id="formulario" action="" class="formulario">
         <h1>Nueva Cita</h1><br><br>
             
             
@@ -70,8 +70,9 @@
 	        <select id="tipo">	        		
 	               <option value="Estetica">Estetica</option>
 	               <option value="Consulta">Consulta</option>
-	               <option value="Vacunación">Vacunación</option>
-	               <option value="Operacion">Operacion</option>
+	               <option value="Vacunacion">Vacunación</option>
+	               <option value="Operacion">Operación</option>
+	               <option value="Otro">Otro</option>
 	        </select>
 	        <label for="tipo" class="formulario__label estatic ">Tipo de Cita</label>
             

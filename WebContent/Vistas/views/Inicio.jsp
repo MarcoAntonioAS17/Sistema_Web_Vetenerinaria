@@ -85,43 +85,45 @@
 
             <div> 
                 <p>Tipo de cita</p>
-                <select name="tipo" >
-                    <option value="Todas">Todas</option>
-                    <option value="Estetica">Estetica</option>
-                    <option value="Vacuna">Vacuna</option>
-                    <option value="Consulta">Consulta</option>
-                    <option value="Otros">Otros</option>
+                <select id="select-tipo" name="tipo" >
+                    <option value="6">Todas</option>
+                   	<option value="1">Estetica</option>
+	               	<option value="2">Consulta</option>
+	               	<option value="3">Vacunación</option>
+	               	<option value="4">Operación</option>
+	               	<option value="5">Otro</option>
                 </select>
             </div>
 
             <div>
                 <input id="hoy" type="radio" name="opcion">
-                <label for="hoy">Hoy</label>
+                <label class="selected" for="hoy">Hoy</label>
                 <input id="semana" type="radio" name="opcion">
                 <label for="semana">Semana</label>
                 <input id="mes" type="radio" name="opcion">
                 <label for="mes">Mes</label>
             </div>
 
-            <div id="agenda-contenido">
+            <div id="citas-dia" class="agenda-contenido">
                 <div>
-
-                    <img src="../img/estetica-icono.png" alt="icono-estetica">
-                    <div>
-                        <p id="fecha">30/04/2020 10:00 hrs</p>
-                        <p>Luis Hernandez</p>
-                        <p>Tommy</p>
-                    </div>
-                </div>
+					<div>
+                	<p>Error en conexion con el servidor</p>
+					</div>
+				</div>
+            </div>
+            <div id="citas-semana" class="agenda-contenido">
+               <div>
+					<div>
+                	<p>Error en conexion con el servidor</p>
+					</div>
+				</div>
+            </div>
+            <div id="citas-mes" class="agenda-contenido">
                 <div>
-
-                    <img src="../img/estetica-icono.png" alt="icono-estetica">
-                    <div>
-                        <p id="fecha">30/04/2020 10:00 hrs</p>
-                        <p>Luis Hernandez</p>
-                        <p>Tommy</p>
-                    </div>
-                </div>
+					<div>
+                	<p>Error en conexion con el servidor</p>
+					</div>
+				</div>
             </div>
 
         </div>
