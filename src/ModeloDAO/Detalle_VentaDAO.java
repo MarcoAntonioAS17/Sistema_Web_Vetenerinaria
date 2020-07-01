@@ -6,38 +6,38 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import Config.Conexion;
-import Modelo.Detalle_Compras;
+import Modelo.Detalle_Ventas;
 
-public class Detalle_CompraDAO {
+public class Detalle_VentaDAO {
 	
 	String query;
 	
-	public Detalle_CompraDAO() {
+	public Detalle_VentaDAO() {
 		
 	}
 	
-	public String Listar_JSON(int IDCompra) {
+	public String Listar_JSON(int IDVenta) {
 		Conexion conect = new Conexion();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
 		String retorno = new String("[");
 		
-		this.query = "SELECT R_Producto, productos.Nombre, detalle_compras.Cantidad, productos.Precio_Compra "
-				+ "FROM veterinaria.detalle_compras " + 
-				"INNER JOIN productos ON detalle_compras.R_Producto=productos.idProductos where R_Compra=?;";
+		this.query = "SELECT R_Producto, productos.Nombre, detalle_ventas.Cantidad, productos.Precio_Venta "
+				+ "FROM veterinaria.detalle_ventas " + 
+				"INNER JOIN productos ON detalle_ventas.R_Producto=productos.idProductos where R_Venta=?;";
     	
     	try {
             ps = conect.getConnection().prepareStatement(query);
-            ps.setInt(1,IDCompra);
+            ps.setInt(1,IDVenta);
             rs = ps.executeQuery();
             
             while(rs.next()) {
-            	Detalle_Compras dcompra = new Detalle_Compras();
-            	dcompra.setR_Producto(rs.getString("R_Producto"));
-            	dcompra.setNombre_Producto(rs.getString("Nombre"));
-            	dcompra.setCantidad(rs.getInt("Cantidad"));
-            	dcompra.setPrecio(rs.getFloat("Precio_Compra"));
+            	Detalle_Ventas dcompra = new Detalle_Ventas();
+            	dcompra.setR_Producto(rs.getString(1));
+            	dcompra.setNombre_Producto(rs.getString(2));
+            	dcompra.setCantidad(rs.getInt(3));
+            	dcompra.setPrecio(rs.getFloat(4));
             	
             	retorno+= dcompra.crear_JSON();
             	if(!rs.isLast())
@@ -50,30 +50,30 @@ public class Detalle_CompraDAO {
 		return retorno;
 	}
 	
-	public String Listar_JSON_Ver_Compras(int IDCompra) {
+	public String Listar_JSON_Ver_Ventas(int IDVenta) {
 		Conexion conect = new Conexion();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
 		String retorno = new String("[");
 		
-		this.query = "SELECT R_Producto, productos.Nombre, detalle_compras.Cantidad, productos.Precio_Compra "
-				+ "FROM veterinaria.detalle_compras " + 
-				"INNER JOIN productos ON detalle_compras.R_Producto=productos.idProductos where R_Compra=?;";
+		this.query = "SELECT R_Producto, productos.Nombre, detalle_ventas.Cantidad, productos.Precio_Venta "
+				+ "FROM veterinaria.detalle_ventas " + 
+				"INNER JOIN productos ON detalle_ventas.R_Producto=productos.idProductos where R_Venta=?;";
     	
     	try {
             ps = conect.getConnection().prepareStatement(query);
-            ps.setInt(1,IDCompra);
+            ps.setInt(1,IDVenta);
             rs = ps.executeQuery();
             
             while(rs.next()) {
-            	Detalle_Compras dcompra = new Detalle_Compras();
-            	dcompra.setR_Producto(rs.getString("R_Producto"));
-            	dcompra.setNombre_Producto(rs.getString("Nombre"));
-            	dcompra.setCantidad(rs.getInt("Cantidad"));
-            	dcompra.setPrecio(rs.getFloat("Precio_Compra"));
+            	Detalle_Ventas dventa = new Detalle_Ventas();
+            	dventa.setR_Producto(rs.getString(1));
+            	dventa.setNombre_Producto(rs.getString(2));
+            	dventa.setCantidad(rs.getInt(3));
+            	dventa.setPrecio(rs.getFloat(4));
             	
-            	retorno+= dcompra.crear_JSON_Ver_Compras();
+            	retorno+= dventa.crear_JSON_Ver_Ventas();
             	if(!rs.isLast())
             		retorno+= ",";
             }
@@ -84,20 +84,18 @@ public class Detalle_CompraDAO {
 		return retorno;
 	}
 	
-	
-	
-	public boolean add(Detalle_Compras Dcompra) {
+	public boolean add(Detalle_Ventas Dventa) {
 		PreparedStatement ps=null;
 		Conexion conect = new Conexion();
 		
-		this.query = "INSERT INTO detalle_compras (R_Compra,R_Producto,Cantidad) VALUES (?,?,?);";
+		this.query = "INSERT INTO detalle_ventas (R_Venta,R_Producto,Cantidad) VALUES (?,?,?);";
 		
 		try {
         	ps = conect.getConnection().prepareStatement(query);
             
-            ps.setInt(1,Dcompra.getR_Compra());
-            ps.setString(2,Dcompra.getR_Producto());
-            ps.setInt(3,Dcompra.getCantidad());
+            ps.setInt(1,Dventa.getR_Venta());
+            ps.setString(2,Dventa.getR_Producto());
+            ps.setInt(3,Dventa.getCantidad());
             
             ps.executeUpdate();
         } catch (Exception var4) {
@@ -107,14 +105,14 @@ public class Detalle_CompraDAO {
         return true;
     }
 	 
-	public int buscar_compra(Date Fecha, Date Hora) {
+	public int buscar_venta(Date Fecha, Date Hora) {
 
 		Conexion conect = new Conexion();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		int ID=0;
 
-		this.query = "SELECT idCompras FROM compras WHERE Fecha = ? and Hora = ?;";
+		this.query = "SELECT idVentas FROM ventas WHERE Fecha = ? and Hora = ?;";
 		
 		try {
 			ps=conect.getConnection().prepareStatement(this.query);
@@ -127,7 +125,7 @@ public class Detalle_CompraDAO {
             
             rs = ps.executeQuery();
             while(rs.next()) {
-            	ID=rs.getInt("idCompras");
+            	ID=rs.getInt(1);
             }
             
 		}catch (Exception e) {
@@ -186,7 +184,7 @@ public class Detalle_CompraDAO {
 		Conexion conect = new Conexion();
 		PreparedStatement ps=null;
 		try {
-        	this.query = "delete from detalle_compras where R_Producto = ? and R_Compra = ?;";
+        	this.query = "delete from detalle_ventas where R_Producto = ? and R_Venta = ?;";
         	ps = conect.getConnection().prepareStatement(query);
             ps.setString(1, producto);
             ps.setInt(2, CodVenta);
@@ -200,17 +198,17 @@ public class Detalle_CompraDAO {
 		return true;
 	}
 	
-	public void modificar_cantidad(String Codigo, int Compra, int Cantidad) {
+	public void modificar_cantidad(String Codigo, int Venta, int Cantidad) {
 		Conexion conect = new Conexion();
 		PreparedStatement ps=null;
 
-		this.query = "UPDATE detalle_compras SET cantidad=? where R_Producto = ? and R_Compra = ?;";
+		this.query = "UPDATE detalle_ventas SET cantidad=? where R_Producto = ? and R_Venta = ?;";
 		
 		try {
 			ps = conect.getConnection().prepareStatement(this.query);
             ps.setInt(1, Cantidad);
 			ps.setString(2,Codigo);
-            ps.setInt(3, Compra);
+            ps.setInt(3, Venta);
             ps.executeUpdate();
             
 		}catch (Exception e) {
@@ -221,19 +219,19 @@ public class Detalle_CompraDAO {
 		return;
 	}
 
-	public int consultar_cantidad(String Codigo, int Compra) {
+	public int consultar_cantidad(String Codigo, int Venta) {
 		
 		Conexion conect = new Conexion();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		int cant=0;
 
-		this.query = "SELECT cantidad from detalle_compras where R_Producto = ? and R_Compra = ?;";
+		this.query = "SELECT cantidad from detalle_ventas where R_Producto = ? and R_Venta = ?;";
 		
 		try {
 			ps=conect.getConnection().prepareStatement(this.query);
             ps.setString(1,Codigo);
-            ps.setInt(2, Compra);
+            ps.setInt(2, Venta);
             rs = ps.executeQuery();
             while(rs.next()) {
             	cant=rs.getInt("cantidad");
@@ -250,7 +248,7 @@ public class Detalle_CompraDAO {
 		Conexion conect = new Conexion();
 		PreparedStatement ps=null;
 		try {
-        	this.query = "delete from detalle_compras where R_Compra = ?;";
+        	this.query = "delete from detalle_ventas where R_Venta = ?;";
         	ps = conect.getConnection().prepareStatement(query);
             ps.setInt(1, CodVenta);
             ps.executeUpdate();
@@ -263,18 +261,17 @@ public class Detalle_CompraDAO {
 		return true;
 	}
 	
-	public String producto_x_proveedor(int IDProveedor) {
+	public String cargar_productos() {
 		Conexion conect = new Conexion();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
 		String retorno = new String("[");
 		
-		this.query = "SELECT idProductos, Nombre FROM veterinaria.productos WHERE R_Proveedor=?";
+		this.query = "SELECT idProductos, Nombre FROM veterinaria.productos;";
     	
     	try {
             ps = conect.getConnection().prepareStatement(query);
-            ps.setInt(1,IDProveedor);
             rs = ps.executeQuery();
             
             while(rs.next()) {

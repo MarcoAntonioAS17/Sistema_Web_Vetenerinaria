@@ -38,94 +38,29 @@
             <form id="busqueda">
               <label>Buscar</label>
               <select id="opciones" name="opciones">
-                   <option value="Codigo">Codigo Venta</option>
-                  <option value="Cliente">Cliente</option>
-                  <option value="Fecha">Fecha</option>
-                  <option value="Hora">Hora</option>
-                  <option value="Producto">Producto</option>
-                  <option value="Cantidad">Cantidad</option>
-                  <option value="Precio">Precio</option>
+                  <option value="1">Codigo Venta</option>
+                  <option value="2">Cliente</option>
+                  <option value="3">Fecha</option>
+                  <option value="4">Hora</option>
               </select>
             
-               <input id="busqueda" type="search" placeholder="Busqueda"> 
+              <input id="busqueda_input" type="search" placeholder="Busqueda">
             </form>
             
          
-            <table>
+            <table id="reporte">
                 <thead>
                     <tr>
-                    	<th>Código de Venta</th>
-                    	<th>Cliente</th>
+                    	<th>Código</th>
+                    	<th>Proveedor</th>
                     	<th>Fecha</th>
                     	<th>Hora</th>
-                        <th>Código del Producto</th>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                        <th>Precio Total</th>
+                        <th>Total</th>
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                   <tr>
-                   		<td>001</td>
-                   		<td>Felipe Ramirez</td>
-                   		<td>10/02/2020</td>
-                   		<td>12:00</td>
-                        <td>72931038</td>
-                        <td>Croqueta Proplan Cordero</td>
-                        <td>1</td>
-                        <td>1200</td>
-                        <td>1200</td>
-                        <td>
-                        	<a  href="#"><img width="25px" alt="ico-editar" src="../img/editar-icono.svg"></a>
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    <tr>
-                    	<td>001</td>
-                   		<td>Felipe Ramirez</td>
-                   		<td>10/02/2020</td>
-                   		<td>12:00</td>
-                        <td>72931038</td>
-                        <td>Croqueta Proplan Cordero</td>
-                        <td>1</td>
-                        <td>1200</td>
-                        <td>1200</td>
-                        <td>
-                        	<a  href="#"><img width="25px" alt="ico-editar" src="../img/editar-icono.svg"></a>
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    <tr>
-                    	<td>001</td>
-                   		<td>Felipe Ramirez</td>
-                   		<td>10/02/2020</td>
-                   		<td>12:00</td>
-                        <td>72931038</td>
-                        <td>Croqueta Proplan Cordero</td>
-                        <td>1</td>
-                        <td>1200</td>
-                        <td>1200</td>
-                        <td>
-                        	<a  href="#"><img width="25px" alt="ico-editar" src="../img/editar-icono.svg"></a>
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    
-                    <tr>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td>Total</td>
-                    	<td>$3,600</td>
-                    	<td></td>
-                    </tr>
-                </tbody>
+                <tbody id="tbody1">
+				</tbody>
             </table>
         
 	</div>
@@ -133,6 +68,8 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
+    <script type="text/javascript" src="../scripts/Tabla_Extendible.js"></script>
+   	<script type="text/javascript" src="../scripts/ver_ventas.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
     
 </body>

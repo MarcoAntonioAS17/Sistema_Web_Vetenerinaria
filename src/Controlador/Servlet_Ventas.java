@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Modelo.Compras;
-import Modelo.Detalle_Compras;
-import ModeloDAO.CompraDAO;
-import ModeloDAO.Detalle_CompraDAO;
+import Modelo.Detalle_Ventas;
+import Modelo.Ventas;
+import ModeloDAO.Detalle_VentaDAO;
+import ModeloDAO.VentaDAO;
 
 @WebServlet("/Ventas")
 public class Servlet_Ventas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
-	CompraDAO dao = new CompraDAO();
-	Detalle_CompraDAO dao_detalle = new Detalle_CompraDAO();
-	Compras compra = new Compras();
-	Detalle_Compras Dcompra = new Detalle_Compras();
+	VentaDAO dao = new VentaDAO();
+	Detalle_VentaDAO dao_detalle = new Detalle_VentaDAO();
+	Ventas venta = new Ventas();
+	Detalle_Ventas Dventa = new Detalle_Ventas();
     public Servlet_Ventas() {
         super();
         // TODO Auto-generated constructor stub
@@ -42,166 +42,136 @@ public class Servlet_Ventas extends HttpServlet {
 			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
 			
-			//Guardamos la compra general
-			compra.setR_Proveedor(Integer.parseInt(request.getParameter("Proveedor")));
+			//Guardamos la venta general
+			venta.setR_Cliente(Integer.parseInt(request.getParameter("Cliente")));
 			
 			try {
 				SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd");
-				compra.setFecha(objSDF.parse(request.getParameter("Fecha")));
+				venta.setFecha(objSDF.parse(request.getParameter("Fecha")));
 				objSDF = new SimpleDateFormat("hh:mm");
-				compra.setHora(objSDF.parse(request.getParameter("Hora")));
+				venta.setHora(objSDF.parse(request.getParameter("Hora")));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 			
-			if(!dao.add(compra)) {
+			if(!dao.add(venta)) {
 				response.getWriter().write("");
 				return;
 			}
 			
 			
-			compra.setIdCompra(dao_detalle.buscar_compra(compra.getFecha(),compra.getHora()));
+			venta.setIDVenta(dao_detalle.buscar_venta(venta.getFecha(),venta.getHora()));
 			
 			
-			Dcompra.setR_Producto(request.getParameter("Producto"));
-			Dcompra.setCantidad(Integer.parseInt(request.getParameter("Cantidad")));
-			Dcompra.setR_Compra(compra.getIdCompra());
+			Dventa.setR_Producto(request.getParameter("Producto"));
+			Dventa.setCantidad(Integer.parseInt(request.getParameter("Cantidad")));
+			Dventa.setR_Venta(venta.getIDVenta());
 			
-			int inventario = dao_detalle.consultar_inventario(Dcompra.getR_Producto());
+			int inventario = dao_detalle.consultar_inventario(Dventa.getR_Producto());
 			
-			if( (inventario-Dcompra.getCantidad()) < 0) {
+			if( (inventario-Dventa.getCantidad()) < 0) {
 				response.getWriter().write("false");
 				return;
 			}
 
-			if(!dao_detalle.modificar_inventario(Dcompra.getR_Producto(), (inventario-Dcompra.getCantidad())))
+			if(!dao_detalle.modificar_inventario(Dventa.getR_Producto(), (inventario-Dventa.getCantidad())))
 			{
 				response.getWriter().write("false");
 				return;
 			}
 			
-			if(dao_detalle.add(Dcompra)) {
-				response.getWriter().write(dao_detalle.Listar_JSON(compra.getIdCompra()));
+			if(dao_detalle.add(Dventa)) {
+				response.getWriter().write(dao_detalle.Listar_JSON(venta.getIDVenta()));
 			}else {
 				response.getWriter().write("false");
 			}
 		}else {
 			if(accion.equals("agregar_producto2")) {
+				
 				response.setContentType("text/html");
 				response.setCharacterEncoding("UTF-8");
 				
-				Dcompra.setR_Producto(request.getParameter("Producto"));
-				Dcompra.setCantidad(Integer.parseInt(request.getParameter("Cantidad")));
+				Dventa.setR_Producto(request.getParameter("Producto"));
+				Dventa.setCantidad(Integer.parseInt(request.getParameter("Cantidad")));
 				
-				int inventario = dao_detalle.consultar_inventario(Dcompra.getR_Producto());
+				int inventario = dao_detalle.consultar_inventario(Dventa.getR_Producto());
 				
-				if( (inventario-Dcompra.getCantidad()) < 0) {
+				if( (inventario-Dventa.getCantidad()) < 0) {
 					response.getWriter().write("false");
 					return;
 				}
 				
-				if(!dao_detalle.modificar_inventario(Dcompra.getR_Producto(), (inventario-Dcompra.getCantidad())))
+				if(!dao_detalle.modificar_inventario(Dventa.getR_Producto(), (inventario-Dventa.getCantidad())))
 				{
 					return;
 				}
 				
-				if(dao_detalle.add(Dcompra)) {
-					response.getWriter().write(dao_detalle.Listar_JSON(compra.getIdCompra()));
+				int cantidad = dao_detalle.consultar_cantidad(Dventa.getR_Producto(),Dventa.getR_Venta());
+				
+				if(cantidad >0) {
+					dao_detalle.modificar_cantidad(Dventa.getR_Producto(),Dventa.getR_Venta(),Dventa.getCantidad()+cantidad);
+					response.getWriter().write(dao_detalle.Listar_JSON(venta.getIDVenta()));
 				}else {
-					response.getWriter().write("false");
+					if(dao_detalle.add(Dventa)) {
+						response.getWriter().write(dao_detalle.Listar_JSON(venta.getIDVenta()));
+					}else {
+						response.getWriter().write("false");
+					}
 				}
-			}else {
-			}
-		}
-		
-		/*if(accion.equals("mostrar")) {
-			String busq=request.getParameter("search");
-			int valor = Integer.parseInt(request.getParameter("valor"));
-			
-			response.setContentType("text/html");
-			response.setCharacterEncoding("UTF-8");
-			
-			response.getWriter().write(dao.Listar_JSON(valor, busq));
-			return;
-		}
-		
-		if(accion.equals("agregar")) {
-			producto.setIDProducto(request.getParameter("idProducto"));
-			producto.setNombre(request.getParameter("Nombre"));
-			producto.setCantidad(Integer.parseInt(request.getParameter("Cantidad")));
-			producto.setR_Categoria(Integer.parseInt(request.getParameter("Categoria")));
-			producto.setPrecio_C(Float.parseFloat(request.getParameter("Precio_C")));
-			producto.setPrecio_V(Float.parseFloat(request.getParameter("Precio_V")));
-			SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd");
-			try {
-				producto.setCaducidad(objSDF.parse(request.getParameter("Fecha")));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			producto.setR_Proveedor(Integer.parseInt(request.getParameter("Proveedor")));
-			producto.setDescripcion(request.getParameter("Descripcion"));
-			
-			response.setContentType("text/html");
-			response.setCharacterEncoding("UTF-8");
-			
-			if(dao.add(producto)) {
-				response.getWriter().write("true");
-			}else {
-				response.getWriter().write("false");
-			}
-		}else {
-			if(accion.equals("eliminar")) {
-				String idpro = request.getParameter("IDProductos");
-
+				
+			}else { if(accion.equals("borrar_producto")) {
+				Dventa.setR_Producto( request.getParameter("Producto"));
+				Dventa.setCantidad(Integer.parseInt(request.getParameter("Cantidad")));
+				
 				response.setContentType("text/html");
 				response.setCharacterEncoding("UTF-8");
 				
-				if(dao.delete(idpro)) {
-					response.getWriter().write("true");
-				}else {
+				if(!dao_detalle.eliminar_producto(Dventa.getR_Producto(),Dventa.getR_Venta())) {
 					response.getWriter().write("false");
+					return;
 				}
-			}else{
-				if(accion.equals("editar1")) {
-					String idpro = request.getParameter("IDProducto");
-					producto = dao.select_one(idpro);
+				int inventario = dao_detalle.consultar_inventario(Dventa.getR_Producto());
+				
+				if(!dao_detalle.modificar_inventario(Dventa.getR_Producto(), (inventario+Dventa.getCantidad())))
+				{
+					response.getWriter().write("false");
+					return;
+				}
+				
+				response.getWriter().write(dao_detalle.Listar_JSON(venta.getIDVenta()));
+			}else { if(accion.equals("cancelar_venta")) {
+				
+				boolean retorno=true;
+				dao.regresar_inventario(Dventa.getR_Venta());
+				retorno=dao_detalle.eliminar_productos(Dventa.getR_Venta());
+				if(retorno)
+					retorno=dao.eliminar_venta(Dventa.getR_Venta());
+				
+				response.setContentType("text/html");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(""+retorno);
+				
+			}else {if(accion.equals("cargar_productos")) {
+				
+				response.setContentType("text/html");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(dao_detalle.cargar_productos());
 					
+			}else{
+				if(accion.equals("mostrar_ventas")) {
 					response.setContentType("text/html");
 					response.setCharacterEncoding("UTF-8");
-				    response.getWriter().write(producto.crear_JSON());
-				    return;
+					int opcion = Integer.parseInt(request.getParameter("valor"));
+					String busq = request.getParameter("search");
 					
-				}else {
-					if(accion.equals("editar")) {
-						producto.setIDProducto(request.getParameter("idProducto"));
-						producto.setNombre(request.getParameter("Nombre"));
-						producto.setCantidad(Integer.parseInt(request.getParameter("Cantidad")));
-						producto.setR_Categoria(Integer.parseInt(request.getParameter("Categoria")));
-						producto.setPrecio_C(Float.parseFloat(request.getParameter("Precio_C")));
-						producto.setPrecio_V(Float.parseFloat(request.getParameter("Precio_V")));
-						SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd");
-						try {
-							producto.setCaducidad(objSDF.parse(request.getParameter("Fecha")));
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						producto.setR_Proveedor(Integer.parseInt(request.getParameter("Proveedor")));
-						producto.setDescripcion(request.getParameter("Descripcion"));
-						
-						response.setContentType("text/html");
-						response.setCharacterEncoding("UTF-8");
-						
-						if(dao.edit(producto)) 
-							response.getWriter().write("true");
-						else 
-							response.getWriter().write("false");
-						
-						
-					}
-				}
+					response.getWriter().write(dao.mostrar_ventas(opcion,busq));
 			}
-		}*/
+				
+			}
+			}
+			}
+			}
+			}
+			
+		}
 	}
-}

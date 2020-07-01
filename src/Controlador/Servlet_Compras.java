@@ -79,7 +79,8 @@ public class Servlet_Compras extends HttpServlet {
 			}else {
 				response.getWriter().write("false");
 			}
-		}else { if(accion.equals("agregar_producto2")) {
+		}else { 
+			if(accion.equals("agregar_producto2")) {
 			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
 			
@@ -92,6 +93,7 @@ public class Servlet_Compras extends HttpServlet {
 			{
 				return;
 			}
+			
 			int cantidad = dao_detalle.consultar_cantidad(Dcompra.getR_Producto(),Dcompra.getR_Compra());
 			
 			if(cantidad >0) {
@@ -106,7 +108,8 @@ public class Servlet_Compras extends HttpServlet {
 			}
 			
 			
-		}else { if(accion.equals("borrar_producto")) {
+		}else { 
+			if(accion.equals("borrar_producto")) {
 			Dcompra.setR_Producto( request.getParameter("Producto"));
 			Dcompra.setCantidad(Integer.parseInt(request.getParameter("Cantidad")));
 			
@@ -126,7 +129,8 @@ public class Servlet_Compras extends HttpServlet {
 			}
 			
 			response.getWriter().write(dao_detalle.Listar_JSON(compra.getIdCompra()));
-		}else { if(accion.equals("cancelar_compra")) {
+		}else { 
+			if(accion.equals("cancelar_compra")) {
 			
 			boolean retorno=true;
 			dao.regresar_inventario(Dcompra.getR_Compra());
@@ -138,7 +142,8 @@ public class Servlet_Compras extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(""+retorno);
 			
-		}else {if(accion.equals("cargar_productos")) {
+		}else {
+			if(accion.equals("cargar_productos")) {
 			
 			int Cod_Pro = Integer.parseInt(request.getParameter("Proveedor"));
 			response.setContentType("text/html");

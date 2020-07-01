@@ -1,20 +1,30 @@
 
 var contador =true;
+var Total;
 
 $(document).ready(function(){
 	
 	contador=true;
-	var Total;
+	
 	$("#Cantidad").val("1");
-	cargar_productos($("#Clv_Pro").val());
+	cargar_productos();
 	
 	ocultar_elementos();
+	
+	$("#Efectivo").keyup(function(e){
+		$("#Cambio").val(" "+($(this).val()-Total));
+	});
+	
 	$('#guardar').click(function(e){
-		var confirma = confirm("¿Estás seguro que deseas finalizar la compra?");
+		if($("#Cambio").val()<0){
+			alert("Dinero insuficiente");
+			return;
+		}
+		var confirma = confirm("¿Estás seguro que deseas finalizar la venta?");
 		
 		if(confirma == true){
 			limpiar_campos();
-			alert("Compra guardada");
+			alert("Venta guardada");
 			location.reload();
 			
 		}else{
@@ -23,18 +33,18 @@ $(document).ready(function(){
     });
 	
 	$('#cancelar').click(function(e){
-		var confirma = confirm("¿Estás seguro que deseas CANCELAR la compra?");
+		var confirma = confirm("¿Estás seguro que deseas CANCELAR la Venta?");
 		
 		if(confirma == true){
 			limpiar_campos();
-		$.post("../../Compras",{
-	 		accion : "cancelar_compra"
+		$.post("../../Ventas",{
+	 		accion : "cancelar_venta"
 		},function(responseText){
 			if(responseText != "false"){
-				alert("La compra ha sido cancelada");
+				alert("La venta ha sido cancelada");
 				location.reload();
 			}else{
-				  alert("Error al cancelar compra");
+				  alert("Error al cancelar venta");
 				  return;
 			}
 		});
@@ -50,7 +60,7 @@ $(document).ready(function(){
 		var varFecha = $("#Fec_C").val();
 	   	var varHora = $("#Hra_C").val();
 	   
-	   	var varProveedor = $("#Clv_Pro").val();
+	   	var varCliente = $("#Clv_Client").val();
 	   	var varProducto = $("#Clv_Prod").val();
 	   	var varCantidad = $("#Cantidad").val();
 	   	
@@ -71,13 +81,13 @@ $(document).ready(function(){
 	   	}
 	   	
 	 	if(contador){
-	 		$.post("../../Compras",{
+	 		$.post("../../Ventas",{
 		 		accion : "agregar_producto",
 				Fecha : varFecha,
 				Hora : varHora,
 				Producto: varProducto,
 				Cantidad: varCantidad,
-				Proveedor: varProveedor
+				Cliente: varCliente
 			},function(responseText){
 				
 				if(responseText != "false"){
@@ -91,7 +101,7 @@ $(document).ready(function(){
 			});
 	 		contador=false;
 	 	}else{
-	 		$.post("../../Compras",{
+	 		$.post("../../Ventas",{
 		 		accion : "agregar_producto2",
 				Producto: varProducto,
 				Cantidad: varCantidad
@@ -108,10 +118,6 @@ $(document).ready(function(){
 	   	
 	});
 	
-	$("#Clv_Pro").change(function(e){
-		cargar_productos($(this).val());
-		
-	});
 });
 
 function mostrar_registros(responseJson){
@@ -144,11 +150,10 @@ function mostrar_registros(responseJson){
 	return suma;
 }
 
-function cargar_productos(vProveedor){
+function cargar_productos(){
 	$("datalist").empty();
-	$.post("../../Compras",{
-		accion : "cargar_productos",
-		Proveedor: vProveedor
+	$.post("../../Ventas",{
+		accion : "cargar_productos"
 	},function(responseJson){
 		var datos = JSON.parse(responseJson);
 
@@ -163,7 +168,7 @@ function cargar_productos(vProveedor){
 
 function eliminar(varProducto, varCantidad){
 
-	$.post("../../Compras",{
+	$.post("../../Ventas",{
  		accion : "borrar_producto",
 		Producto: varProducto,
 		Cantidad: varCantidad
@@ -179,7 +184,9 @@ function eliminar(varProducto, varCantidad){
 
 function limpiar_campos(){
 	$("#Clv_Prod").val("");	
-	$("#Cantidad").val(1);	
+	$("#Cantidad").val(1);
+	$("#Efectivo").val("");
+	$("#Cambio").val("-1");
 }
 
 function ocultar_elementos(){
