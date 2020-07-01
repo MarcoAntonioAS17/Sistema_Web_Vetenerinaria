@@ -46,7 +46,7 @@
                         <th>Clave del Cliente</th>
                         <th>Nombre</th>
                         <th>Teléfono</th>
-                        <th>E-mail</th>
+                        <th>Correo Electronico</th>
                         <th></th>
                     </tr>
                 </thead>

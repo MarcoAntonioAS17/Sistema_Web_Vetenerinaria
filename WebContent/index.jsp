@@ -93,7 +93,7 @@
 				 Password: passwordvar
 				},function(responseText){
 				 	if(responseText == "true"){
-				 		$(location).attr('href',"http://localhost:8080/SistemaWebVeterinaria/Vistas/views/Inicio.jsp");
+				 		$(location).attr('href',"http://localhost:8015/SistemaWebVeterinaria/Vistas/views/Inicio.jsp");
 				 	}else{
 				 		alert("Usuario o contraseña incorrecto");
 				 	}
