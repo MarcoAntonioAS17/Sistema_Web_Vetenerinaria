@@ -17,7 +17,7 @@
 	
     <link rel="stylesheet" type="text/css" href="Vistas/CSS/login.css">
     
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="Vistas/scripts/jquery.min.js"></script>
 
 	<title>Login</title>
 
@@ -45,7 +45,7 @@
                         
                        <!-- <button id="guardar" type="button" name="accion" value="Agregar" class="guardar">Agregar</button>
                         <input id="Ingresar" type="submit" name="Ingresar" value="Entrar" >-->
-                        <button id="Ingresar" type="button" name="Ingresar" >Ingresa</button>
+                        <button id="Ingresar" type="button" name="Ingresar" >Ingresar</button>
                     </form>
                 </div>
                 <div id="opcion-new">

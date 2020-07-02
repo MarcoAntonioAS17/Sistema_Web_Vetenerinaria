@@ -2,6 +2,7 @@ package ModeloDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,7 +46,19 @@ public class Detalle_CompraDAO {
             }
 	    } catch (Exception var4) {
 	        var4.printStackTrace();
-	    }
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
     	retorno+="]";
 		return retorno;
 	}
@@ -79,7 +92,19 @@ public class Detalle_CompraDAO {
             }
 	    } catch (Exception var4) {
 	        var4.printStackTrace();
-	    }
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
     	retorno+="]";
 		return retorno;
 	}
@@ -103,7 +128,17 @@ public class Detalle_CompraDAO {
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
         return true;
     }
 	 
@@ -133,6 +168,18 @@ public class Detalle_CompraDAO {
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return ID;
 	}
@@ -157,6 +204,18 @@ public class Detalle_CompraDAO {
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return cant;
 	}
@@ -177,6 +236,17 @@ public class Detalle_CompraDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 			return false;
+		}finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return true;
 	}
@@ -195,7 +265,18 @@ public class Detalle_CompraDAO {
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 		return true;
 	}
@@ -217,6 +298,17 @@ public class Detalle_CompraDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 			return;
+		}finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return;
 	}
@@ -242,6 +334,18 @@ public class Detalle_CompraDAO {
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return cant;
 	}
@@ -258,7 +362,18 @@ public class Detalle_CompraDAO {
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 		return true;
 	}
@@ -288,7 +403,19 @@ public class Detalle_CompraDAO {
             }
 	    } catch (Exception var4) {
 	        var4.printStackTrace();
-	    }
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
     	retorno+="]";
 		return retorno;
 	}

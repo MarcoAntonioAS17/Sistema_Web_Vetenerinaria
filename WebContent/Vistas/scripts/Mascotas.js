@@ -107,13 +107,18 @@ function mostrar_registros(opcion,busqueda){
 	},function(responseJson){
 		
 		var datos = JSON.parse(responseJson);
-
+		var date;
+		var options = { year: 'numeric', month: 'long', day: 'numeric' };
+		
 		for(var i in datos){
+			date = new Date(datos[i].Nacimiento);
+			date.setDate(date.getDate() + 1);
+			
 			$("tbody").append("<tr>" +
 					"<td>"+datos[i].IDMascota+"</td>" +
 					"<td>"+datos[i].R_Cliente+"</td>" +
 					"<td>"+datos[i].Nombre+"</td>" +
-					"<td> "+datos[i].Edad+"</td>" +
+					"<td> "+datos[i].Edad+" ("+date.toLocaleDateString("es-ES", options)+")</td>" +
 					"<td> "+datos[i].Tipo+"</td>" +
 					"<td>"+datos[i].Raza+"</td>" +
 					"<td>"+datos[i].Descripcion+"</td>" +

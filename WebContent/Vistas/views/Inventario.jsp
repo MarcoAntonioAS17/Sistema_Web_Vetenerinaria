@@ -140,7 +140,7 @@
         </div>
     </form>
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+   <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
     <script type="text/javascript" src="../scripts/Productos.js"></script>

@@ -7,9 +7,16 @@ $(document).ready(function(){
 	},function(responseText){
 		var datos = JSON.parse(responseText);
 		
-		$("#Prod_Tot").text(datos.Totales);
-		$("#Agotarse").text(datos.Agotarse);
+		const options2 = { style: 'currency', currency: 'USD' };
+		const numberFormat2 = new Intl.NumberFormat('en-US', options2);
+		
+		$("#Client_Tot").text(datos.Clientes_Tot);
+		$("#Prod_Tot").text(datos.PTotales);
+		$("#CitasV").text(datos.Citas);
+		
 		$("#caducar").text(datos.Caducar);
+		$("#Agotarse").text(datos.Agotarse);
+		$("#VentasS").text(numberFormat2.format( datos.VentasSem));
 	});
 
 	

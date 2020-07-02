@@ -176,8 +176,13 @@ function mostrar_registros(opcion,busqueda){
 	},function(responseJson){
 		
 		var datos = JSON.parse(responseJson);
-
+		var date;
+		var options = { year: 'numeric', month: 'long', day: 'numeric' };
+	
 		for(var i in datos){
+			date = new Date(datos[i].Caducidad);
+			date.setDate(date.getDate() + 1);
+			
 			$("tbody").append("<tr>" +
 					"<td>"+datos[i].IDProducto+"</td>" +
 					"<td>"+datos[i].Nombre+"</td>" +
@@ -186,7 +191,7 @@ function mostrar_registros(opcion,busqueda){
 					"<td> $"+datos[i].Precio_C+"</td>" +
 					"<td>"+datos[i].R_Categoria+"</td>" +
 					"<td>"+datos[i].R_Proveedor+"</td>" +
-					"<td>"+datos[i].Caducidad+"</td>" +
+					"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
 					"<td>"+datos[i].Descripcion+"</td>" +
 					"<td>"+
 					"<button onclick=\"editar_inicio("+datos[i].IDProducto+")\" class=\"editar_pro\"> <img width=\"25px\"  alt=\"icono-editar\" src=\"../img/editar-icono.svg\"></button>"+

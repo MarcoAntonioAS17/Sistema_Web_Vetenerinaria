@@ -33,9 +33,12 @@ public class Servlet_Principal extends HttpServlet {
 			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
 			
-			response.getWriter().write("{\"Totales\": \""+dao.Producto_Totales()
+			response.getWriter().write("{\"PTotales\": \""+dao.Producto_Totales()
+					+"\", \"Clientes_Tot\": \""+dao.Clientes_Totales()
+					+"\", \"Citas\": \""+dao.Citas_Vigentes()
 					+"\", \"Agotarse\": \""+dao.Productos_Agotarse()
 					+"\", \"Caducar\": \""+dao.Productos_Caducar()
+					+"\", \"VentasSem\": \""+dao.Ventas_Semana()
 					+"\"}");
 			return;
 		}

@@ -20,15 +20,27 @@ function mostrar_registros(){
 		for(var i in datos){
 			date = new Date(datos[i].Fecha); 
 			date.setDate(date.getDate() + 1);
-			$("tbody").append("<tr>" +
-					"<td>"+datos[i].IDCita+"</td>" +
-					"<td>"+datos[i].Tipo+"</td>" +
-					"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
-					"<td> "+datos[i].Hora+"</td>" +
-					"<td> "+datos[i].NombreC+"</td>" +
-					"<td>"+datos[i].NombreM+"</td>" +
-					"<td>"+datos[i].Notas+"</td>" +
-					"</tr>");
+			if(datos[i].Hora == "null"){
+				 $("tbody").append("<tr>" +
+							"<td>"+datos[i].IDCita+"</td>" +
+							"<td>"+datos[i].Tipo+"</td>" +
+							"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
+							"<td>"+datos[i].Hora+"</td>" +
+							"<td> "+datos[i].NombreC+"</td>" +
+							"<td>"+datos[i].NombreM+"</td>" +
+							"<td>"+datos[i].Notas+"</td>" +
+							"</tr>");
+			 }else{
+				 $("tbody").append("<tr>" +
+							"<td>"+datos[i].IDCita+"</td>" +
+							"<td>"+datos[i].Tipo+"</td>" +
+							"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
+							"<td>"+datos[i].Hora[0]+datos[i].Hora[1]+datos[i].Hora[2]+datos[i].Hora[3]+datos[i].Hora[4]+"</td>" +
+							"<td> "+datos[i].NombreC+"</td>" +
+							"<td>"+datos[i].NombreM+"</td>" +
+							"<td>"+datos[i].Notas+"</td>" +
+							"</tr>");
+			 }
 		}		
 	}
 	);

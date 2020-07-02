@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import Config.Conexion;
 import Modelo.Administrador;
 
-public class AdministradorDAO extends Conexion{
+public class AdministradorDAO {
 	
 	public boolean autenticacion(Administrador admin) {
 		PreparedStatement ps = null;
 		ResultSet rs= null;
-		
+		Conexion c = new Conexion();
 		try {
 			String query = "SELECT * FROM administradores WHERE BINARY UserName = ? and BINARY Password = ?;";
-			ps =  getConnection().prepareStatement(query);
+			ps =  c.getConnection().prepareStatement(query);
 			ps.setString(1, admin.getUserName());
 			ps.setString(2, admin.getPassword());
 			rs = ps.executeQuery();
@@ -29,8 +29,8 @@ public class AdministradorDAO extends Conexion{
 			// TODO: handle exception
 		}finally {
 			try {
-				if(getConnection() != null)
-					getConnection().close();
+				if(c.getConnection() != null)
+					c.getConnection().close();
 				if(ps != null)
 					ps.close();
 				if(rs != null)

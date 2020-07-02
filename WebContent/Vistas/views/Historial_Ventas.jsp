@@ -52,7 +52,7 @@
                 <thead>
                     <tr>
                     	<th>Código</th>
-                    	<th>Proveedor</th>
+                    	<th>Cliente</th>
                     	<th>Fecha</th>
                     	<th>Hora</th>
                         <th>Total</th>
@@ -66,7 +66,7 @@
 	</div>
     
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/Tabla_Extendible.js"></script>
    	<script type="text/javascript" src="../scripts/ver_ventas.js"></script>

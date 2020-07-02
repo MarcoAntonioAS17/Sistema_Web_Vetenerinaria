@@ -50,7 +50,7 @@
         <div id="contenedor-inicio" class="contenedor">
             <div id="opc1" class="opcion">
                 <img class="icono" src="../img/Contactos.png" alt="icono-contacto">
-                <h1>20</h1>
+                <h1 id="Client_Tot"></h1>
                 <p>Clientes Totales</p>
             </div>
             <div id="opc2" class="opcion">
@@ -60,8 +60,8 @@
             </div>
             <div id="opc3" class="opcion">
                 <img class="icono" src="../img/cita-icono.png" alt="icono-contacto">
-                <h1>2</h1>
-                <p>Citas</p>
+                <h1 id="CitasV"></h1>
+                <p>Citas Vigentes</p>
             </div>
             <div id="opc4" class="opcion">
                 <img class="icono" src="../img/caducar-icono.png" alt="icono-contacto">
@@ -75,7 +75,7 @@
             </div>
             <div id="opc6" class="opcion">
                 <img class="icono" src="../img/venta-icono.svg" alt="icono-contacto">
-                <h1>20</h1>
+                <h1 id="VentasS"></h1>
                 <p>Ventas de la semana</p>
             </div>
         </div>
@@ -131,10 +131,10 @@
     
   
     
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/Inicio.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
 
 </body>
 </html>

@@ -23,14 +23,17 @@ function mostrar_registros(opcion,busqueda){
 		
 		const options2 = { style: 'currency', currency: 'USD' };
 		const numberFormat2 = new Intl.NumberFormat('en-US', options2);
+		var date;
+		var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 		
 		for(var i in datos){
-
+			date = new Date(datos[i].Fecha);
+			date.setDate(date.getDate() + 1);
 			$("#tbody1").append("<tr id=\"R"+datos[i].Codigo+"\" onclick=\"extender("+datos[i].Codigo+")\" class=\"odd\">" +
 					"<td>"+datos[i].Codigo+"</td>" +
 					"<td>"+datos[i].Nombre+"</td>" +
-					"<td>"+datos[i].Fecha+"</td>" +
-					"<td>"+datos[i].Hora+"</td>" +
+					"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
+					"<td>"+datos[i].Hora[0]+datos[i].Hora[1]+datos[i].Hora[2]+datos[i].Hora[3]+datos[i].Hora[4]+"</td>" +
 					"<td> "+numberFormat2.format(datos[i].Total)+"</td>"+
 					
 					"<td>"+

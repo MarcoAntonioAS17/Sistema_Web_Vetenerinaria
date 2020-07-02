@@ -68,7 +68,7 @@ public class Mascotas {
 	public String crear_JSON() throws ParseException{
     	String lista = new String("{ \"IDMascota\": \""+String.format("%d", this.Clave)
     			+"\", \"Nombre\":\""+this.Nombre
-    			+"\", \"Edad\":\"");
+    			+"\", \"Nacimiento\":\""+this.Edad);
     	
     	Calendar startCalendar = new GregorianCalendar(); 
     	startCalendar.setTime(this.Edad); 
@@ -76,9 +76,10 @@ public class Mascotas {
     	endCalendar.setTime(new Date()); 
 
     	int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR); 
-    	int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH); 
+    	int diffMonth = endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH); 
 		
-		lista+=diffMonth+" Meses ("+this.Edad+")";
+    	
+    	lista+="\", \"Edad\":\""+diffYear +" Años "+diffMonth+" Meses";
     	
     	lista+=("\", \"Tipo\":\""+this.Tipo
     			+"\", \"Raza\":\""+this.Raza

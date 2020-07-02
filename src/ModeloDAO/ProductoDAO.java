@@ -2,6 +2,7 @@ package ModeloDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 import Config.Conexion;
 import Modelo.Producto;
 
-public class ProductoDAO extends Conexion{
+public class ProductoDAO{
 	
     PreparedStatement ps;
     ResultSet rs;
@@ -22,7 +23,7 @@ public class ProductoDAO extends Conexion{
     
     
     public String Listar_JSON(int key, String busq) {
-    	
+    	Conexion conect = new Conexion();
     	String retorno = new String("[");
     	
     	this.query = "SELECT idProductos, productos.Nombre, Cantidad, Precio_Venta, Precio_Compra, Caducidad, Descripcion, " + 
@@ -66,7 +67,7 @@ public class ProductoDAO extends Conexion{
 		}
     	
     	try {
-            ps = getConnection().prepareStatement(query);
+            ps = conect.getConnection().prepareStatement(query);
             ps.setString(1,"%"+busq+"%");
             this.rs = this.ps.executeQuery();
             
@@ -89,14 +90,26 @@ public class ProductoDAO extends Conexion{
     	
 	    } catch (Exception var4) {
 	        var4.printStackTrace();
-	    }
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
     	retorno+="]";
     	return retorno;
     }
     
     public List<Producto> listar(){
     	List<Producto> datos = new ArrayList<Producto>();
-    	
+    	Conexion conect = new Conexion();
     	this.query = "SELECT idProductos, productos.Nombre, Cantidad, Precio_Venta, Precio_Compra, Caducidad, Descripcion, " + 
     			"categorias.Nombre as Categoria, " + 
     			"proveedores.Proveedor_Nombre as Proveedor, R_Proveedor, R_Categoria" + 
@@ -105,7 +118,7 @@ public class ProductoDAO extends Conexion{
     			"INNER JOIN proveedores ON productos.R_Proveedor=proveedores.idProveedores;";
     	
     	try {
-            ps = getConnection().prepareStatement(query);
+            ps = conect.getConnection().prepareStatement(query);
             this.rs = this.ps.executeQuery();
             
             while(this.rs.next()) {
@@ -125,12 +138,24 @@ public class ProductoDAO extends Conexion{
     	
 	    } catch (Exception var4) {
 	        var4.printStackTrace();
-	    }
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
     	return datos;
     }
 
     public boolean add(Producto nuevo_pro, boolean opcion) {
-
+    	Conexion conect = new Conexion();
         try {
         	
         	if(opcion) {
@@ -143,7 +168,7 @@ public class ProductoDAO extends Conexion{
             				"values (?,?,?,?,?,? ,?,?)";
         	}
         	
-        	ps = getConnection().prepareStatement(query);
+        	ps = conect.getConnection().prepareStatement(query);
             
             ps.setString(1, nuevo_pro.getIDProducto());
             ps.setString(2,nuevo_pro.getNombre());
@@ -166,35 +191,60 @@ public class ProductoDAO extends Conexion{
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
         return true;
     }
 
     public boolean delete(String ID) {
-       
+    	Conexion conect = new Conexion();
         try {
         	this.query = "DELETE FROM productos WHERE idProductos = ?;";
-        	ps = getConnection().prepareStatement(query);
+        	ps = conect.getConnection().prepareStatement(query);
             ps.setString(1, ID);
             this.ps.executeUpdate();
             
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
         return true;
     }
     
     public Producto select_one(String IDProducto){
+    	Conexion conect = new Conexion();
     	Producto new_product = new Producto();
     	this.query = "SELECT idProductos, productos.Nombre, Cantidad, Precio_Venta, Precio_Compra, Caducidad, Descripcion, " + 
     			"R_Categoria as Categoria, R_Proveedor as Proveedor " + 
     			"FROM veterinaria.productos WHERE idProductos=?;";
     	
     	try {
-            ps = getConnection().prepareStatement(query);
+            ps = conect.getConnection().prepareStatement(query);
             ps.setString(1,IDProducto);
             this.rs = this.ps.executeQuery();
             
@@ -214,12 +264,24 @@ public class ProductoDAO extends Conexion{
     	
 	    } catch (Exception var4) {
 	        var4.printStackTrace();
-	    }
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
     	return new_product;
     }
     
     public boolean edit(Producto product, boolean opcion) {
-        
+    	Conexion conect = new Conexion();
         try {
         	
         	if(opcion)
@@ -231,7 +293,7 @@ public class ProductoDAO extends Conexion{
             			+ "Precio_Compra = ? , Caducidad = NULL, Descripcion = ?, R_Categoria = ?, R_Proveedor = ? "
             			+ "WHERE idProductos = ?;";
         		
-        	ps = getConnection().prepareStatement(query);
+        	ps = conect.getConnection().prepareStatement(query);
             
             ps.setString(1,product.getNombre());
             ps.setInt(2, product.getCantidad());
@@ -256,7 +318,19 @@ public class ProductoDAO extends Conexion{
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
         return true;
     }

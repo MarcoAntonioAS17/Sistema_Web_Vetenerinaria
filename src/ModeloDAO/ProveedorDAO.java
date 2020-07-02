@@ -2,13 +2,14 @@ package ModeloDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import Config.Conexion;
 import Modelo.Proveedor;
 
-public class ProveedorDAO extends Conexion{
+public class ProveedorDAO {
 	
 	PreparedStatement ps;
     ResultSet rs;
@@ -20,11 +21,12 @@ public class ProveedorDAO extends Conexion{
     }
     
     public Proveedor select_one(int IDProveedor){
+    	Conexion conect = new Conexion();
     	Proveedor new_pro = new Proveedor();
     	this.query = "SELECT * FROM Proveedores WHERE idProveedores=?;";
     	
     	try {
-            ps = getConnection().prepareStatement(query);
+            ps = conect.getConnection().prepareStatement(query);
             ps.setInt(1,IDProveedor);
             this.rs = this.ps.executeQuery();
             
@@ -37,17 +39,29 @@ public class ProveedorDAO extends Conexion{
     	
 	    } catch (Exception var4) {
 	        var4.printStackTrace();
-	    }
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
     	return new_pro;
     }
     
     public List<Proveedor> listar(){
     	List<Proveedor> datos = new ArrayList<Proveedor>();
-    	
+    	Conexion conect = new Conexion();
     	this.query = "SELECT * FROM Proveedores;";
     	
     	try {
-            ps = getConnection().prepareStatement(query);
+            ps = conect.getConnection().prepareStatement(query);
             this.rs = this.ps.executeQuery();
             
             while(this.rs.next()) {
@@ -61,16 +75,28 @@ public class ProveedorDAO extends Conexion{
     	
 	    } catch (Exception var4) {
 	        var4.printStackTrace();
-	    }
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
     	return datos;
     }
 
     public boolean edit(Proveedor proveed) {
-        
+    	Conexion conect = new Conexion();
         try {
         	this.query = "UPDATE Proveedores SET Proveedor_Nombre = ?, Telefono=?, Correo= ?"
         			+ "WHERE idProveedores = ?";
-        	ps = getConnection().prepareStatement(query);
+        	ps = conect.getConnection().prepareStatement(query);
             
             ps.setInt(4, proveed.getIDProveedor());
             ps.setString(1,proveed.getNombre());
@@ -81,18 +107,30 @@ public class ProveedorDAO extends Conexion{
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
         return true;
     }
     
     public boolean add(Proveedor nuevo_pro) {
-        
+    	Conexion conect = new Conexion();
 
         try {
         	this.query = "INSERT INTO Proveedores (idProveedores, Proveedor_Nombre, Telefono, Correo) "
         			+ "VALUES ( ?, ?, ?, ?);";
-        	ps = getConnection().prepareStatement(query);
+        	ps = conect.getConnection().prepareStatement(query);
             
             ps.setInt(1, nuevo_pro.getIDProveedor());
             ps.setString(2,nuevo_pro.getNombre());
@@ -103,24 +141,48 @@ public class ProveedorDAO extends Conexion{
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
         return true;
     }
 
     public boolean delete(int ID) {
-       
+    	Conexion conect = new Conexion();
 
         try {
         	this.query = "DELETE FROM Proveedores WHERE idProveedores = ?;";
-        	ps = getConnection().prepareStatement(query);
+        	ps = conect.getConnection().prepareStatement(query);
             ps.setInt(1, ID);
             this.ps.executeUpdate();
             
         } catch (Exception var4) {
             var4.printStackTrace();
             return false;
-        }
+        }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
         return true;
     }
