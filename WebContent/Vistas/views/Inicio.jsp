@@ -5,11 +5,15 @@
 <%
 	HttpSession user_session = request.getSession(false);
 	String usuario = (String) user_session.getAttribute("usuario");
+	String ST = (String) user_session.getAttribute("tipo");
 	if(usuario == null){
 		response.sendRedirect("../../index.jsp");
-	} 
+		return;
+	}
+	
+	int Tipo = Integer.parseInt(ST);
+	
 %>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -43,9 +47,19 @@
         </label>
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
-	
-	<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>
-	
+	<%
+    	switch(Tipo){
+    		 case 1:%>
+    			<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>		 
+    			 <%break;
+    		 case 2:%>
+    		 	<jsp:include page="Includes/Menu_Principal2.jsp"></jsp:include>
+    			 <%break;
+    		 case 3:%>
+    		 	<jsp:include page="Includes/Menu_Principal3.jsp"></jsp:include>
+    			 <%break;
+    	}
+    %>
     <div id="contenido">
         <div id="contenedor-inicio" class="contenedor">
             <div id="opc1" class="opcion">
@@ -73,11 +87,13 @@
                 <h1 id="Agotarse"></h1>
                 <p>Proximos a agotarse</p>
             </div>
+            <%if(Tipo==1){ %>
             <div id="opc6" class="opcion">
                 <img class="icono" src="../img/venta-icono.svg" alt="icono-contacto">
                 <h1 id="VentasS"></h1>
                 <p>Ventas de la semana</p>
             </div>
+            <%} %>
         </div>
 
         <div class="agenda-div">

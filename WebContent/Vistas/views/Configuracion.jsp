@@ -61,7 +61,7 @@
     		 	<jsp:include page="Includes/Menu_Principal3.jsp"></jsp:include>
     			 <%break;
     	}
-    	%>
+    %>
     <br><br><br><br>
     
     <div class="contenido"  >
@@ -142,9 +142,6 @@
         		</ul>
         		Modificar:
         		<ul>
-        			<li>Clientes</li>
-        			<li>Mascotas</li>
-        			<li>Inventario</li>
         			<li>Citas</li>
         		</ul>
         	</div>

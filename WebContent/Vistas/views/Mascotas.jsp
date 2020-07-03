@@ -7,6 +7,18 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	HttpSession user_session = request.getSession(false);
+	String usuario = (String) user_session.getAttribute("usuario");
+	String ST = (String) user_session.getAttribute("tipo");
+	if(usuario == null){
+		response.sendRedirect("../../index.jsp");
+		return;
+	}
+	
+	int Tipo = Integer.parseInt(ST);
+	
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,6 +31,16 @@
     <!--- Custom CSS for this page --->
     <link rel="stylesheet" href="../icons/style.css">
     <link rel="stylesheet" href="../CSS/mascotas.css">
+    <%if(Tipo==3){ %>
+    
+    	<style type="text/css">
+    		td button{
+    			display: none;
+    		}
+    	</style>
+    	
+    <%} %>
+    
 </head>
     
 <body>
@@ -36,9 +58,19 @@
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
 	
-	
-	<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>
-    
+	<%
+    	switch(Tipo){
+    		 case 1:%>
+    			<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>		 
+    			 <%break;
+    		 case 2:%>
+    		 	<jsp:include page="Includes/Menu_Principal2.jsp"></jsp:include>
+    			 <%break;
+    		 case 3:%>
+    		 	<jsp:include page="Includes/Menu_Principal3.jsp"></jsp:include>
+    			 <%break;
+    	}
+    %>
     <br><br><br><br>
     
     <div class="contenido"  >
@@ -76,6 +108,7 @@
         
     </div>
     <br>
+    <%if(Tipo !=3){ %>
     <form action="" class="formulario">
         <h1>Registrar Nueva Mascota</h1><br><br>
             
@@ -118,6 +151,7 @@
             <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
         </div>
     </form>
+    <%} %>
 
 	
 
@@ -125,6 +159,19 @@
     <script type="text/javascript" src="../scripts/Mascotas.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
+    <%if(Tipo==3){ %>
     
+    	<script type="text/javascript">
+    	 	$(document).ready(function(){
+    	 		
+    	 		$("tr").hover(function(){
+        	 		$(".editar_pro").remove();
+        	 		$(".eliminar_pro").remove();
+    	 		});
+    	 		
+    	 	});
+    	</script>
+    	
+    <%} %>
 </body>
 </html>
