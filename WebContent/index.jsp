@@ -30,8 +30,6 @@
             </section>
            
             <section id="right">
-                  <input  id="login"  name="opcion" type="radio" checked> <label id="f-login" for="login">Ingresar</label>
-                  <input id="new"  name="opcion" type="radio"> <label id="f-new" for="new">Registrar</label>
                   
                 <div id="opcion-login">
                     <h1>BIENVENIDO</h1>
@@ -48,19 +46,7 @@
                         <button id="Ingresar" type="button" name="Ingresar" >Ingresar</button>
                     </form>
                 </div>
-                <div id="opcion-new">
-                    <h1>Nuevo Usuario</h1>
-                    <h2>Ingrese los datos de la nueva cuenta</h2>
-                    <form action="" method="post" >
-                        <p>CUENTA DE USUARIO</p>
-                        <input type="text" name="Usuario_Nuevo" placeholder="Usuario">
-                        
-                        <p>CONTRASEÑA</p>
-                        <input type="password" name="Password_Nuevo" placeholder="Contraseña">
-                        
-                        <input type="submit" name="Guardar" value="Guardar">
-                    </form>
-                </div>
+               
             </section>
             
             
@@ -100,37 +86,7 @@
 				});
 			});
         	
-            /*Clic en Ingresar*/
-            $("#login").change(function(){
-
-                $("#f-new").css({ "color": "#3a4955",
-                    "border": "1px solid #808d97",
-                    "background": "#808d97"});
-                
-                $("#f-login").css({ "color": "white",
-                    "border": "1px solid #70D6C1",
-                    "background": "#70D6C1"});
-                
-                
-                $("#opcion-login").toggle(1000);
-                $("#opcion-new").toggle(1000);
- 
-            });
-            
-            //Clic en Registrar
-            $("#new").change(function(){
-                
-                 $("#f-login").css({ "color": "#3a4955",
-                    "border": "1px solid #808d97",
-                    "background": "#808d97"});
-                
-                $("#f-new").css({ "color": "white",
-                    "border": "1px solid #70D6C1",
-                    "background": "#70D6C1"});
-                
-                $("#opcion-login").toggle(1000);
-                $("#opcion-new").toggle(1000);
-            });
+           
             
         });
     </script>

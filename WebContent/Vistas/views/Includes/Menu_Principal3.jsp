@@ -12,22 +12,6 @@
                 </li>
                 
                 <li class="title">ADMINISTRAR VENTAS</li>
-                <li>
-                   <a href="">Ventas<i class="icon-chevron-small-right icon-right icon"></i>
-                   </a>
-                    <ul>
-                        <li>
-                            <a href="Historial_Ventas.jsp">
-                                <i class="sub_menu"></i>
-                                Ventas Realizadas
-                            </a>
-                            <a href="Ventas.jsp">
-                                <i class="sub_menu"></i>
-                                Nueva Venta
-                            </a>
-                        </li>
-                    </ul>
-                </li>
                 
                 <li>
                    <a href="">Citas<i class="icon-chevron-small-right icon-right icon"></i>
@@ -37,10 +21,6 @@
                             <a href="Ver_Citas.jsp">
                                 <i class="sub_menu"></i>
                                 Citas actuales
-                            </a>
-                            <a href="Todas_Citas.jsp">
-                                <i class="sub_menu"></i>
-                                Todas las Citas
                             </a>
                         </li>
                     </ul>
@@ -67,14 +47,7 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="Compras.jsp">
-                                <i class="sub_menu"></i>
-                                Nueva Compra
-                            </a>
-                            <a href="Ver_Compras.jsp">
-                                <i class="sub_menu"></i>
-                                Ver Compras
-                            </a>
+                            
                             <a href="Proveedores.jsp">
                                 <i class="sub_menu"></i>
                                 Proveedores
@@ -90,10 +63,6 @@
                             <a href="Inventario.jsp">
                                 <i class="sub_menu"></i>
                                 Consultar Inventario
-                            </a>
-                            <a href="Categorias.jsp">
-                                <i class="sub_menu"></i>
-                                Categorias
                             </a>
                         </li>
                     </ul>

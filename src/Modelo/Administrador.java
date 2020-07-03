@@ -4,6 +4,7 @@ public class Administrador {
 	
 	private String UserName;
 	private String Password;
+	private int Tipo;
 	
 	public Administrador() {
 		
@@ -20,6 +21,14 @@ public class Administrador {
 	}
 	public void setUserName(String userName) {
 		UserName = userName;
+	}
+
+	public int getTipo() {
+		return Tipo;
+	}
+
+	public void setTipo(int tipo) {
+		Tipo = tipo;
 	}
 	
 	

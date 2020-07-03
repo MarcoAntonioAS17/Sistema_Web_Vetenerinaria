@@ -448,7 +448,7 @@ public class CitasDAO {
 		default:
 			break;
 		}
-		this.query+="order by fecha;";
+		this.query+=" order by fecha;";
 		
 		try {
             ps = conect.getConnection().prepareStatement(query);
