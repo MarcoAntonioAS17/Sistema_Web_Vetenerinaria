@@ -37,6 +37,96 @@ public class Servlet_Ventas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String accion = request.getParameter("accion");
 		
+		if(accion.equals("agregar_servicio")) {
+
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			
+			//Guardamos la venta general
+			venta.setR_Cliente(Integer.parseInt(request.getParameter("Cliente")));
+			
+			try {
+				SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd");
+				venta.setFecha(objSDF.parse(request.getParameter("Fecha")));
+				objSDF = new SimpleDateFormat("HH:mm");
+				venta.setHora(objSDF.parse(request.getParameter("Hora")));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			if(!dao.add(venta)) {
+				response.getWriter().write("false");
+				return;
+			}
+			
+			venta.setIDVenta(dao_detalle.buscar_venta(venta.getFecha(),venta.getHora()));
+			
+			String servicio = request.getParameter("Servicio");
+			float precio = Integer.parseInt(request.getParameter("Precio"));
+			
+			//Buscamos si ya existe el servicio con el precio
+			int codigo = dao.buscar_servicio(servicio, precio);
+			//Si no, lo creamos
+			if(codigo==0) {
+				codigo = dao.ultimo_codigo()+1;
+				if(dao.add_servicio(codigo, servicio, precio)) {
+					response.getWriter().write("false");
+					return;
+				}
+			}
+			
+			Dventa.setR_Producto(codigo+"");
+			Dventa.setCantidad(1);
+			Dventa.setR_Venta(venta.getIDVenta());
+			
+			if(dao_detalle.add(Dventa)) {
+				response.getWriter().write(dao_detalle.Listar_JSON(venta.getIDVenta()));
+			}else {
+				response.getWriter().write("false");
+			}
+			return;
+		}
+		
+		if(accion.equals("agregar_servicio2")) {
+
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			
+			String servicio = request.getParameter("Servicio");
+			float precio = Integer.parseInt(request.getParameter("Precio"));
+			
+			//Buscamos si ya existe el servicio con el precio
+			int codigo = dao.buscar_servicio(servicio, precio);
+			//Si no, lo creamos
+			if(codigo==0) {
+				codigo = dao.ultimo_codigo()+1;
+				if(!dao.add_servicio(codigo, servicio, precio)) {
+					response.getWriter().write("false");
+					return;
+				}
+			}
+			
+			Dventa.setR_Producto(codigo+"");
+			Dventa.setCantidad(1);
+			Dventa.setR_Venta(venta.getIDVenta());
+			
+			int cantidad2 = dao_detalle.consultar_cantidad(Dventa.getR_Producto(),Dventa.getR_Venta());
+			
+			if(cantidad2 >0) {
+				dao_detalle.modificar_cantidad(Dventa.getR_Producto(),Dventa.getR_Venta(),Dventa.getCantidad()+cantidad2);
+				response.getWriter().write(dao_detalle.Listar_JSON(venta.getIDVenta()));
+			}else {
+				if(dao_detalle.add(Dventa)) {
+					response.getWriter().write(dao_detalle.Listar_JSON(venta.getIDVenta()));
+				}else {
+					response.getWriter().write("false");
+				}
+			
+				return;
+			}
+		}
+		
+		
 		if(accion.equals("agregar_producto")) {
 
 			response.setContentType("text/html");
@@ -55,7 +145,7 @@ public class Servlet_Ventas extends HttpServlet {
 			}
 			
 			if(!dao.add(venta)) {
-				response.getWriter().write("");
+				response.getWriter().write("false");
 				return;
 			}
 			
@@ -86,6 +176,7 @@ public class Servlet_Ventas extends HttpServlet {
 				response.getWriter().write("false");
 			}
 		}else {
+			
 			if(accion.equals("agregar_producto2")) {
 				
 				response.setContentType("text/html");
@@ -139,7 +230,9 @@ public class Servlet_Ventas extends HttpServlet {
 				}
 				
 				response.getWriter().write(dao_detalle.Listar_JSON(venta.getIDVenta()));
-			}else { if(accion.equals("cancelar_venta")) {
+			}else { 
+				
+				if(accion.equals("cancelar_venta")) {
 				
 				boolean retorno=true;
 				dao.regresar_inventario(Dventa.getR_Venta());
@@ -151,7 +244,9 @@ public class Servlet_Ventas extends HttpServlet {
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(""+retorno);
 				
-			}else {if(accion.equals("cargar_productos")) {
+			}else {
+				
+				if(accion.equals("cargar_productos")) {
 				
 				response.setContentType("text/html");
 				response.setCharacterEncoding("UTF-8");

@@ -94,9 +94,15 @@
            <%} %>
         </select>
         
+        <label class="formulario__label_fija">Opciones</label>
+       		<select id="otro_opc" class="formulario__input">
+       			<option value="1">Producto</option>
+       			<option value="2">Servicio Veterinario</option>
+       		</select>
+        
        <div id="cont-producto">
-	        <label for="Clv_Prod" class="label-input-20">Código del producto</label>
-	        
+       		
+       		<label for="Clv_Prod" class="label-input-20">Código del producto</label>
 	        <input  id="Clv_Prod" list="list_prod" class="input-20" placeholder="Código">
 	        <datalist id="list_prod">
 	        	
@@ -106,6 +112,21 @@
 	        <input id="Cantidad" type="number" class="input-20" placeholder="Cantidad">  
         
         	<button id="agregar" type="button" class="agregar">Agregar Producto</button>
+        	
+        	
+        	<label for="servicio" class="label-input-20 hide">Concepto</label>
+	        
+	        <select id="servicio" class="input-20 hide">
+	        	<option value="Consulta">Consulta</option>
+	        	<option value="Operación">Operación</option>
+	        	<option value="Estética">Estetica</option>
+	        </select>
+	        
+	        <label for="Otro_Precio" class="label-input-20 hide">Precio</label>
+	        <input id="Otro_Precio" type="text" class="input-20 hide" placeholder="Precio">  
+        
+        	<button id="Otro_Agregar" type="button" class="agregar hide">Agregar Servicio</button>
+        
         </div>
         
          <div id="tabla">

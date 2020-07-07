@@ -384,7 +384,7 @@ public class Detalle_VentaDAO {
 		
 		String retorno = new String("[");
 		
-		this.query = "SELECT idProductos, Nombre FROM veterinaria.productos;";
+		this.query = "SELECT idProductos, Nombre FROM veterinaria.productos where R_Categoria like \"%\";";
     	
     	try {
             ps = conect.getConnection().prepareStatement(query);

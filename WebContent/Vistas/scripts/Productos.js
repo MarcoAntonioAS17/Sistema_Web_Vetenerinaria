@@ -26,7 +26,7 @@
     	   var varProveedor =$("#Proveedores").val();
     	   var varDescr =$("#Descrip").val();
     	   
-    	   if(idPro == "" || varNombre ==""){
+    	   if(idPro == "" || varNombre =="" || varPrecio_V =="" || varCantidad=="" || varPrecio_C==""){
     		   if(idPro == ""){
 					$("#Clv_Pro").css({"border-color":"red","color":"red"});
 				}
@@ -36,6 +36,8 @@
 				alert("Faltan campos por acompletar");
     		   return;
     	   }
+    	   
+    	   
     	  $.post("../../Productos",{
 				accion : "agregar",
 				idProducto : idPro,	        	  
@@ -59,6 +61,7 @@
 				limpiar_campos();
 		});
        });
+       
  
 	   $('#actualizar').click(function(e){
 		   var idPro = $("#Clv_Pro").val();

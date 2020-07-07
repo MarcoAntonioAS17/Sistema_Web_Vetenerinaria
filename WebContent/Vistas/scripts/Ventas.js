@@ -8,11 +8,17 @@ $(document).ready(function(){
 	
 	$("#Cantidad").val("1");
 	cargar_productos();
-	
+	$("#otro_opc").val(1);
 	ocultar_elementos();
 	
 	$("#Efectivo").keyup(function(e){
 		$("#Cambio").val(" "+($(this).val()-Total));
+	});
+	
+	$("#otro_opc").change(function() {
+		$("#cont-producto").children().toggle(500);
+		$("#list_prod").hide();
+		
 	});
 	
 	$('#guardar').click(function(e){
@@ -31,8 +37,8 @@ $(document).ready(function(){
 			return;
 		}
     });
-	
-	$('#cancelar').click(function(e){
+    
+    $('#cancelar').click(function(e){
 		var confirma = confirm("¿Estás seguro que deseas CANCELAR la Venta?");
 		
 		if(confirma == true){
@@ -118,6 +124,65 @@ $(document).ready(function(){
 	   	
 	});
 	
+	$("#Otro_Agregar").click(function(){
+		
+    	var falso=false;
+		var varFecha = $("#Fec_C").val();
+	   	var varHora = $("#Hra_C").val();
+	   	var varCliente = $("#Clv_Client").val();
+	   
+	   	var varServicio = $("#servicio").val(); 
+	   	var varPrecio = $("#Otro_Precio").val();
+	   	
+	   	$("#Otro_Precio").css({"border-color":"black","color":"black"});
+	   	
+		if(varPrecio == "" ){
+	   		$("#Otro_Precio").css({"border-color":"red","color":"red"});
+	   		falso=true;
+	   	}
+	   	if(falso){
+	   		alert("Faltan registros por acompletar");
+	   		return;
+	   	}
+	   	
+	 	if(contador){
+	 		$.post("../../Ventas",{
+		 		accion : "agregar_servicio",
+				Fecha : varFecha,
+				Hora : varHora,
+				Cliente: varCliente,
+				Precio: varPrecio,
+				Servicio: varServicio
+			},function(responseText){
+				
+				if(responseText != "false"){
+					Total=mostrar_registros(responseText);
+					$('#tabla').show(500);
+					limpiar_campos();
+				}else{
+					  alert("Error al agregar servicio");
+					  return;
+				}
+			});
+	 		contador=false;
+	 	}else{
+	 		$.post("../../Ventas",{
+		 		accion : "agregar_servicio2",
+				Precio: varPrecio,
+				Servicio: varServicio
+			},function(responseText){
+				if(responseText != "false"){
+					Total=mostrar_registros(responseText);
+					limpiar_campos();
+				}else{
+					  alert("Error al agregar servicio");
+					  return;
+				}
+			});
+	 	}
+	   	
+    });
+	
 });
 
 function mostrar_registros(responseJson){
@@ -174,7 +239,7 @@ function eliminar(varProducto, varCantidad){
 		Cantidad: varCantidad
 	},function(responseText){
 		if(responseText != "false"){
-			mostrar_registros(responseText);
+			Total=mostrar_registros(responseText);
 		}else{
 			  alert("Error al agregar producto");
 			  return;
@@ -187,6 +252,7 @@ function limpiar_campos(){
 	$("#Cantidad").val(1);
 	$("#Efectivo").val("");
 	$("#Cambio").val("-1");
+	 $("#Otro_Precio").val("");
 }
 
 function ocultar_elementos(){

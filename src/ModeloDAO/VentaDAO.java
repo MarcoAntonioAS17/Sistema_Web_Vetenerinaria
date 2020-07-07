@@ -201,5 +201,111 @@ public class VentaDAO {
     	return retorno;
 	}
 	
+	public int buscar_servicio(String Nombre, float Precio) {
+		
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int codigo=0;
+		
+		this.query = "SELECT idProductos FROM veterinaria.productos where Nombre = ? and Precio_Venta = ? ;";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1,Nombre);
+            ps.setFloat(2, Precio);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	codigo = rs.getInt(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return codigo;
+	}
 	
+	public int ultimo_codigo() {
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int retorno=0;
+		
+		this.query = "SELECT idProductos FROM veterinaria.productos where "
+				+ "Nombre like \"Consulta\" or Nombre like \"Est%tica\" or Nombre like \"Operaci%n\" "
+				+ "order by idProductos desc limit 1;";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	retorno = rs.getInt(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return retorno;
+		
+		
+	}
+	
+	public boolean add_servicio(int codigo, String Servicio, float precio) {
+		 	Conexion conect = new Conexion();
+	       try {
+	    	   this.query = "insert into productos (idProductos, Nombre, Precio_Venta)"
+	       			+ " values (?,?,?);";
+	    	   ps = conect.getConnection().prepareStatement(query);
+	           
+	           ps.setInt(1, codigo);
+	           ps.setString(2, Servicio);
+	           ps.setFloat(3, precio);
+	           
+	           this.ps.executeUpdate();
+	       } catch (Exception var4) {
+	           var4.printStackTrace();
+	           return false;
+	       } finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	       return true;
+	 }
 }

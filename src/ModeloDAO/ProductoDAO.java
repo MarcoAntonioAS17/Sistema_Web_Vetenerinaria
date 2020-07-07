@@ -4,9 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import Config.Conexion;
 import Modelo.Producto;
 
@@ -107,53 +104,6 @@ public class ProductoDAO{
     	return retorno;
     }
     
-    public List<Producto> listar(){
-    	List<Producto> datos = new ArrayList<Producto>();
-    	Conexion conect = new Conexion();
-    	this.query = "SELECT idProductos, productos.Nombre, Cantidad, Precio_Venta, Precio_Compra, Caducidad, Descripcion, " + 
-    			"categorias.Nombre as Categoria, " + 
-    			"proveedores.Proveedor_Nombre as Proveedor, R_Proveedor, R_Categoria" + 
-    			"FROM veterinaria.productos " + 
-    			"INNER JOIN Categorias ON  productos.R_Categoria=Categorias.idCategorias " + 
-    			"INNER JOIN proveedores ON productos.R_Proveedor=proveedores.idProveedores;";
-    	
-    	try {
-            ps = conect.getConnection().prepareStatement(query);
-            this.rs = this.ps.executeQuery();
-            
-            while(this.rs.next()) {
-            	Producto new_product = new Producto();
-            	new_product.setIDProducto(this.rs.getString("idProductos"));
-            	new_product.setNombre(this.rs.getString("Nombre"));
-            	new_product.setCantidad(this.rs.getInt("Cantidad"));
-            	new_product.setPrecio_V(this.rs.getFloat("Precio_Venta"));
-            	new_product.setPrecio_C(this.rs.getFloat("Precio_Compra"));
-            	new_product.setCaducidad(this.rs.getDate("Caducidad"));
-            	new_product.setDescripcion(this.rs.getString("Descripcion"));
-            	new_product.setS_Categoria(this.rs.getString("Categoria"));
-            	new_product.setS_Proveedor(this.rs.getString("Proveedor"));
-            	
-            	datos.add(new_product);
-            }
-    	
-	    } catch (Exception var4) {
-	        var4.printStackTrace();
-	    }finally {
-			try {
-				if(conect.getConnection() != null)
-					conect.getConnection().close();
-				if(ps != null)
-					ps.close();
-				if(rs != null)
-					rs.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-    	return datos;
-    }
-
     public boolean add(Producto nuevo_pro, boolean opcion) {
     	Conexion conect = new Conexion();
         try {

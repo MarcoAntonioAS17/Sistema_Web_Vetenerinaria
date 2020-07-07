@@ -37,7 +37,7 @@ public class PrincipalDAO {
 	public int Producto_Totales() {
 		Conexion conect = new Conexion();
 		int retorno = 0;
-	    	this.query = "SELECT count(Nombre) as Productos FROM veterinaria.productos;";
+	    	this.query = "SELECT count(Nombre) as Productos FROM veterinaria.productos where R_Categoria like \"%\";";
 	    	
 	    	try {
 	            ps = conect.getConnection().prepareStatement(query);
