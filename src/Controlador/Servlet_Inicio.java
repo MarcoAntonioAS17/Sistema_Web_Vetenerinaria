@@ -44,7 +44,6 @@ public class Servlet_Inicio extends HttpServlet {
     		
     		response.setContentType("text/html");
     		response.setCharacterEncoding("UTF-8");
-    		//response.sendRedirect("Vistas/views/Inicio.jsp");
     		response.getWriter().write("true");
     		
     		
@@ -53,7 +52,6 @@ public class Servlet_Inicio extends HttpServlet {
     		
     		response.setContentType("text/html");
     		response.setCharacterEncoding("UTF-8");
-    		//response.sendRedirect("index.jsp");
     		response.getWriter().write("false");
     		
     		

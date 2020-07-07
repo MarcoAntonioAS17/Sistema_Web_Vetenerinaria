@@ -2,6 +2,7 @@ package ModeloDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import Config.Conexion;
 
@@ -28,7 +29,19 @@ public class PrincipalDAO {
 	    	
 		    } catch (Exception var4) {
 		        var4.printStackTrace();
-		    }
+		    }finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		
 		return retorno;
 		
@@ -49,7 +62,19 @@ public class PrincipalDAO {
 	    	
 		    } catch (Exception var4) {
 		        var4.printStackTrace();
-		    }
+		    }finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		
 		return retorno;
 		
@@ -71,37 +96,28 @@ public class PrincipalDAO {
 	    	
 		    } catch (Exception var4) {
 		        var4.printStackTrace();
-		    }
+		    }finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		
 		return retorno;
 		
 	}
 	
-	public int Productos_Agotarse() {
+	public int Cantidad_Dias() {
 		Conexion conect = new Conexion();
 		int retorno = 0;
-	    	this.query = "SELECT count(Nombre) as Productos FROM veterinaria.productos where Cantidad < 3;";
-	    	
-	    	try {
-	            ps = conect.getConnection().prepareStatement(query);
-	            this.rs = this.ps.executeQuery();
-	            
-	            while(this.rs.next()) {
-		        	retorno=this.rs.getInt("Productos");
-	            }
-	    	
-		    } catch (Exception var4) {
-		        var4.printStackTrace();
-		    }
-		
-		return retorno;
-		
-	}
-	
-	public int Productos_Caducar() {
-		Conexion conect = new Conexion();
-		int retorno = 0;
-	    	this.query = "SELECT count(DATEDIFF(Caducidad, now())) as Dias FROM veterinaria.productos where DATEDIFF(Caducidad, now()) < 30;";
+	    	this.query = "SELECT Dias_Caducidad FROM veterinaria.configuracion where Clave = 1;";
 	    	
 	    	try {
 	            ps = conect.getConnection().prepareStatement(query);
@@ -113,7 +129,118 @@ public class PrincipalDAO {
 	    	
 		    } catch (Exception var4) {
 		        var4.printStackTrace();
-		    }
+		    }finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+		return retorno;
+	}
+	
+	public int Cantidad_N() {
+		Conexion conect = new Conexion();
+		int retorno = 0;
+	    	this.query = "SELECT Cantidad_Inventario FROM veterinaria.configuracion where Clave = 1;";
+	    	
+	    	try {
+	            ps = conect.getConnection().prepareStatement(query);
+	            this.rs = this.ps.executeQuery();
+	            
+	            while(this.rs.next()) {
+		        	retorno=this.rs.getInt(1);
+	            }
+	    	
+		    } catch (Exception var4) {
+		        var4.printStackTrace();
+		    }finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+		return retorno;
+	}
+	
+	public int Productos_Agotarse(int Cantidad) {
+		Conexion conect = new Conexion();
+		int retorno = 0;
+	    	this.query = "SELECT count(Nombre) as Productos FROM veterinaria.productos where Cantidad < ? and R_Proveedor like '%';";
+	    	
+	    	try {
+	            ps = conect.getConnection().prepareStatement(query);
+	            ps.setInt(1, Cantidad);
+	            this.rs = this.ps.executeQuery();
+	            
+	            while(this.rs.next()) {
+		        	retorno=this.rs.getInt("Productos");
+	            }
+	    	
+		    } catch (Exception var4) {
+		        var4.printStackTrace();
+		    }finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+		return retorno;
+		
+	}
+	
+	public int Productos_Caducar(int Dias) {
+		Conexion conect = new Conexion();
+		int retorno = 0;
+	    	this.query = "SELECT count(DATEDIFF(Caducidad, now())) as Dias FROM veterinaria.productos where DATEDIFF(Caducidad, now()) < ?;";
+	    	
+	    	try {
+	            ps = conect.getConnection().prepareStatement(query);
+	            ps.setInt(1, Dias);
+	            this.rs = this.ps.executeQuery();
+	            
+	            while(this.rs.next()) {
+		        	retorno=this.rs.getInt(1);
+	            }
+	    	
+		    } catch (Exception var4) {
+		        var4.printStackTrace();
+		    }finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		
 		return retorno;
 		
@@ -138,7 +265,19 @@ public class PrincipalDAO {
 	    	
 		    } catch (Exception var4) {
 		        var4.printStackTrace();
-		    }
+		    }finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		
 		return retorno;
 		

@@ -40,6 +40,17 @@ public class Servlet_Citas extends HttpServlet {
 			response.getWriter().write(dao.mostrar_citas_todas());
 			return;
 		}
+		if(accion.equals("mostrar_todas_de")) {
+			
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			
+			String mascota = request.getParameter("Mascota");
+			String cliente = request.getParameter("Cliente");
+			
+			response.getWriter().write(dao.mostrar_citas_todas_de(cliente, mascota));
+			return;
+		}
 		if(accion.equals("mostrar")) {
 			
 			response.setContentType("text/html");

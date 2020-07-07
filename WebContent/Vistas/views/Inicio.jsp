@@ -27,9 +27,7 @@
     <title>Inicio</title>
 
     <!--- Custom CSS for this page --->
-    <link rel="stylesheet" href="../icons/style.css">
-    <link rel="stylesheet" href="../CSS/opciones.css">
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/Inicio.css">
     
 </head>
     
@@ -60,7 +58,7 @@
     			 <%break;
     	}
     %>
-    <div id="contenido">
+    <div id="contenido" >
         <div id="contenedor-inicio" class="contenedor">
             <div id="opc1" class="opcion">
                 <img class="icono" src="../img/Contactos.png" alt="icono-contacto">
@@ -145,7 +143,6 @@
         </div>
     </div>
     
-  
     
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>

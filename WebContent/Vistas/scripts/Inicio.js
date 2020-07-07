@@ -22,6 +22,7 @@ $(document).ready(function(){
 	
 	cargar_citas(6);
 	
+	
 	$("#hoy").click(function(e){
 		$(".selected").removeClass('selected');
 		
@@ -77,7 +78,7 @@ function cargar_citas(opc){
 			 date = new Date(datos[i].Fecha); 
 			 date.setDate(date.getDate() + 1);
 			 
-			 elemento.append("<div id=\"D"+datos[i].IDCita+"\"></div>");
+			 elemento.append("<div id=\"D"+datos[i].IDCita+"\" onclick=\"buscar_historial('"+datos[i].NombreC+"','"+datos[i].NombreM+"')\"></div>");
 			 
 			 var hijo = $("#D"+datos[i].IDCita);
 			 
@@ -106,7 +107,7 @@ function cargar_citas(opc){
 			 }
 			 if(datos[i].Hora != 'null'){
 				 hijo.append(
-		                    "<div>"+
+		                    "<div >"+
 		                        "<p id='fecha'>"+date.toLocaleDateString("es-ES", options) +". Hora: "+ datos[i].Hora[0]+datos[i].Hora[1]+datos[i].Hora[2]+datos[i].Hora[3]+datos[i].Hora[4]+"</p>"+
 		                        "<p>"+datos[i].NombreC+"</p>"+
 		                        "<p>"+datos[i].NombreM+"</p>"+
@@ -114,7 +115,7 @@ function cargar_citas(opc){
 		                );
 			 }else{
 				 hijo.append(
-		                    "<div>"+
+						 "<div >"+
 		                        "<p id='fecha'>"+date.toLocaleDateString("es-ES", options) +"</p>"+
 		                        "<p>"+datos[i].NombreC+"</p>"+
 		                        "<p>"+datos[i].NombreM+"</p>"+
@@ -156,7 +157,7 @@ function cargar_citas(opc){
 			 date = new Date(datos[i].Fecha); 
 			 date.setDate(date.getDate() + 1);
 			 
-			 elemento.append("<div id=\"S"+datos[i].IDCita+"\"></div>");
+			 elemento.append("<div id=\"S"+datos[i].IDCita+"\" onclick=\"buscar_historial('"+datos[i].NombreC+"','"+datos[i].NombreM+"')\"></div>");
 			 
 			 var hijo = $("#S"+datos[i].IDCita);
 			 
@@ -235,7 +236,7 @@ function cargar_citas(opc){
 			 date = new Date(datos[i].Fecha); 
 			 date.setDate(date.getDate() + 1);
 			 
-			 elemento.append("<div id=\"M"+datos[i].IDCita+"\"></div>");
+			 elemento.append("<div id=\"M"+datos[i].IDCita+"\" onclick=\"buscar_historial('"+datos[i].NombreC+"','"+datos[i].NombreM+"')\"></div>");
 			 
 			 var hijo = $("#M"+datos[i].IDCita);
 			 
@@ -294,6 +295,19 @@ function cargar_citas(opc){
 			i++;
 		}
 		$("#mes").next().text("Mes ("+(i)+")");
+	});
+	
+}
+
+function buscar_historial(varCliente, varMascota){
+	
+	$.post("../../Principal",{
+		accion : "H_Cliente",
+		Cliente: varCliente,
+		Mascota: varMascota
+	},function(responseText){
+		var datos = JSON.parse(responseText);
+		$(location).attr('href',"Historial_Cliente.jsp");
 	});
 	
 }

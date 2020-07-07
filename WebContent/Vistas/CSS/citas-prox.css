@@ -45,6 +45,7 @@
     display: flex;
     flex-wrap: wrap;
     border-top: 1px solid #ccc;
+    cursor: pointer;
 }
 
 .agenda-contenido div div{

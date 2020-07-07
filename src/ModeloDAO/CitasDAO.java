@@ -248,6 +248,62 @@ public class CitasDAO {
     	return retorno;
 	}
     
+public String mostrar_citas_todas_de(String nombre, String mascota) {
+		
+		Conexion conect = new Conexion();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String retorno = new String("[");
+		this.query = "SELECT idCitas, clientes.Nombre, Fecha, date_add(Hora, Interval 1 hour) as Horas, citas.Tipo, mascotas.Nombre, Notas FROM veterinaria.citas " + 
+				"inner join clientes on R_Cliente =idClientes " + 
+				"inner join mascotas on  R_Mascota=idMascotas " + 
+				"where clientes.Nombre = ? and mascotas.Nombre = ? " +
+				"order by fecha; ";
+		
+		try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1, nombre);
+            ps.setString(2, mascota);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	Cita new_cita = new Cita();
+            	
+            	new_cita.setID(rs.getInt(1));
+            	new_cita.setS_Cliente(rs.getString(2));
+            	new_cita.setFecha(rs.getDate(3));
+            	new_cita.setHora(rs.getTime(4));
+            	new_cita.setTipo(rs.getString(5));
+            	new_cita.setS_Mascota(rs.getString(6));
+            	new_cita.setNotas(rs.getString(7));
+            	
+            	retorno+= new_cita.crear_JSON();
+            	
+            	if(!rs.isLast())
+            		retorno+= ",";
+            }
+    	
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    }finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+    	retorno+="]";
+    	return retorno;
+	}
+    
     public String mostrar_citas_todas() {
 		
 		Conexion conect = new Conexion();

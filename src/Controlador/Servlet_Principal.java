@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ModeloDAO.CitasDAO;
 import ModeloDAO.PrincipalDAO;
@@ -28,7 +29,27 @@ public class Servlet_Principal extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String accion = request.getParameter("accion");
+		
+		if(accion.equals("H_Cliente")) {
+			
+			HttpSession sesion_user = request.getSession(true);
+			
+			String mascota = request.getParameter("Mascota");
+			String cliente = request.getParameter("Cliente");
+			
+			sesion_user.setAttribute("Mascota",mascota);
+			sesion_user.setAttribute("Cliente", cliente);
+			
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+
+			response.getWriter().write("true");
+			
+			return;
+		}
+		
 		if(accion.equals("C_Datos")) {
 			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
@@ -36,8 +57,8 @@ public class Servlet_Principal extends HttpServlet {
 			response.getWriter().write("{\"PTotales\": \""+dao.Producto_Totales()
 					+"\", \"Clientes_Tot\": \""+dao.Clientes_Totales()
 					+"\", \"Citas\": \""+dao.Citas_Vigentes()
-					+"\", \"Agotarse\": \""+dao.Productos_Agotarse()
-					+"\", \"Caducar\": \""+dao.Productos_Caducar()
+					+"\", \"Agotarse\": \""+dao.Productos_Agotarse(dao.Cantidad_N())
+					+"\", \"Caducar\": \""+dao.Productos_Caducar(dao.Cantidad_Dias())
 					+"\", \"VentasSem\": \""+dao.Ventas_Semana()
 					+"\"}");
 			return;
