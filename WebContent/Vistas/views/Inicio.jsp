@@ -5,11 +5,15 @@
 <%
 	HttpSession user_session = request.getSession(false);
 	String usuario = (String) user_session.getAttribute("usuario");
+	String ST = (String) user_session.getAttribute("tipo");
 	if(usuario == null){
 		response.sendRedirect("../../index.jsp");
-	} 
+		return;
+	}
+	
+	int Tipo = Integer.parseInt(ST);
+	
 %>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -43,41 +47,53 @@
         </label>
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
-	
-	<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>
-	
+	<%
+    	switch(Tipo){
+    		 case 1:%>
+    			<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>		 
+    			 <%break;
+    		 case 2:%>
+    		 	<jsp:include page="Includes/Menu_Principal2.jsp"></jsp:include>
+    			 <%break;
+    		 case 3:%>
+    		 	<jsp:include page="Includes/Menu_Principal3.jsp"></jsp:include>
+    			 <%break;
+    	}
+    %>
     <div id="contenido">
         <div id="contenedor-inicio" class="contenedor">
             <div id="opc1" class="opcion">
                 <img class="icono" src="../img/Contactos.png" alt="icono-contacto">
-                <h1>20</h1>
+                <h1 id="Client_Tot"></h1>
                 <p>Clientes Totales</p>
             </div>
             <div id="opc2" class="opcion">
                 <img class="icono" src="../img/producto-icono.png" alt="icono-contacto">
-                <h1>20</h1>
+                <h1 id="Prod_Tot"></h1>
                 <p>Productos</p>
             </div>
             <div id="opc3" class="opcion">
                 <img class="icono" src="../img/cita-icono.png" alt="icono-contacto">
-                <h1>2</h1>
-                <p>Citas</p>
+                <h1 id="CitasV"></h1>
+                <p>Citas Vigentes</p>
             </div>
             <div id="opc4" class="opcion">
                 <img class="icono" src="../img/caducar-icono.png" alt="icono-contacto">
-                <h1>0</h1>
+                <h1 id="caducar"></h1>
                 <p>Productos a caducar</p>
             </div>
             <div id="opc5" class="opcion">
                 <img class="icono" src="../img/agotarse-icono.png" alt="icono-contacto">
-                <h1>20</h1>
+                <h1 id="Agotarse"></h1>
                 <p>Proximos a agotarse</p>
             </div>
+            <%if(Tipo==1){ %>
             <div id="opc6" class="opcion">
                 <img class="icono" src="../img/venta-icono.svg" alt="icono-contacto">
-                <h1>20</h1>
+                <h1 id="VentasS"></h1>
                 <p>Ventas de la semana</p>
             </div>
+            <%} %>
         </div>
 
         <div class="agenda-div">
@@ -85,43 +101,45 @@
 
             <div> 
                 <p>Tipo de cita</p>
-                <select name="tipo" >
-                    <option value="Todas">Todas</option>
-                    <option value="Estetica">Estetica</option>
-                    <option value="Vacuna">Vacuna</option>
-                    <option value="Consulta">Consulta</option>
-                    <option value="Otros">Otros</option>
+                <select id="select-tipo" name="tipo" >
+                    <option value="6">Todas</option>
+                   	<option value="1">Estetica</option>
+	               	<option value="2">Consulta</option>
+	               	<option value="3">Vacunación</option>
+	               	<option value="4">Operación</option>
+	               	<option value="5">Otro</option>
                 </select>
             </div>
 
             <div>
                 <input id="hoy" type="radio" name="opcion">
-                <label for="hoy">Hoy</label>
+                <label class="selected" for="hoy">Hoy</label>
                 <input id="semana" type="radio" name="opcion">
                 <label for="semana">Semana</label>
                 <input id="mes" type="radio" name="opcion">
                 <label for="mes">Mes</label>
             </div>
 
-            <div id="agenda-contenido">
+            <div id="citas-dia" class="agenda-contenido">
                 <div>
-
-                    <img src="../img/estetica-icono.png" alt="icono-estetica">
-                    <div>
-                        <p id="fecha">30/04/2020 10:00 hrs</p>
-                        <p>Luis Hernandez</p>
-                        <p>Tommy</p>
-                    </div>
-                </div>
+					<div>
+                	<p>Error en conexion con el servidor</p>
+					</div>
+				</div>
+            </div>
+            <div id="citas-semana" class="agenda-contenido">
+               <div>
+					<div>
+                	<p>Error en conexion con el servidor</p>
+					</div>
+				</div>
+            </div>
+            <div id="citas-mes" class="agenda-contenido">
                 <div>
-
-                    <img src="../img/estetica-icono.png" alt="icono-estetica">
-                    <div>
-                        <p id="fecha">30/04/2020 10:00 hrs</p>
-                        <p>Luis Hernandez</p>
-                        <p>Tommy</p>
-                    </div>
-                </div>
+					<div>
+                	<p>Error en conexion con el servidor</p>
+					</div>
+				</div>
             </div>
 
         </div>
@@ -129,9 +147,10 @@
     
   
     
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../scripts/Inicio.js"></script>
+    
 
 </body>
 </html>

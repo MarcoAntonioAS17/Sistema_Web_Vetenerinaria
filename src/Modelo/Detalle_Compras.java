@@ -47,5 +47,13 @@ public class Detalle_Compras {
 				+"\"}");
 		return lista;
 	}
-
+	
+	public String crear_JSON_Ver_Compras() {
+		String lista = new String("[\""+this.R_Producto
+				+"\", \""+this.Nombre_Producto
+				+"\", \""+this.Cantidad
+				+"\", \""+this.Precio
+				+"\"]");
+		return lista;
+	}
 }

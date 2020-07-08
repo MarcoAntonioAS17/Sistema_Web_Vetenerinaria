@@ -30,7 +30,6 @@ public class Servlet_Clientes extends HttpServlet {
 		String accion = request.getParameter("accion");
 		
 		if(accion.equals("agregar")) {
-			cliente.setIDClient(Integer.parseInt(request.getParameter("Clientes")));
 			cliente.setNombreC(request.getParameter("Nom_Cte"));
 			cliente.setTelefonoC(request.getParameter("Telefono"));
 			cliente.setEmailC(request.getParameter("Email"));

@@ -1,5 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+
+<%@page import="Modelo.Clientes"%>
+<%@page import="ModeloDAO.ClientesDAO"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	HttpSession user_session = request.getSession(false);
+	String usuario = (String) user_session.getAttribute("usuario");
+	String ST = (String) user_session.getAttribute("tipo");
+	if(usuario == null){
+		response.sendRedirect("../../index.jsp");
+		return;
+	}
+	
+	int Tipo = Integer.parseInt(ST);
+	
+	switch(Tipo){
+		 case 3:
+			 response.sendRedirect("Inicio.jsp");
+			break;
+	}
+	
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,12 +54,23 @@
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
 	
-	<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>
-
+ 	<%
+    	switch(Tipo){
+    		 case 1:%>
+    			<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>		 
+    			 <%break;
+    		 case 2:%>
+    		 	<jsp:include page="Includes/Menu_Principal2.jsp"></jsp:include>
+    			 <%break;
+    		 case 3:%>
+    		 	<jsp:include page="Includes/Menu_Principal3.jsp"></jsp:include>
+    			 <%break;
+    	}
+    %>
     <br><br><br><br>
     
     <form action="" class="formulario">
-        <h1>Nueva venta</h1>
+        <h1>Nueva Venta</h1>
         <div id="date-time">
 	        <label for="Fec_C" class="label-input-40">Fecha</label>
 	        <label for="Hra_C" class="label-input-40">Hora</label>
@@ -43,83 +79,76 @@
 	        <input id="Hra_C" name="Hra_C" type="time" class="input-40">  
         </div>
         
-        <input id="Clv_Cte" name="Clv_Cte" type="text" class="formulario__input" required="required">  
-        <label for="Clv_Cte" class="formulario__label">Clave de Cliente</label>
+        <label class="formulario__label_fija">Cliente</label>
+        <select id="Clv_Client" name="opciones" class="formulario__input">
+        	<%
+	        	ClientesDAO provedao = new ClientesDAO();
+	    		List<Clientes> listprove = provedao.listar();
+	    		Iterator<Clientes> iterprove = listprove.iterator();
+	    		Clientes client=null;
+	    		while(iterprove.hasNext()){
+    			client=iterprove.next();
+           	%>
+               <option value="<%=client.getIDClient() %>"><%=client.getNombreC()%></option>
+               
+           <%} %>
+        </select>
         
-        <div id="cont-producto">
-	        <label for="Clv_Pro" class="label-input-30">Código del producto</label>
-	        <input id="Clv_Pro" name="Clv_Pro" type="text" class="input-30" placeholder="Código">  
+       <div id="cont-producto">
+	        <label for="Clv_Prod" class="label-input-20">Código del producto</label>
+	        
+	        <input  id="Clv_Prod" list="list_prod" class="input-20" placeholder="Código">
+	        <datalist id="list_prod">
+	        	
+	        </datalist>
+	        
+	        <label for="Cantidad" class="label-input-20">Cantidad</label>
+	        <input id="Cantidad" type="number" class="input-20" placeholder="Cantidad">  
         
         	<button id="agregar" type="button" class="agregar">Agregar Producto</button>
         </div>
-         <h1>Carrito de venta</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código del Producto</th>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                        <th>Precio Total</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                   <tr>
-                        <td>72931038</td>
-                        <td>Croqueta Proplan Cordero</td>
-                        <td>1</td>
-                        <td>1200</td>
-                        <td>1200</td>
-                        <td>
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    <tr>
-                        <td>72931038</td>
-                        <td>Croqueta Proplan Cordero</td>
-                        <td>1</td>
-                        <td>1200</td>
-                        <td>1200</td>
-                        <td>
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    <tr>
-                        <td>72931038</td>
-                        <td>Croqueta Proplan Cordero</td>
-                        <td>1</td>
-                        <td>1200</td>
-                        <td>1200</td>
-                        <td>
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    
-                    <tr>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td>Total</td>
-                    	<td>$3,600</td>
-                    	<td></td>
-                    </tr>
-                </tbody>
-            </table>
         
-        <div >
-            <button id="guardar" type="submit" class="guardar">Finalizar Venta</button>
-            <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
+         <div id="tabla">
+	         <h1>Carrito de Compra</h1>
+	            <table>
+	                <thead>
+	                    <tr>
+	                        <th>Código del Producto</th>
+	                        <th>Nombre</th>
+	                        <th>Cantidad</th>
+	                        <th>Precio Unitario</th>
+	                        <th>Precio Total</th>
+	                        <th></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                   
+	                </tbody>
+	            </table>
+           	<br>
+           	<div id="div-cambio">
+           		 <label for="Efectivo" class="label-input-20">Efectivo : </label>
+	        	<input  id="Efectivo" type="text" class="input-20" placeholder="Efectivo">
+	        	
+	        	<label for="Cambio" class="label-input-20">Cambio : </label>
+	        	<input  id="Cambio" type="text" class="input-20" placeholder="Efectivo" disabled="disabled">
+           	</div>
+           	<br>
+	            
+	        <div >
+	            <button id="guardar" type="button"  class="guardar">Finalizar Venta</button>
+	            <button id="cancelar" type="button" class="cancelar">Cancelar</button>
+	        </div>
         </div>
-        
         
     </form>
     
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
     <script type="text/javascript" src="../scripts/fecha-tiempo.js"></script>
+    <script type="text/javascript" src="../scripts/Ventas.js"></script>
     
 </body>
 </html>

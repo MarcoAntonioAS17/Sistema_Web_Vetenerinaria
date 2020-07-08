@@ -1,5 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="UTF-8"%>
+
+<%
+	HttpSession user_session = request.getSession(false);
+	String usuario = (String) user_session.getAttribute("usuario");
+	String ST = (String) user_session.getAttribute("tipo");
+	if(usuario == null){
+		response.sendRedirect("../../index.jsp");
+		return;
+	}
+	
+	int Tipo = Integer.parseInt(ST);
+	
+	switch(Tipo){
+		 case 2:
+		 case 3:
+			 response.sendRedirect("Inicio.jsp");
+			break;
+	}
+	
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,8 +49,20 @@
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
 	
-	<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>
-
+ 	<%
+    	switch(Tipo){
+    		 case 1:%>
+    			<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>		 
+    			 <%break;
+    		 case 2:%>
+    		 	<jsp:include page="Includes/Menu_Principal2.jsp"></jsp:include>
+    			 <%break;
+    		 case 3:%>
+    		 	<jsp:include page="Includes/Menu_Principal3.jsp"></jsp:include>
+    			 <%break;
+    	}
+    %>
+    
     <br><br><br><br>
     
    <div id="contenido1" class="contenido"  >
@@ -38,101 +70,38 @@
             <form id="busqueda">
               <label>Buscar</label>
               <select id="opciones" name="opciones">
-                   <option value="Codigo">Codigo Venta</option>
-                  <option value="Cliente">Cliente</option>
-                  <option value="Fecha">Fecha</option>
-                  <option value="Hora">Hora</option>
-                  <option value="Producto">Producto</option>
-                  <option value="Cantidad">Cantidad</option>
-                  <option value="Precio">Precio</option>
+                  <option value="1">Codigo Venta</option>
+                  <option value="2">Cliente</option>
+                  <option value="3">Fecha</option>
+                  <option value="4">Hora</option>
               </select>
             
-               <input id="busqueda" type="search" placeholder="Busqueda"> 
+              <input id="busqueda_input" type="search" placeholder="Busqueda">
             </form>
             
          
-            <table>
+            <table id="reporte">
                 <thead>
                     <tr>
-                    	<th>Código de Venta</th>
+                    	<th>Código</th>
                     	<th>Cliente</th>
                     	<th>Fecha</th>
                     	<th>Hora</th>
-                        <th>Código del Producto</th>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                        <th>Precio Total</th>
+                        <th>Total</th>
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                   <tr>
-                   		<td>001</td>
-                   		<td>Felipe Ramirez</td>
-                   		<td>10/02/2020</td>
-                   		<td>12:00</td>
-                        <td>72931038</td>
-                        <td>Croqueta Proplan Cordero</td>
-                        <td>1</td>
-                        <td>1200</td>
-                        <td>1200</td>
-                        <td>
-                        	<a  href="#"><img width="25px" alt="ico-editar" src="../img/editar-icono.svg"></a>
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    <tr>
-                    	<td>001</td>
-                   		<td>Felipe Ramirez</td>
-                   		<td>10/02/2020</td>
-                   		<td>12:00</td>
-                        <td>72931038</td>
-                        <td>Croqueta Proplan Cordero</td>
-                        <td>1</td>
-                        <td>1200</td>
-                        <td>1200</td>
-                        <td>
-                        	<a  href="#"><img width="25px" alt="ico-editar" src="../img/editar-icono.svg"></a>
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    <tr>
-                    	<td>001</td>
-                   		<td>Felipe Ramirez</td>
-                   		<td>10/02/2020</td>
-                   		<td>12:00</td>
-                        <td>72931038</td>
-                        <td>Croqueta Proplan Cordero</td>
-                        <td>1</td>
-                        <td>1200</td>
-                        <td>1200</td>
-                        <td>
-                        	<a  href="#"><img width="25px" alt="ico-editar" src="../img/editar-icono.svg"></a>
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    
-                    <tr>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td>Total</td>
-                    	<td>$3,600</td>
-                    	<td></td>
-                    </tr>
-                </tbody>
+                <tbody id="tbody1">
+				</tbody>
             </table>
         
 	</div>
     
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
+    <script type="text/javascript" src="../scripts/Tabla_Extendible.js"></script>
+   	<script type="text/javascript" src="../scripts/ver_ventas.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
     
 </body>

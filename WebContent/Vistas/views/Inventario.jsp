@@ -1,5 +1,4 @@
-<%@page import="ModeloDAO.ProductoDAO"%>
-<%@page import="Modelo.Producto"%>
+
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 
@@ -11,6 +10,20 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	HttpSession user_session = request.getSession(false);
+	String usuario = (String) user_session.getAttribute("usuario");
+	String ST = (String) user_session.getAttribute("tipo");
+	if(usuario == null){
+		response.sendRedirect("../../index.jsp");
+		return;
+	}
+	
+	int Tipo = Integer.parseInt(ST);
+	
+	
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,6 +34,16 @@
     
     <title>Inventario</title>
     <link rel="stylesheet" href="../CSS/inventario.css">
+     <%if(Tipo!=1){ %>
+    
+    	<style type="text/css">
+    		td button{
+    			display: none;
+    		}
+    	</style>
+    	
+    <%} %>
+    
 </head>
     
 <body>
@@ -37,9 +60,19 @@
         </label>
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
-   
-	<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>
-	
+     <%
+    	switch(Tipo){
+    		 case 1:%>
+    			<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>		 
+    			 <%break;
+    		 case 2:%>
+    		 	<jsp:include page="Includes/Menu_Principal2.jsp"></jsp:include>
+    			 <%break;
+    		 case 3:%>
+    		 	<jsp:include page="Includes/Menu_Principal3.jsp"></jsp:include>
+    			 <%break;
+    	}
+    %>
    
     <div id="contenido1" class="contenido"  >
         <h1>Inventario</h1>
@@ -81,7 +114,7 @@
             </table>
         
     </div>
-    
+    <% if(Tipo==1){%>
     <form action="" class="formulario">
         <h5 id="title_form">AGREGAR PRODUCTO</h5>
       <input id="Clv_Pro" name="Clv_Pro" type="number" class="formulario__input" required="required">  
@@ -140,12 +173,27 @@
             <button id="cancelar" type="reset" onclick="limpiar_campos()" class="cancelar">Cancelar</button>
         </div>
     </form>
-
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<%} %>
+	
+	
+   <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
     <script type="text/javascript" src="../scripts/Productos.js"></script>
+    <%if(Tipo!=1){ %>
     
+    	<script type="text/javascript">
+    	 	$(document).ready(function(){
+    	 		
+    	 		$("tr").hover(function(){
+        	 		$(".editar_pro").remove();
+        	 		$(".eliminar_pro").remove();
+    	 		});
+    	 		
+    	 	});
+    	</script>
+    	
+    <%} %>
     
 </body>
 </html>

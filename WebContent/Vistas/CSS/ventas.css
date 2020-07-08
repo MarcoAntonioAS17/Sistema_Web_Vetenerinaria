@@ -10,3 +10,8 @@ body {
     margin: 0;
     font-family: sans-serif;
 }
+
+#div-cambio > input{
+	margin-left: 10px;
+}
+

@@ -6,6 +6,27 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	HttpSession user_session = request.getSession(false);
+	String usuario = (String) user_session.getAttribute("usuario");
+	String ST = (String) user_session.getAttribute("tipo");
+	if(usuario == null){
+		response.sendRedirect("../../index.jsp");
+		return;
+	}
+	
+	int Tipo = Integer.parseInt(ST);
+	
+	switch(Tipo){
+		 case 2:
+		 case 3:
+			 response.sendRedirect("Inicio.jsp");
+			break;
+	}
+	
+%>
+    
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -34,9 +55,19 @@
         </label>
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
-	
-	<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>
-
+	<%
+   	switch(Tipo){
+   		 case 1:%>
+   			<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>		 
+   			 <%break;
+   		 case 2:%>
+   		 	<jsp:include page="Includes/Menu_Principal2.jsp"></jsp:include>
+   			 <%break;
+   		 case 3:%>
+   		 	<jsp:include page="Includes/Menu_Principal3.jsp"></jsp:include>
+   			 <%break;
+   	}
+    %>
     <br><br><br><br>
     
     <form class="formulario">
@@ -102,7 +133,7 @@
     </form>
     
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
     <script type="text/javascript" src="../scripts/fecha-tiempo.js"></script>

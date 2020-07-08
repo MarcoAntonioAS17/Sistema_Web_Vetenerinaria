@@ -4,7 +4,8 @@
     width: 20%;
     background-color: white;
      -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,.5);
-    margin-top: 20px; 
+    margin-top: 20px;
+    margin-bottom: 20px; 
 }
 
 /*Tipo de cita*/
@@ -35,23 +36,23 @@
 }
 
 .agenda-div label{
-    padding: 2px 10px;
+    padding: 5px 15px;
     cursor:pointer;
     padding-bottom: 4px;
 }
 
-#agenda-contenido div{
+.agenda-contenido div{
     display: flex;
     flex-wrap: wrap;
     border-top: 1px solid #ccc;
 }
 
-#agenda-contenido div div{
+.agenda-contenido div div{
     width: 75%;
     border-top: 0px;
 }
 
-#agenda-contenido img{
+.agenda-contenido img{
     margin-top: 10px;
     width: 4em;
     height: 4em;
@@ -63,4 +64,16 @@
     border: 1px solid #70d67f;
     border-radius: 10px;
     padding: 3px;
+}
+
+#citas-semana, #citas-mes{
+	display: none;
+}
+
+.selected{
+	border-radius: 10px 10px 0px 0px;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	font-weight: bold;
 }

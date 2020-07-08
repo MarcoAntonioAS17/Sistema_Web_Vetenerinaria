@@ -1,5 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+
+<%@page import="Modelo.Clientes"%>
+<%@page import="ModeloDAO.ClientesDAO"%>
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	HttpSession user_session = request.getSession(false);
+	String usuario = (String) user_session.getAttribute("usuario");
+	String ST = (String) user_session.getAttribute("tipo");
+	if(usuario == null){
+		response.sendRedirect("../../index.jsp");
+		return;
+	}
+	
+	int Tipo = Integer.parseInt(ST);
+	
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,6 +31,16 @@
     <!--- Custom CSS for this page --->
     <link rel="stylesheet" href="../icons/style.css">
     <link rel="stylesheet" href="../CSS/mascotas.css">
+    <%if(Tipo==3){ %>
+    
+    	<style type="text/css">
+    		td button{
+    			display: none;
+    		}
+    	</style>
+    	
+    <%} %>
+    
 </head>
     
 <body>
@@ -29,9 +58,19 @@
         <img id="logo-extend" src="../img/Logo-Extend-Extend.svg" alt="logo-extendido">
     </div>
 	
-	
-	<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>
-    
+	<%
+    	switch(Tipo){
+    		 case 1:%>
+    			<jsp:include page="Includes/Menu_Principal.jsp"></jsp:include>		 
+    			 <%break;
+    		 case 2:%>
+    		 	<jsp:include page="Includes/Menu_Principal2.jsp"></jsp:include>
+    			 <%break;
+    		 case 3:%>
+    		 	<jsp:include page="Includes/Menu_Principal3.jsp"></jsp:include>
+    			 <%break;
+    	}
+    %>
     <br><br><br><br>
     
     <div class="contenido"  >
@@ -39,24 +78,22 @@
             <form id="busqueda">
               <label>Buscar</label>
               <select id="opciones" name="opciones">
-                   <option value="Codigo">Codigo del Cliente</option>
-                  <option value="NombreM">Nombre de Mascota</option>
-                  <option value="EdadM">Edad de Mascota</option>
-                  <option value="TipoM">Tipo de Mascota</option>
-                  <option value="RazaM">Raza de Mascota</option>
-                  <option value="Descripcion">Descripcion</option>
-                  <option value="Nombre">Nombre Cliente</option>
-                  <option value="Email">Teléfono</option>
-                  <option value="Email">Email</option>
+                  <option value="1">Clave</option>
+                  <option value="2">Nombre</option>
+                  <option value="3">Edad</option>
+                  <option value="4">Tipo</option>
+                  <option value="5">Raza</option>
+                  <option value="6">Descripcion</option>
+                  <option value="7">Dueño</option>
               </select>
             
-               <input id="busqueda" type="search" placeholder="Busqueda"> 
+               <input id="busqueda-input" type="search" placeholder="Busqueda"> 
             </form>
             <table>
                 <thead>
                     <tr>
                         <th>Clave de la Mascota</th>
-                        <th>Clave del Cliente</th>
+                        <th>Dueño</th>
                         <th>Nombre de la Mascota</th>
                         <th>Edad</th>
                         <th>Tipo de Mascota</th>
@@ -65,47 +102,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                   <tr>
-                        <td>72931038</td>
-                       <td>755252252</td>
-                        <td>Scarlett</td>
-                        <td>2 años</td>
-                        <td>Perro</td>
-                        <td>Chihuahua</td>
-                        <td>Color cafe, ojos negros, cola corta y trompa chata</td>
-                        <td>
-                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
-                    <tr>
-                        <td>72931038</td>
-                        <td>755252252</td>
-                        <td>Cheese</td>
-                        <td>2 años</td>
-                        <td>Perro</td>
-                        <td>Salchicha</td>
-                        <td>Color blanco, ojos cafes, cola larga y trompa alargada</td>
-                        <td>
-                        	<a  href="#"><img width="25px"  alt="icono-editar" src="../img/editar-icono.svg"></a>	
-                            <a  href="#"><img width="25px" alt="ico-eliminar" src="../img/eliminar-icono.svg"></a>
-                       </td>
-                    </tr>
+                   
                 </tbody>
             </table>
         
     </div>
     <br>
+    <%if(Tipo !=3){ %>
     <form action="" class="formulario">
         <h1>Registrar Nueva Mascota</h1><br><br>
-            <input id="Clv_Mas" name="Clv_Mas" type="text" class="formulario__input" required="required">  
-            <label for="Clv_Mas" class="formulario__label">Clave de la Mascota</label>
+            
+            
+            <input  id="Clv_Clie" list="list_prod" class="formulario__input ">
+	        <datalist id="list_prod">
+	        	<%
+	        		ClientesDAO daocat = new ClientesDAO();
+	           		List<Clientes> listcat = daocat.listar();
+	           		Iterator<Clientes> itercat = listcat.iterator();
+	           		Clientes clie=null;
+	           		while(itercat.hasNext()){
+	           			clie=itercat.next();
+	           	%>
+	               <option value="<%=clie.getIDClient() %>"><%=clie.getNombreC() %></option>
+	               
+	           <%} %>	
+	        </datalist>
+	        <input id="clv" type="hidden" value="">
+	        <label for="Clv_Clie" class="formulario__label estatic">Clave del Cliente</label>
             
             <input id="Nom_Mas" name="Nom_Mas" type="text" class="formulario__input" required="required"> 
             <label for="Nom_Mas" class="formulario__label">Nombre de la Mascota</label>
             
-            <input id="Edad_Mas" name="Edad_Mas" type="number" class="formulario__input" required="required"> 
-            <label for="Edad_Mas" class="formulario__label">Edad</label>
+            <input id="Edad_Mas" name="Edad_Mas" type="date" class="formulario__input" required="required"> 
+            <label for="Edad_Mas" class="formulario__label estatic">Edad (En Meses)</label>
             
             <input id="Tipo_Mas" name="Tipo_Mas" type="text" class="formulario__input" required="required"> 
             <label for="Tipo_Mas" class="formulario__label">Tipo de Mascota</label>
@@ -117,16 +146,32 @@
             <label for="Des_Mas" class="formulario__label">Descripción</label>
         
         <div >
-            <button id="guardar" type="submit" class="guardar">Guardar</button>
+        	<button id="actualizar" type="button" class="actualizar">Actualizar</button>
+            <button id="guardar" type="button" class="guardar">Guardar</button>
             <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
         </div>
     </form>
+    <%} %>
 
 	
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="../scripts/Mascotas.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
+    <%if(Tipo==3){ %>
     
+    	<script type="text/javascript">
+    	 	$(document).ready(function(){
+    	 		
+    	 		$("tr").hover(function(){
+        	 		$(".editar_pro").remove();
+        	 		$(".eliminar_pro").remove();
+    	 		});
+    	 		
+    	 	});
+    	</script>
+    	
+    <%} %>
 </body>
 </html>

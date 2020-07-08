@@ -52,20 +52,32 @@ public class Servlet_Productos extends HttpServlet {
 			producto.setR_Categoria(Integer.parseInt(request.getParameter("Categoria")));
 			producto.setPrecio_C(Float.parseFloat(request.getParameter("Precio_C")));
 			producto.setPrecio_V(Float.parseFloat(request.getParameter("Precio_V")));
-			SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd");
-			try {
-				producto.setCaducidad(objSDF.parse(request.getParameter("Fecha")));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			producto.setR_Proveedor(Integer.parseInt(request.getParameter("Proveedor")));
 			producto.setDescripcion(request.getParameter("Descripcion"));
 			
 			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
 			
-			if(dao.add(producto)) {
+			String fecha = request.getParameter("Fecha");
+			
+			if(!fecha.equals("")) {
+				//Viene con fecha
+				SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd");
+				try {
+					producto.setCaducidad(objSDF.parse(fecha));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(dao.add(producto,true)) {
+					response.getWriter().write("true");
+				}else {
+					response.getWriter().write("false");
+				}
+				return;
+			}
+			
+			if(dao.add(producto,false)) {
 				response.getWriter().write("true");
 			}else {
 				response.getWriter().write("false");
@@ -100,23 +112,37 @@ public class Servlet_Productos extends HttpServlet {
 						producto.setR_Categoria(Integer.parseInt(request.getParameter("Categoria")));
 						producto.setPrecio_C(Float.parseFloat(request.getParameter("Precio_C")));
 						producto.setPrecio_V(Float.parseFloat(request.getParameter("Precio_V")));
-						SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd");
-						try {
-							producto.setCaducidad(objSDF.parse(request.getParameter("Fecha")));
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
 						producto.setR_Proveedor(Integer.parseInt(request.getParameter("Proveedor")));
 						producto.setDescripcion(request.getParameter("Descripcion"));
+						
+						String fecha = request.getParameter("Fecha");
 						
 						response.setContentType("text/html");
 						response.setCharacterEncoding("UTF-8");
 						
-						if(dao.edit(producto)) 
+						if(!fecha.equals("")) {
+							//Viene con fecha
+							SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-mm-dd");
+							try {
+								producto.setCaducidad(objSDF.parse(request.getParameter("Fecha")));
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+							if(dao.edit(producto,true)) 
+								response.getWriter().write("true");
+							else 
+								response.getWriter().write("false");
+							return;
+						}
+						
+						if(dao.edit(producto,false)) 
 							response.getWriter().write("true");
 						else 
 							response.getWriter().write("false");
+						
+					
 						
 						
 					}

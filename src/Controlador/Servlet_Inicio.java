@@ -1,7 +1,6 @@
 package Controlador;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,10 +36,11 @@ public class Servlet_Inicio extends HttpServlet {
     	
     	AdministradorDAO admindao = new AdministradorDAO();
     	HttpSession sesion_user = request.getSession(true);
-    	
-    	if(admindao.autenticacion(admin)) {
+    	int tipo =admindao.autenticacion(admin);
+    	if(tipo!=0) {
     		
     		sesion_user.setAttribute("usuario",admin.getUserName() );
+    		sesion_user.setAttribute("tipo", tipo+"");
     		
     		response.setContentType("text/html");
     		response.setCharacterEncoding("UTF-8");

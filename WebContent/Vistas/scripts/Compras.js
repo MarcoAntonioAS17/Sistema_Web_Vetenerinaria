@@ -34,7 +34,7 @@ $(document).ready(function(){
 				alert("La compra ha sido cancelada");
 				location.reload();
 			}else{
-				  alert("Error al cancelar producto");
+				  alert("Error al cancelar compra");
 				  return;
 			}
 		});

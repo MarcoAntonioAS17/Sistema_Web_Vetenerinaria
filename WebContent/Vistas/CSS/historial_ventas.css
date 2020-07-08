@@ -1,5 +1,5 @@
 @import url("style.css");
-@import url("tables.css");
+@import url("extend-table.css");
 
 body {
     margin: 0;
@@ -12,4 +12,10 @@ body {
     background-color: white;
     padding-bottom: 20px;
      -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,.5);
+    margin-bottom: 20px;
 }
+
+.bt-menos{
+	display: none;
+}
+

@@ -3,25 +3,19 @@
  $(document).ready(function(){
 		   
 	       $('#guardar').click(function(e){
-	    	   var idCliente = $("#Clv_C").val();
+	    	   
 	    	   var Nom_Cte = $("#Nom_Cte").val();
 	    	   var Tel_Cte = $("#Tel_Cte").val();
 	    	   var Mail_Cte = $("#Mail_Cte").val();
 	    	   
-	    	   if(idCliente == "" || Nom_Cte ==""){
-	    		   if(idCliente == ""){
-						$("#Clv_C").css({"border-color":"red","color":"red"});
-					}
-					if(Nom_Cte==""){
-						$("#Nom_Cte").css({"border-color":"red","color":"red"});
-					}
+	    	   if( Nom_Cte ==""){
+    				$("#Nom_Cte").css({"border-color":"red","color":"red"});
 					alert("Faltan campos por ser llenados");
 	    		   return;
 	    	   }
 	    	   
 	          $.post("../../Clientes",{
 	        	  accion : "agregar",
-	        	  Clientes : idCliente,
 	        	  Nom_Cte : Nom_Cte,
 	        	  Telefono : Tel_Cte,
 	        	  Email: Mail_Cte
