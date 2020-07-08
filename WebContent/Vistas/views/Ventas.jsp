@@ -40,6 +40,7 @@
 </head>
     
 <body>
+	<form class="form" style="max-width: none; ">
 	
 	<input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="">
     <div id="label_sup">
@@ -144,12 +145,54 @@
         
     </form>
     
-
+	</form> 
+	
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
     <script type="text/javascript" src="../scripts/fecha-tiempo.js"></script>
-    <script type="text/javascript" src="../scripts/Ventas.js"></script>
+    <script type="text/javascript" src="../scripts/Ventas.js"></script>}
+    
+     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>  
+    
+    <script>  
+    (function () {  
+        var  
+         form = $('.form'),  
+         cache_width = form.width(),  
+         a4 = [595.28, 841.89]; // for a4 size paper width and height  
+
+        $('#create_pdf').on('click', function () {  
+            $('body').scrollTop(0);  
+            createPDF();  
+        });  
+        //create pdf  
+        function createPDF() {  
+            getCanvas().then(function (canvas) {  
+                var  
+                 img = canvas.toDataURL("image/png"),  
+                 doc = new jsPDF({  
+                     unit: 'px',  
+                     format: 'a4'  
+                 });  
+                doc.addImage(img, 'JPEG', 20, 20);  
+                doc.save('VentasPDF.pdf');  
+                form.width(cache_width);  
+            });  
+        }  
+
+        // create canvas object  
+        function getCanvas() {  
+            form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
+            return html2canvas(form, {  
+                imageTimeout: 2000,  
+                removeContainer: true  
+            });  
+        }  
+
+    }());  
+</script>  
     
 </body>
 </html>
