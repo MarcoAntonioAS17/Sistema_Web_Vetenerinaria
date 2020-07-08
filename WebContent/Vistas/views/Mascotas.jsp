@@ -149,6 +149,7 @@
         	<button id="actualizar" type="button" class="actualizar">Actualizar</button>
             <button id="guardar" type="button" class="guardar">Guardar</button>
             <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
+            <button id="create_pdf" type="button" class="create_pdf">Descargar PDF</button>
         </div>
     </form>
     <%} %>

@@ -138,6 +138,7 @@
 	        <div >
 	            <button id="guardar" type="button"  class="guardar">Finalizar Venta</button>
 	            <button id="cancelar" type="button" class="cancelar">Cancelar</button>
+	            <button id="create_pdf" type="button" class="create_pdf">Descargar PDF</button>
 	        </div>
         </div>
         
