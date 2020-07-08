@@ -71,8 +71,12 @@
     			 <%break;
     	}
     %>
-    <br><br><br><br>
     
+    <br><br>
+   	<button id="create_pdf" type="button" class="create_pdf">Descargar PDF</button>
+    <br><br>
+    
+    <form class="form" style="max-width: none;"> 
     <div class="contenido"  >
         <h1>Mascotas Registradas</h1>
             <form id="busqueda">
@@ -149,17 +153,20 @@
         	<button id="actualizar" type="button" class="actualizar">Actualizar</button>
             <button id="guardar" type="button" class="guardar">Guardar</button>
             <button id="cancelar" type="reset" class="cancelar">Cancelar</button>
-            <button id="create_pdf" type="button" class="create_pdf">Descargar PDF</button>
         </div>
     </form>
     <%} %>
-
+	</form>
 	
 
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/Mascotas.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script> 
+    
     <%if(Tipo==3){ %>
     
     	<script type="text/javascript">

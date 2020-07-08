@@ -63,9 +63,12 @@
     	}
     %>
     
-    <br><br><br><br>
+    <br><br>
+   	<button id="create_pdf" type="button" class="create_pdf">Descargar PDF</button>
+    <br><br>
     
-   <div id="contenido1" class="contenido"  >
+    <form class="form" style="max-width: none;"> 
+   	<div id="contenido1" class="contenido"  >
         <h1>Historial de ventas</h1>
             <form id="busqueda">
               <label>Buscar</label>
@@ -95,14 +98,17 @@
 				</tbody>
             </table>
         
-	</div>
-    
+		</div>
+    </form>
 
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/Tabla_Extendible.js"></script>
    	<script type="text/javascript" src="../scripts/ver_ventas.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script> 
     
 </body>
 </html>
