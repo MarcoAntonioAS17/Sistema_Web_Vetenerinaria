@@ -69,7 +69,7 @@ public class Servlet_Ventas extends HttpServlet {
 			//Si no, lo creamos
 			if(codigo==0) {
 				codigo = dao.ultimo_codigo()+1;
-				if(dao.add_servicio(codigo, servicio, precio)) {
+				if(!dao.add_servicio(codigo, servicio, precio)) {
 					response.getWriter().write("false");
 					return;
 				}

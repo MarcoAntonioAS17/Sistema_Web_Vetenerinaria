@@ -311,3 +311,28 @@ function buscar_historial(varCliente, varMascota){
 	});
 	
 }
+
+function enlace(key){
+	
+	switch (key) {
+	case 1:
+		$(location).attr('href',"Clientes.jsp");
+		break;
+	case 2:
+		$(location).attr('href',"Inventario.jsp");
+		break;
+	case 3:
+		$(location).attr('href',"Ver_Citas.jsp");
+		break;
+	case 4:
+		$(location).attr('href',"Inventario.jsp");
+		break;
+	case 5:
+		$(location).attr('href',"Inventario.jsp");
+		break;
+	case 6:
+		$(location).attr('href',"Historial_Ventas.jsp");
+		break;
+
+	}
+}

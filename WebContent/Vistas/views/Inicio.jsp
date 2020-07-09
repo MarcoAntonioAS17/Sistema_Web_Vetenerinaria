@@ -60,33 +60,33 @@
     %>
     <div id="contenido" >
         <div id="contenedor-inicio" class="contenedor">
-            <div id="opc1" class="opcion">
+            <div onclick="enlace(1)" id="opc1" class="opcion">
                 <img class="icono" src="../img/Contactos.png" alt="icono-contacto">
                 <h1 id="Client_Tot"></h1>
                 <p>Clientes Totales</p>
             </div>
-            <div id="opc2" class="opcion">
+            <div onclick="enlace(2)" id="opc2" class="opcion" >
                 <img class="icono" src="../img/producto-icono.png" alt="icono-contacto">
                 <h1 id="Prod_Tot"></h1>
                 <p>Productos</p>
             </div>
-            <div id="opc3" class="opcion">
+            <div onclick="enlace(3)" id="opc3" class="opcion">
                 <img class="icono" src="../img/cita-icono.png" alt="icono-contacto">
                 <h1 id="CitasV"></h1>
                 <p>Citas Vigentes</p>
             </div>
-            <div id="opc4" class="opcion">
+            <div onclick="enlace(4)" id="opc4" class="opcion">
                 <img class="icono" src="../img/caducar-icono.png" alt="icono-contacto">
                 <h1 id="caducar"></h1>
                 <p>Productos a caducar</p>
             </div>
-            <div id="opc5" class="opcion">
+            <div onclick="enlace(5)" id="opc5" class="opcion">
                 <img class="icono" src="../img/agotarse-icono.png" alt="icono-contacto">
                 <h1 id="Agotarse"></h1>
                 <p>Proximos a agotarse</p>
             </div>
             <%if(Tipo==1){ %>
-            <div id="opc6" class="opcion">
+            <div onclick="enlace(6)" id="opc6" class="opcion">
                 <img class="icono" src="../img/venta-icono.svg" alt="icono-contacto">
                 <h1 id="VentasS"></h1>
                 <p>Ventas de la semana</p>

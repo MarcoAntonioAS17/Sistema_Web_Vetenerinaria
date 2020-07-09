@@ -5,6 +5,16 @@ $(document).ready(function(){
 	$("#busqueda_input").keyup(function(){
 		   mostrar_registros($("#opciones").val(),$(this).val());
 	   });
+	
+	$.post("../../Grafica",{
+		accion : "grafica_ventas",
+		
+		},function(response){
+			var resJSON = JSON.parse(response);
+			
+			cargar_grafica(resJSON);
+	});
+		
 
 });
 
@@ -86,7 +96,66 @@ function mostrar_registros(opcion,busqueda){
 	    $("#reporte tr:first-child").show();
 	});
 	
+}
+
+function cargar_grafica(datos){
+	//Grafica
 	
-    
-	
+	let miCanvas = document.getElementById("MiGrafica").getContext("2d");
+	var Meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+	new Chart(miCanvas,{
+		type: "line",
+		data:{
+			
+				
+			labels:[Meses[datos.Meses[11]-1],Meses[datos.Meses[10]-1],Meses[datos.Meses[9]-1],Meses[datos.Meses[8]-1],Meses[datos.Meses[7]-1],Meses[datos.Meses[6]-1],
+					Meses[datos.Meses[5]-1],Meses[datos.Meses[4]-1],Meses[datos.Meses[3]-1],Meses[datos.Meses[2]-1],Meses[datos.Meses[1]-1],Meses[datos.Meses[0]-1]],
+			datasets:[
+				{
+					lineTension: 0,    
+					label: "Ventas Generales",
+					fill: false,
+					borderColor: "#f00",
+					data:[datos.VentasM[11],datos.VentasM[10],datos.VentasM[9],datos.VentasM[8],datos.VentasM[7],datos.VentasM[6],
+						datos.VentasM[5],datos.VentasM[4],datos.VentasM[3],datos.VentasM[2],datos.VentasM[1],datos.VentasM[0]]
+				}
+			]
+		}, 
+		options: {
+			responsive: true,
+			title: {
+				fontSize: 22,
+				fontColor: '#70a9d6',
+				display: true,
+				text: 'Ventas actuales'
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+				xAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Meses'
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Ventas'
+					},
+					ticks: {
+						min: 0
+					}
+				}]
+			}
+		}
+	});
 }

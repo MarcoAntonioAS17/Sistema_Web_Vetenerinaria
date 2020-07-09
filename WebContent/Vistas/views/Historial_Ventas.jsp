@@ -64,7 +64,9 @@
     %>
     
     <br><br><br><br>
-    
+    <div id="grafica" class="contenido">
+    <canvas id="MiGrafica" ></canvas>
+    </div>
    <div id="contenido1" class="contenido"  >
         <h1>Historial de ventas</h1>
             <form id="busqueda">
@@ -97,7 +99,8 @@
         
 	</div>
     
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+	
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/Tabla_Extendible.js"></script>
