@@ -2,8 +2,15 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/abii0/Downloads/javax.servlet (1).jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/abii0/Downloads/javax.annotation.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/abii0/Downloads/mysql-connector-java-8.0.19.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/META-INF/bin/javax.servlet.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="WebContent/META-INF/bin/mysql-connector-java-8.0.19.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
