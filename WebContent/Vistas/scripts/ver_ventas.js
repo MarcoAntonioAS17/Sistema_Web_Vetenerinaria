@@ -118,6 +118,20 @@ function cargar_grafica(datos){
 					borderColor: "#f00",
 					data:[datos.VentasM[11],datos.VentasM[10],datos.VentasM[9],datos.VentasM[8],datos.VentasM[7],datos.VentasM[6],
 						datos.VentasM[5],datos.VentasM[4],datos.VentasM[3],datos.VentasM[2],datos.VentasM[1],datos.VentasM[0]]
+				},{
+					lineTension: 0,    
+					label: "Ventas de Productos",
+					fill: false,
+					borderColor: "#0f0",
+					data:[datos.V_Prod[11],datos.V_Prod[10],datos.V_Prod[9],datos.V_Prod[8],datos.V_Prod[7],datos.V_Prod[6],
+						datos.V_Prod[5],datos.V_Prod[4],datos.V_Prod[3],datos.V_Prod[2],datos.V_Prod[1],datos.V_Prod[0]]
+				},{
+					lineTension: 0,    
+					label: "Ventas en Servicios",
+					fill: false,
+					borderColor: "#00f",
+					data:[datos.V_Ser[11],datos.V_Ser[10],datos.V_Ser[9],datos.V_Ser[8],datos.V_Ser[7],datos.V_Ser[6],
+						datos.V_Ser[5],datos.V_Ser[4],datos.V_Ser[3],datos.V_Ser[2],datos.V_Ser[1],datos.V_Ser[0]]
 				}
 			]
 		}, 
@@ -141,6 +155,7 @@ function cargar_grafica(datos){
 				xAxes: [{
 					display: true,
 					scaleLabel: {
+						fontSize: 14,
 						display: true,
 						labelString: 'Meses'
 					}
@@ -148,6 +163,7 @@ function cargar_grafica(datos){
 				yAxes: [{
 					display: true,
 					scaleLabel: {
+						fontSize: 14,
 						display: true,
 						labelString: 'Ventas'
 					},

@@ -158,7 +158,7 @@ public class VentaDAO {
 				break;
 		}
 		
-		this.query+="group by idVentas order by idVentas;";
+		this.query+="group by idVentas order by Fecha desc;";
 		try {
             ps2 = conect.getConnection().prepareStatement(query);
             ps2.setString(1,"%"+busq+"%");
@@ -322,6 +322,84 @@ public class VentaDAO {
 				"inner join Ventas on R_Venta= ventas.idVentas " + 
 				"inner join Productos on R_Producto=idProductos " + 
 				"where Fecha like ?;";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1, "%"+year+"-"+String.format("%02d",mes)+"-%");
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	retorno = rs.getFloat(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return retorno;
+	}
+	
+	public float productos_mes(int mes, int year) {
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		float retorno=0;
+		
+		this.query = "SELECT sum(detalle_ventas.Cantidad*productos.Precio_Venta)  FROM veterinaria.detalle_ventas " + 
+				"inner join Ventas on R_Venta= ventas.idVentas " + 
+				"inner join Productos on R_Producto=idProductos " + 
+				"where Fecha like ? and cast(idProductos as real)  > 500;";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1, "%"+year+"-"+String.format("%02d",mes)+"-%");
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	retorno = rs.getFloat(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return retorno;
+	}
+	
+	public float servicios_mes(int mes, int year) {
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		float retorno=0;
+		
+		this.query = "SELECT sum(detalle_ventas.Cantidad*productos.Precio_Venta)  FROM veterinaria.detalle_ventas " + 
+				"inner join Ventas on R_Venta= ventas.idVentas " + 
+				"inner join Productos on R_Producto=idProductos " + 
+				"where Fecha like ? and cast(idProductos as real)  < 500;";
     	
     	try {
             ps = conect.getConnection().prepareStatement(query);

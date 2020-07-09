@@ -40,16 +40,22 @@ public class Servlet_Grafica extends HttpServlet {
             
 			int Mes=c2.get(Calendar.MONTH)+1;
 			int year=c2.get(Calendar.YEAR);
-			String Retorno="{\"VentasM\": [";
+			String Retorno= new String("{\"VentasM\": [");
 			String Meses = "\"Meses\":[";
+			String Ventas_Pro = "\"V_Prod\":[";
+			String Ventas_Ser = "\"V_Ser\":[";
 			
 			for(int i=0;i<12;i++) {
 				
 				if(i<11) {
 					Retorno+=dao.total_mes(Mes,year)+", ";
+					Ventas_Pro+=dao.productos_mes(Mes, year)+", ";
+					Ventas_Ser+=dao.servicios_mes(Mes, year)+", ";
 					Meses +=Mes+", ";
 				}else {
-					Retorno+=dao.total_mes(Mes,year)+"";
+					Ventas_Pro+=dao.productos_mes(Mes, year);
+					Ventas_Ser+=dao.servicios_mes(Mes, year);
+					Retorno+=dao.total_mes(Mes,year);
 					Meses +=Mes;
 				}
 				Mes--;
@@ -58,9 +64,13 @@ public class Servlet_Grafica extends HttpServlet {
 					Mes=12;
 				}
 			}
-			Meses+="]";
+			Meses+="],";
+			Ventas_Ser+="],";
+			Ventas_Pro+="]";
 			Retorno+="],";
-			Retorno+=Meses+"}";
+			Retorno+=Meses+Ventas_Ser+Ventas_Pro;
+			
+			Retorno+="}";
 			
 			response.getWriter().write(Retorno);
 			

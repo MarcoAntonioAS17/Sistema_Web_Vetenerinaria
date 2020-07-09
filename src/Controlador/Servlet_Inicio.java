@@ -35,6 +35,7 @@ public class Servlet_Inicio extends HttpServlet {
     	admin.setPassword(request.getParameter("Password"));
     	
     	AdministradorDAO admindao = new AdministradorDAO();
+    	
     	HttpSession sesion_user = request.getSession(true);
     	int tipo =admindao.autenticacion(admin);
     	if(tipo!=0) {
