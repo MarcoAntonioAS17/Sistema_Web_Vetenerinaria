@@ -62,8 +62,6 @@ public class Servlet_Grafica extends HttpServlet {
 			Retorno+="],";
 			Retorno+=Meses+"}";
 			
-			System.out.println(Retorno);
-            
 			response.getWriter().write(Retorno);
 			
 			return;
