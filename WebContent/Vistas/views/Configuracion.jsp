@@ -215,8 +215,8 @@
 
         <h1>Modificar Contraseña</h1>
         
-        <input id="ContraA" type="password" class="formulario__input" required="required">  
-        <label for="ContraA" class="formulario__label">Contraseña actual</label>
+        <input id="ContraAc" type="password" class="formulario__input" required="required">  
+        <label for="ContraAc" class="formulario__label">Contraseña actual</label>
         
         <input id="ContraN" type="password" class="formulario__input" required="required">  
         <label for="ContraN" class="formulario__label">Nueva Contraseña</label>

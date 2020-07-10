@@ -204,7 +204,7 @@ public class CitasDAO {
 				"inner join clientes on R_Cliente =idClientes " + 
 				"inner join mascotas on  R_Mascota=idMascotas " + 
 				"where datediff(Fecha,now()) >=0 " +
-				"order by fecha; ";
+				"order by fecha desc; ";
 		
 		try {
             ps = conect.getConnection().prepareStatement(query);
@@ -259,7 +259,7 @@ public String mostrar_citas_todas_de(String nombre, String mascota) {
 				"inner join clientes on R_Cliente =idClientes " + 
 				"inner join mascotas on  R_Mascota=idMascotas " + 
 				"where clientes.Nombre = ? and mascotas.Nombre = ? " +
-				"order by fecha; ";
+				"order by fecha desc; ";
 		
 		try {
             ps = conect.getConnection().prepareStatement(query);
@@ -314,7 +314,7 @@ public String mostrar_citas_todas_de(String nombre, String mascota) {
 		this.query = "SELECT idCitas, clientes.Nombre, Fecha, date_add(Hora, Interval 1 hour) as Horas, citas.Tipo, mascotas.Nombre, Notas FROM veterinaria.citas " + 
 				"inner join clientes on R_Cliente =idClientes " + 
 				"inner join mascotas on  R_Mascota=idMascotas " + 
-				"order by fecha; ";
+				"order by fecha desc; ";
 		
 		try {
             ps = conect.getConnection().prepareStatement(query);
@@ -621,4 +621,230 @@ public String mostrar_citas_todas_de(String nombre, String mascota) {
     	return retorno;
 	
     }
+    
+    /*
+     * Metodos para las graficas
+     *
+     */
+    public int total_mes(int mes, int year) {
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int retorno=0;
+		
+		this.query = "SELECT count(idCitas) from citas " + 
+				"where Fecha like ?; ";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1, "%"+year+"-"+String.format("%02d",mes)+"-%");
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	retorno = rs.getInt(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return retorno;
+	}
+    
+    public int estetica_mes(int mes, int year) {
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int retorno=0;
+		
+		this.query = "SELECT count(idCitas) from citas " + 
+				"where Fecha like ? and Tipo like \"Est%tica\"; ";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1, "%"+year+"-"+String.format("%02d",mes)+"-%");
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	retorno = rs.getInt(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return retorno;
+	}
+    
+    public int consulta_mes(int mes, int year) {
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int retorno=0;
+		
+		this.query = "SELECT count(idCitas) from citas " + 
+				"where Fecha like ? and Tipo like \"Consulta\"; ";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1, "%"+year+"-"+String.format("%02d",mes)+"-%");
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	retorno = rs.getInt(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return retorno;
+	}
+    
+    public int vacunacion_mes(int mes, int year) {
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int retorno=0;
+		
+		this.query = "SELECT count(idCitas) from citas " + 
+				"where Fecha like ? and Tipo like \"Vacuna%\"; ";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1, "%"+year+"-"+String.format("%02d",mes)+"-%");
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	retorno = rs.getInt(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return retorno;
+	}
+    
+    public int operacion_mes(int mes, int year) {
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int retorno=0;
+		
+		this.query = "SELECT count(idCitas) from citas " + 
+				"where Fecha like ? and Tipo like \"Opera%\"; ";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1, "%"+year+"-"+String.format("%02d",mes)+"-%");
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	retorno = rs.getInt(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return retorno;
+	}
+    
+    public int otr_mes(int mes, int year) {
+		Conexion conect = new Conexion();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int retorno=0;
+		
+		this.query = "SELECT count(idCitas) from citas " + 
+				"where Fecha like ? and Tipo like \"Otro\"; ";
+    	
+    	try {
+            ps = conect.getConnection().prepareStatement(query);
+            ps.setString(1, "%"+year+"-"+String.format("%02d",mes)+"-%");
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	retorno = rs.getInt(1);
+
+            }
+	    } catch (Exception var4) {
+	        var4.printStackTrace();
+	    } finally {
+			try {
+				if(conect.getConnection() != null)
+					conect.getConnection().close();
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return retorno;
+	}
 }

@@ -52,7 +52,7 @@ public class AdministradorDAO {
 		ResultSet rs= null;
 		Conexion c = new Conexion();
 		try {
-			String query = "SELECT * FROM administradores WHERE BINARY UserName = ? and BINARY Password = ?;";
+			String query = "SELECT Nivel FROM administradores WHERE BINARY UserName = ? and BINARY Password = ?;";
 			ps =  c.getConnection().prepareStatement(query);
 			ps.setString(1, Name);
 			ps.setString(2, Pass);
@@ -60,7 +60,7 @@ public class AdministradorDAO {
 			
 			if(rs.next()) {
 				
-				return rs.getInt(3);
+				return rs.getInt(1);
 			}
 			
 		} catch (Exception e) {

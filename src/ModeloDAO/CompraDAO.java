@@ -200,7 +200,46 @@ public class CompraDAO {
     	return retorno;
 	}
 	
+	//Busqueda de los datos de la grafica
 	
+		public float total_mes(int mes, int year) {
+			Conexion conect = new Conexion();
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			
+			float retorno=0;
+			
+			this.query = "SELECT sum(detalle_compras.Cantidad*productos.Precio_Compra)  FROM veterinaria.detalle_compras " + 
+					"inner join Compras on R_Compra= compras.idCompras " +
+					"inner join Productos on R_Producto=idProductos " +
+					"where Fecha like ?;";
+	    	
+	    	try {
+	            ps = conect.getConnection().prepareStatement(query);
+	            ps.setString(1, "%"+year+"-"+String.format("%02d",mes)+"-%");
+	            rs = ps.executeQuery();
+	            
+	            while(rs.next()) {
+	            	retorno = rs.getFloat(1);
+
+	            }
+		    } catch (Exception var4) {
+		        var4.printStackTrace();
+		    } finally {
+				try {
+					if(conect.getConnection() != null)
+						conect.getConnection().close();
+					if(ps != null)
+						ps.close();
+					if(rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	    	return retorno;
+		}
 	
 	
 }

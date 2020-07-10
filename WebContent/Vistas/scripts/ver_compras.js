@@ -5,6 +5,14 @@ $(document).ready(function(){
 	$("#busqueda_input").keyup(function(){
 		   mostrar_registros($("#opciones").val(),$(this).val());
 	   });
+	$.post("../../Grafica",{
+		accion : "grafica_compras",
+		
+		},function(response){
+			var resJSON = JSON.parse(response);
+			
+			cargar_grafica(resJSON);
+	});
 
 });
 
@@ -85,7 +93,68 @@ function mostrar_registros(opcion,busqueda){
 	    $("#reporte tr:first-child").show();
 	});
 	
+}
+
+function cargar_grafica(datos){
+	//Grafica
 	
-    
-	
+	let miCanvas = document.getElementById("MiGrafica").getContext("2d");
+	var Meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+	new Chart(miCanvas,{
+		type: "line",
+		data:{
+			
+				
+			labels:[Meses[datos.Meses[11]-1],Meses[datos.Meses[10]-1],Meses[datos.Meses[9]-1],Meses[datos.Meses[8]-1],Meses[datos.Meses[7]-1],Meses[datos.Meses[6]-1],
+					Meses[datos.Meses[5]-1],Meses[datos.Meses[4]-1],Meses[datos.Meses[3]-1],Meses[datos.Meses[2]-1],Meses[datos.Meses[1]-1],Meses[datos.Meses[0]-1]],
+			datasets:[
+				{
+					lineTension: 0,    
+					label: "Compras Generales",
+					fill: false,
+					borderColor: "#f00",
+					data:[datos.ComprasM[11],datos.ComprasM[10],datos.ComprasM[9],datos.ComprasM[8],datos.ComprasM[7],datos.ComprasM[6],
+						datos.ComprasM[5],datos.ComprasM[4],datos.ComprasM[3],datos.ComprasM[2],datos.ComprasM[1],datos.ComprasM[0]]
+				}
+			]
+		}, 
+		options: {
+			responsive: true,
+			title: {
+				fontSize: 22,
+				fontColor: '#70a9d6',
+				display: true,
+				text: 'Compras actuales'
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+				xAxes: [{
+					display: true,
+					scaleLabel: {
+						fontSize: 14,
+						display: true,
+						labelString: 'Meses'
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
+						fontSize: 14,
+						display: true,
+						labelString: 'Compras'
+					},
+					ticks: {
+						min: 0
+					}
+				}]
+			}
+		}
+	});
 }

@@ -68,8 +68,12 @@
     	}
     %>
     <br><br><br><br>
+    <div id="grafica" class="contenido">
+    <canvas id="MiGrafica" ></canvas>
+    </div>
     
-    <div class="contenido"  >
+    <br><br>
+    <div class="contenido">
         <h1>Citas</h1>
         
             <table>
@@ -92,6 +96,7 @@
     </div>
     <br>
     
+    <script type="text/javascript" src="../scripts/Chart.js"></script>
 
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>

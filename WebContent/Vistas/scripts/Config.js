@@ -54,6 +54,7 @@
     		   alert("Las contraseñas no coinciden");
     		   return;
     	   }
+    	   
     		
     	   var varTipo = $("#Tipo").val();
     	   var varNombreA = $("#NombreA").val(); 
@@ -66,6 +67,7 @@
     			   $("#Contra").css({"border-color":"red","color":"red"});
     		   return;
     	   }
+    	   alert(varNombreA+" "+ varPassA);
           $.post("../../Configurar",{
         	  accion : "validar_admin",
         	  NombreA : varNombreA,
@@ -111,7 +113,7 @@ function eliminar(Usuario){
 
 function modificar(Usuario){
 	
-	var varPassA = $("#ContraA").val();
+	var varPassA = $("#ContraAc").val();
 	var varPass = $("#ContraN").val();
 	var varPass2 = $("#ContraN2").val();
 	

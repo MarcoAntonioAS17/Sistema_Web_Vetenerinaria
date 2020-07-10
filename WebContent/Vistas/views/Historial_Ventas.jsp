@@ -99,7 +99,7 @@
         
 	</div>
     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script type="text/javascript" src="../scripts/Chart.js"></script>
 	
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>

@@ -69,7 +69,7 @@ public class Servlet_Configurar extends HttpServlet {
 					String PasswordA = request.getParameter("PassA");
 					
 		    		if(admin_dao.autenticacion_admin(NombreA, PasswordA)==1) {
-		    			
+		    			System.out.println("Es 1");
 		    			Administrador admin = new Administrador();
 						admin.setUserName(request.getParameter("Nombre"));
 						admin.setPassword(request.getParameter("Pass"));
