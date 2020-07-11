@@ -17,13 +17,13 @@
                    </a>
                     <ul>
                         <li>
-                            <a href="Historial_Ventas.jsp">
-                                <i class="sub_menu"></i>
-                                Ventas Realizadas
-                            </a>
                             <a href="Ventas.jsp">
                                 <i class="sub_menu"></i>
                                 Nueva Venta
+                            </a>
+                            <a href="Historial_Ventas.jsp">
+                                <i class="sub_menu"></i>
+                                Ventas Realizadas
                             </a>
                         </li>
                     </ul>
@@ -100,6 +100,6 @@
                 </li>
                 <li class="title">SISTEMA</li>
                 <li ><a href="Configuracion.jsp">Acceso y configuración del sistema</a></li>
-                <li class="title" ><a href="../../index.jsp" >Salir</a></li>
+                <li class="title" ><a href="" onclick="salir()" >Salir</a></li>
 			</ul>
 </div>

@@ -134,7 +134,8 @@ public class CompraDAO {
 		ResultSet rs2 = null;
 		
 		String retorno = new String("[");
-		this.query = "select idCompras, Proveedor_Nombre, Fecha, date_add(hora, Interval 1 hour) as Horas, round(sum(detalle_compras.Cantidad*productos.Precio_Compra),2) as Total from detalle_compras " + 
+		
+		this.query = "select idCompras, Proveedor_Nombre, Fecha, hora as Horas, round(sum(detalle_compras.Cantidad*productos.Precio_Compra),2) as Total from detalle_compras " + 
 				"inner join compras on R_Compra=idCompras " + 
 				"inner join proveedores on R_Proveedor=idProveedores " + 
 				"inner join productos on R_Producto=idProductos " ;
@@ -169,7 +170,10 @@ public class CompraDAO {
             	new_comp.setIdCompra(rs2.getInt("idCompras"));
             	new_comp.setS_Proveedor(rs2.getString("Proveedor_Nombre"));
             	new_comp.setFecha(rs2.getDate("Fecha"));
-            	new_comp.setHora(rs2.getTime("Horas"));
+            	
+            	
+            	SimpleDateFormat objSDF = new SimpleDateFormat("HH:mm:ss");
+				new_comp.setHora(objSDF.parse(rs2.getString("Horas")));
             	new_comp.setTotal(rs2.getFloat("Total"));
             	
             	retorno+= new_comp.crear_JSON();

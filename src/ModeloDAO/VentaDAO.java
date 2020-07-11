@@ -170,7 +170,10 @@ public class VentaDAO {
             	new_venta.setIDVenta(rs2.getInt(1));
             	new_venta.setS_Cliente(rs2.getString(2));
             	new_venta.setFecha(rs2.getDate(3));
-            	new_venta.setHora(rs2.getTime(4));
+            	
+            	SimpleDateFormat objSDF = new SimpleDateFormat("HH:mm:ss");
+            	
+            	new_venta.setHora(objSDF.parse(rs2.getString(4)));
             	new_venta.setTotal(rs2.getFloat(5));
             	
             	retorno+= new_venta.crear_JSON();

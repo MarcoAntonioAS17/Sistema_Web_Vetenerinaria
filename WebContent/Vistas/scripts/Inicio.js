@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
 	
+	
 	//Cargar datos numericos
 	$.post("../../Principal",{
 		accion : "C_Datos"

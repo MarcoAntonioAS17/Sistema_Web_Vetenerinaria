@@ -13,8 +13,9 @@ $(document).ready(function(){
 		var confirma = confirm("¿Estás seguro que deseas finalizar la compra?");
 		
 		if(confirma == true){
+			contador=true;
 			limpiar_campos();
-			alert("Compra guardada");
+			alert("Compra guardada");			
 			location.reload();
 			
 		}else{
@@ -31,6 +32,7 @@ $(document).ready(function(){
 	 		accion : "cancelar_compra"
 		},function(responseText){
 			if(responseText != "false"){
+				contador=true;
 				alert("La compra ha sido cancelada");
 				location.reload();
 			}else{
@@ -187,5 +189,16 @@ function ocultar_elementos(){
 	$('#tabla').hide(500);
 
 }
+
+window.addEventListener("beforeunload", function (e) {
+	  
+	var confirmationMessage = "\o/";
+	
+	if(!contador){
+		
+		e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
+		return confirmationMessage;              // Gecko, WebKit, Chrome <34
+	}
+});
 
 

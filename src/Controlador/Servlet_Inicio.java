@@ -31,12 +31,26 @@ public class Servlet_Inicio extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String accion = request.getParameter("accion");
+		
+		HttpSession sesion_user = request.getSession(true);
+		
+		if(accion.equals("salir")) {
+			
+			sesion_user.setAttribute("usuario",null );
+    		sesion_user.setAttribute("tipo", null);
+    		
+    		response.setContentType("text/html");
+    		response.setCharacterEncoding("UTF-8");
+    		response.getWriter().write("true");
+    		return;
+		}
 		admin.setUserName(request.getParameter("Usuario"));
     	admin.setPassword(request.getParameter("Password"));
     	
     	AdministradorDAO admindao = new AdministradorDAO();
     	
-    	HttpSession sesion_user = request.getSession(true);
+    	
     	int tipo =admindao.autenticacion(admin);
     	if(tipo!=0) {
     		

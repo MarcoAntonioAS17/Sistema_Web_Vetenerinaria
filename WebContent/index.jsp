@@ -75,6 +75,7 @@
 				}
 				
 				$.post("SInicio",{
+					accion: "1",
 				 Usuario: usuariovar,
 				 Password: passwordvar
 				},function(responseText){

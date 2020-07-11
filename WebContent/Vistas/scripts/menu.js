@@ -27,3 +27,14 @@ $(document).on("mousedown",function(e) {
     	checkbox.prop("checked",false);
     }
 });
+
+function salir() {
+	
+	$.post("../../SInicio",{
+		accion : "salir"
+	},function(response){
+		$(location).attr('href',"../../index.jsp");
+	});
+	alert();
+	
+}

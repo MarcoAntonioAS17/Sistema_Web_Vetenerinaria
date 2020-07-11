@@ -29,6 +29,7 @@ $(document).ready(function(){
 		var confirma = confirm("¿Estás seguro que deseas finalizar la venta?");
 		
 		if(confirma == true){
+			contador=true;
 			limpiar_campos();
 			alert("Venta guardada");
 			location.reload();
@@ -47,6 +48,7 @@ $(document).ready(function(){
 	 		accion : "cancelar_venta"
 		},function(responseText){
 			if(responseText != "false"){
+				contador=true;
 				alert("La venta ha sido cancelada");
 				location.reload();
 			}else{
@@ -260,5 +262,17 @@ function ocultar_elementos(){
 	$('#tabla').hide(500);
 
 }
+
+window.addEventListener("beforeunload", function (e) {
+	  
+	var confirmationMessage = "\o/";
+	
+	if(!contador){
+		
+		e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
+		return confirmationMessage;              // Gecko, WebKit, Chrome <34
+	}
+});
+
 
 

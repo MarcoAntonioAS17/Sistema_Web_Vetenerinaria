@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Ventas {
@@ -50,11 +52,12 @@ public class Ventas {
 		Total = total;
 	}
 	public String crear_JSON() {
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 		String lista = new String("{ "
 				+ "\"Codigo\":\""+this.IDVenta
 				+ "\",\"Nombre\":\""+this.S_Cliente
 				+ "\",\"Fecha\":\""+this.Fecha
-				+ "\",\"Hora\":\""+this.hora
+				+ "\",\"Hora\":\""+dateFormat.format(this.hora)
 				+ "\",\"Total\":\""+this.Total
 				+"\",");
 		
