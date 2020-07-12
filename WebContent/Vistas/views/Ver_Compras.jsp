@@ -61,11 +61,10 @@
     			 <%break;
     	}
     %>
-    <br><br>
+    <br><br><br><br>
    	<button id="create_pdf" type="button" class="create_pdf">Descargar PDF</button>
-    <br><br>
+    <br>
     
-    <form class="form" style="max-width: none;"> 
     <div id="contenido1" class="contenido"  >
         <h1>Historial de compras</h1>
             <form id="busqueda">
@@ -97,7 +96,6 @@
             </table>
         
 		</div>
-    </form>
 
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>

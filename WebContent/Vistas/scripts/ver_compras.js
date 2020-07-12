@@ -87,7 +87,7 @@ function mostrar_registros(opcion,busqueda){
 }
 
 $(document).ready(function () {  
-    var form = $('.form'),  
+    var form = $('.contenido'),  
      cache_width = form.width(),  
      a4 = [595.28, 841.89]; // for a4 size paper width and height  
 
