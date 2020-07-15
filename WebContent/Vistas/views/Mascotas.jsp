@@ -89,7 +89,8 @@
             
                <input id="busqueda-input" type="search" placeholder="Busqueda"> 
             </form>
-            <table>
+            <button class="but-descargar" id="crearPDF">Guardar PDF</button>
+            <table id="tables">
                 <thead>
                     <tr>
                         <th>Clave de la Mascota</th>
@@ -153,7 +154,8 @@
     </form>
     <%} %>
 
-	
+	<script type="text/javascript" src="../scripts/jspdf.min.js"></script>
+	<script type="text/javascript" src="../scripts/jspdf.plugin.autotable.min.js"></script>
 
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/Mascotas.js"></script>

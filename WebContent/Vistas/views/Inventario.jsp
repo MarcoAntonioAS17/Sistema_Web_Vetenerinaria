@@ -92,7 +92,8 @@
             
                <input id="busqueda_input" type="search" placeholder="Busqueda"> 
             </form>
-            <table>
+            <button class="but-descargar" id="crearPDF">Guardar PDF</button>
+            <table id="my-table">
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -176,7 +177,10 @@
 	<%} %>
 	
 	
-   <script type="text/javascript" src="../scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="../scripts/jspdf.min.js"></script>
+	<script type="text/javascript" src="../scripts/jspdf.plugin.autotable.min.js"></script>
+	
+   	<script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/script.js"></script>
     <script type="text/javascript" src="../scripts/Productos.js"></script>

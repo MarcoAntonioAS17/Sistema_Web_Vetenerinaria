@@ -76,7 +76,7 @@
     <div class="contenido"  >
         <h1>Proveedores</h1>
            
-            <table>
+            <table id="my-table">
                 <thead>
                     <tr>
                         <th>Clave del Proveedor</th>
@@ -109,6 +109,7 @@
                    
                 </tbody>
             </table>
+            <button class="but-descargar" id="crearPDF">Guardar PDF</button>
         
     </div>
     <br>
@@ -134,6 +135,9 @@
         </div>
     </form>
 	<%} %>
+	
+	<script type="text/javascript" src="../scripts/jspdf.min.js"></script>
+	<script type="text/javascript" src="../scripts/jspdf.plugin.autotable.min.js"></script>
 	
 
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>

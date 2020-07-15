@@ -81,6 +81,7 @@
               <input id="busqueda_input" type="search" placeholder="Busqueda">
             </form>
             
+            <button class="but-descargar" id="crearPDF">Guardar PDF</button>
          
             <table id="reporte">
                 <thead>
@@ -99,6 +100,8 @@
         
 	</div>
     
+    <script type="text/javascript" src="../scripts/jspdf.min.js"></script>
+	<script type="text/javascript" src="../scripts/jspdf.plugin.autotable.min.js"></script>
     <script type="text/javascript" src="../scripts/Chart.js"></script>
 	
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
