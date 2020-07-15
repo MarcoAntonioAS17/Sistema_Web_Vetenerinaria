@@ -202,6 +202,7 @@ function crear_documento(){
 
 	  doc.autoTable({
 		  html: '#tables',
+		  styles: { valign: 'middle', halign: 'center' } ,
 		  didDrawPage: function(data){
 			// Header
 		      doc.setFontSize(20)

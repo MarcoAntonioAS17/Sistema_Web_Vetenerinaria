@@ -24,3 +24,20 @@ body {
 #grafica{
 	padding: 15px;
 }
+
+#reporte2{
+	display: none;
+}
+
+.but-descargar{
+	cursor: pointer;
+    margin-top: .10rem;
+    width: 20%;
+    height: 33px;
+    border-radius: .25rem;
+    border: 1px solid transparent;
+    color: #fff;
+    background-color: #7a70d6;
+    font-size: .9rem;
+    margin-left: 20%;
+}

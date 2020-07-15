@@ -136,6 +136,7 @@
 
 	  doc.autoTable({
 		  html: '#my-table',
+		  styles: { valign: 'middle', halign: 'center' } ,
 		  didDrawPage: function(data){
 			// Header
 		      doc.setFontSize(20)

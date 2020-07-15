@@ -138,7 +138,8 @@ public class CompraDAO {
 		this.query = "select idCompras, Proveedor_Nombre, Fecha, hora as Horas, round(sum(detalle_compras.Cantidad*productos.Precio_Compra),2) as Total from detalle_compras " + 
 				"inner join compras on R_Compra=idCompras " + 
 				"inner join proveedores on R_Proveedor=idProveedores " + 
-				"inner join productos on R_Producto=idProductos " ;
+				"inner join productos on R_Producto=idProductos ";
+				
 		switch (key) {
 			case 1:
 					this.query+="where idCompras like ? ";
@@ -158,7 +159,7 @@ public class CompraDAO {
 				break;
 		}
 		
-		this.query+="group by idCompras order by idCompras;";
+		this.query+="group by idCompras order by Fecha desc;";
 		try {
             ps2 = conect.getConnection().prepareStatement(query);
             ps2.setString(1,"%"+busq+"%");

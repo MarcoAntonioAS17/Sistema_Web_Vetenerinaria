@@ -203,7 +203,7 @@ public class CitasDAO {
 		this.query = "SELECT idCitas, clientes.Nombre, Fecha, date_add(Hora, Interval 1 hour) as Horas, citas.Tipo, mascotas.Nombre, Notas FROM veterinaria.citas " + 
 				"inner join clientes on R_Cliente =idClientes " + 
 				"inner join mascotas on  R_Mascota=idMascotas " + 
-				"where datediff(Fecha,now()) >=0 " +
+				"where datediff(Fecha,now()) >= 0 " +
 				"order by fecha desc; ";
 		
 		try {

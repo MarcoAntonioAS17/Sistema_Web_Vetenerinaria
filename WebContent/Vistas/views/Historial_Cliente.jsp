@@ -70,8 +70,11 @@
         <h1>Historial de citas (<%=Cliente%>)</h1>
         	<input id="cliente" type="hidden" value="<%=Cliente%>">
         	<input id="mascota" type="hidden" value="<%=Mascota%>">
-         
-             <table>
+			
+			<button class="but-descargar" id="crearPDF">Guardar PDF</button>
+            <button class="but-descargar" id="crearPDF-detall">Guardar PDF Detallado</button>
+                  
+             <table id="my-table">
                 <thead>
                     <tr>
                         <th>Clave</th>
@@ -81,7 +84,6 @@
                         <th>Cliente</th>
                         <th>Mascota</th>
                         <th>Notas</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="body_citas">
@@ -108,8 +110,30 @@
                 <tbody id="tbody1">
 				</tbody>
             </table>
+            
+            <table id="reporte2">
+                <thead>
+                    <tr>
+                        <th>Código Venta</th>
+                    	<th>Cliente</th>
+                    	<th>Fecha</th>
+                    	<th>Hora</th>
+                        <th>Código Producto</th>
+                        <th>Producto</th>
+                        <th>Precio Unit.</th>
+                        <th>Cantidad</th>
+                        <th>Precio Tot.</th>
+                        <th>Total Venta</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody2">
+				</tbody>
+            </table>
         
 	</div>
+    
+    <script type="text/javascript" src="../scripts/jspdf.min.js"></script>
+	<script type="text/javascript" src="../scripts/jspdf.plugin.autotable.min.js"></script>
     
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>

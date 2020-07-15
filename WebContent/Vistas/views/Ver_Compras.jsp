@@ -80,7 +80,9 @@
                <input id="busqueda_input" type="search" placeholder="Busqueda"> 
             </form>
             
-         
+         	<button class="but-descargar" id="crearPDF">Guardar PDF</button>
+            <button class="but-descargar" id="crearPDF-detall">Guardar PDF Detallado</button>
+         	
             <table id="reporte">
                 <thead>
                     <tr>
@@ -95,10 +97,32 @@
                 <tbody id="tbody1">
 				</tbody>
             </table>
+            
+            <table id="reporte2">
+                <thead>
+                    <tr>
+                        <th>Código Venta</th>
+                    	<th>Proveedor</th>
+                    	<th>Fecha</th>
+                    	<th>Hora</th>
+                        <th>Código Producto</th>
+                        <th>Producto</th>
+                        <th>Precio Unit.</th>
+                        <th>Cantidad</th>
+                        <th>Precio Tot.</th>
+                        <th>Total Venta</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody2">
+				</tbody>
+			</table>
         
 	</div>
     
+    <script type="text/javascript" src="../scripts/jspdf.min.js"></script>
+	<script type="text/javascript" src="../scripts/jspdf.plugin.autotable.min.js"></script>
 	<script type="text/javascript" src="../scripts/Chart.js"></script>
+    
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/menu.js"></script>
     <script type="text/javascript" src="../scripts/Tabla_Extendible.js"></script>

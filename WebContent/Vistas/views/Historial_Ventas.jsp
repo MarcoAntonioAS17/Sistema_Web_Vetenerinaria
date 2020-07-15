@@ -82,11 +82,12 @@
             </form>
             
             <button class="but-descargar" id="crearPDF">Guardar PDF</button>
+            <button class="but-descargar" id="crearPDF-detall">Guardar PDF Detallado</button>
          
             <table id="reporte">
                 <thead>
                     <tr>
-                    	<th>Código</th>
+                    	<th>Código de Venta</th>
                     	<th>Cliente</th>
                     	<th>Fecha</th>
                     	<th>Hora</th>
@@ -97,7 +98,25 @@
                 <tbody id="tbody1">
 				</tbody>
             </table>
-        
+        	
+        	<table id="reporte2">
+                <thead>
+                    <tr>
+                        <th>Código Venta</th>
+                    	<th>Cliente</th>
+                    	<th>Fecha</th>
+                    	<th>Hora</th>
+                        <th>Código Producto</th>
+                        <th>Producto</th>
+                        <th>Precio Unit.</th>
+                        <th>Cantidad</th>
+                        <th>Precio Tot.</th>
+                        <th>Total Venta</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody2">
+				</tbody>
+            </table>
 	</div>
     
     <script type="text/javascript" src="../scripts/jspdf.min.js"></script>

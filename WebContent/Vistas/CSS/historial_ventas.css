@@ -1,6 +1,10 @@
 @import url("style.css");
 @import url("extend-table.css");
 
+#reporte2{
+	display: none;
+}
+
 body {
     margin: 0;
     font-family: sans-serif;
@@ -33,6 +37,6 @@ body {
     color: #fff;
     background-color: #7a70d6;
     font-size: .9rem;
-    margin-left: 40%;
+    margin-left: 20%;
 }
 
