@@ -127,7 +127,7 @@ public class VentaDAO {
     	
 	}
 	
-	public String mostrar_ventas(int key, String busq, boolean cFecha, String fecha_men, String fecha_may) {
+	public String mostrar_ventas(int key, String busq, boolean cFecha, String fecha_men, String fecha_may, int ver) {
 		
 		Conexion conect = new Conexion();
 		
@@ -160,6 +160,16 @@ public class VentaDAO {
 		
 		if(cFecha) {
 			this.query+="and Fecha >=? and Fecha <= ? ";
+		}
+		switch (ver) {
+			case 2:
+				this.query+="and cast(idProductos as real)  > 500 ";
+				break;
+			case 3:
+				this.query+="and cast(idProductos as real)  < 500 ";
+				break;
+			default:
+				break;
 		}
 		
 		this.query+="group by idVentas order by Fecha desc;";

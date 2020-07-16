@@ -394,7 +394,7 @@ public class Detalle_CompraDAO {
             
             while(rs.next()) {
             	
-            	String lista = new String("{\"Codigo\": \""+rs.getInt("idProductos")
+            	String lista = new String("{\"Codigo\": \""+rs.getString("idProductos")
         				+"\", \"Nombre\":\""+rs.getString("Nombre")
         				+"\"}");
             	retorno+=lista;

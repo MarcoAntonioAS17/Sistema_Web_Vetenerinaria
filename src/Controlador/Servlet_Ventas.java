@@ -260,14 +260,16 @@ public class Servlet_Ventas extends HttpServlet {
 					String busq = request.getParameter("search");
 					
 					String conFecha = request.getParameter("marcado");
+					int ver = Integer.parseInt(request.getParameter("Ver"));
+					
 					
 					if(conFecha.equals("Si")) {
 						String fecha_men = request.getParameter("fecha_men");
 						String fecha_may = request.getParameter("fecha_may");
 						
-						response.getWriter().write(dao.mostrar_ventas(opcion,busq,true,fecha_men,fecha_may));
+						response.getWriter().write(dao.mostrar_ventas(opcion,busq,true,fecha_men,fecha_may,ver));
 					}else {
-						response.getWriter().write(dao.mostrar_ventas(opcion,busq,false,null,null));
+						response.getWriter().write(dao.mostrar_ventas(opcion,busq,false,null,null,ver));
 					}
 					
 					

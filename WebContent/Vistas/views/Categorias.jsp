@@ -108,7 +108,7 @@
 
         <h5>Agregar Categoria</h5>
         
-        <input id="Nombre_cat" name="Nombre_cat" type="text" class="formulario__input" required="required">  
+        <input id="Nombre_cat" name="Nombre_cat" type="text" class="formulario__input" required="required" maxlength="45">  
         <label for="Nombre_cat" class="formulario__label">Nombre de la Categoria</label>
         
         <div >

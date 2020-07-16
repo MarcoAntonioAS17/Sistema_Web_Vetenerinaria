@@ -1,9 +1,14 @@
 $(document).ready(function(){
 	
 	$("#busc_calendar").prop("checked", false);
-	mostrar_registros(1,"");
+	$("#ver").val(1);
+	mostrar_registros(1,"",$("#ver").val());
 	$("#Fecha_Men").val("");
 	$("#Fecha_May").val("");
+	
+	$("#ver").change(function() {
+		mostrar_registros(1,"",$(this).val());
+	});
 	
 	$("#crearPDF").click(function(){
 		$(".odd").next("tr").hide();
@@ -14,18 +19,18 @@ $(document).ready(function(){
 	$("#busc_calendar").change(function() {
 		$("#Fecha_Men").val("");
 		$("#Fecha_May").val("");
-		mostrar_registros(1,"");
+		mostrar_registros(1,"",$("#ver").val());
 		$(".busq_fecha").toggle(500);
 	});
 	
 	$("#Fecha_Men").change(function() {
 		if($("#Fecha_May").val()!="")
-			mostrar_registros(1,"");
+			mostrar_registros(1,"",$("#ver").val());
 	});
 	
 	$("#Fecha_May").change(function() {
 		if($("#Fecha_Men").val()!="")
-			mostrar_registros(1,"");
+			mostrar_registros(1,"",$("#ver").val());
 	});
 	
 	$("#crearPDF-detall").click(function(){
@@ -35,7 +40,7 @@ $(document).ready(function(){
 	});
 	
 	$("#busqueda_input").keyup(function(){
-		   mostrar_registros($("#opciones").val(),$(this).val());
+		   mostrar_registros($("#opciones").val(),$(this).val(),$("#ver").val());
 	   });
 	
 	$.post("../../Grafica",{
@@ -50,7 +55,7 @@ $(document).ready(function(){
 
 });
 
-function mostrar_registros(opcion,busqueda){
+function mostrar_registros(opcion,busqueda, ver){
 	
 	if($("#busc_calendar").prop('checked')){
 		
@@ -65,6 +70,7 @@ function mostrar_registros(opcion,busqueda){
 			accion : "mostrar_ventas",
 			valor : opcion,
 			search: busqueda,
+			Ver : ver,
 			marcado: "Si",
 			fecha_men: varFechaMe,
 			fecha_may: varFechaMa
@@ -84,6 +90,7 @@ function mostrar_registros(opcion,busqueda){
 			accion : "mostrar_ventas",
 			valor : opcion,
 			search: busqueda,
+			Ver : ver,
 			marcado: "No",
 		},
 		function(responseJson){
@@ -318,8 +325,16 @@ function crear_documento(){
 		      doc.setFontType('bold')
 		      doc.setTextColor(11, 83, 142)
 		      
-		      doc.text('Reporte de Ventas', data.settings.margin.left + 55, 22)
+		      var key =$("#ver").val();
 		      
+		      if(key == 2)
+		    	  doc.text('Reporte de Ventas (Productos)', data.settings.margin.left + 55, 22)
+	    	  else
+		    	  if(key == 3)
+		    		  doc.text('Reporte de Ventas (Servicios)', data.settings.margin.left + 55, 22)
+	    		  else
+	    			  doc.text('Reporte de Ventas', data.settings.margin.left + 55, 22)
+		      		      
 		      var options = { year: 'numeric', month: 'long', day: 'numeric' };
 		      
 		      if($("#Fecha_Men").val()!="" && $("#Fecha_May").val()!=""){
@@ -388,7 +403,16 @@ function crear_documento2(){
 		      doc.setFontType('bold')
 		      doc.setTextColor(11, 83, 142)
 		      
-		      doc.text('Reporte de Ventas (Detallado)', data.settings.margin.left + 55, 22)
+		       var key =$("#ver").val();
+		      
+		      if(key == 2)
+		    	  doc.text('Reporte de Ventas Detallado (Productos)', data.settings.margin.left + 55, 22)
+	    	  else
+		    	  if(key == 3)
+		    		  doc.text('Reporte de Ventas Detallado(Servicios)', data.settings.margin.left + 55, 22)
+	    		  else
+	    			  doc.text('Reporte de Ventas Detallado', data.settings.margin.left + 55, 22)
+		      	
 		      
 		      var options = { year: 'numeric', month: 'long', day: 'numeric' };
 		     

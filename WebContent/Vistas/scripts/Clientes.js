@@ -68,10 +68,12 @@
 						$("#Clv_C").val(datos.IDClient);
 						$("#Nom_Cte").val(datos.NombreC);
 						$("#Tel_Cte").val(datos.TelefonoC);
-						$("#Mail_Cte").val(datos.CorreoC);
+						$("#Mail_Cte").val(datos.EmailC);
 			    	   
-						$("#title_form").text("EDITAR PROVEEDOR");
-		        	  alert("Baja para modificar los datos");
+						$("#title_form").text("EDITAR CLIENTE");
+						 $('html, body').animate({
+							   scrollTop: $("#title_form").offset().top
+						   }, 1000);
 		        	  $('#guardar').hide(500);
 		        	  $('#actualizar').show(500);
 		        	  $("#Clv_C").prop("readonly", true);
@@ -81,7 +83,7 @@
     	});
  
  
- $('#actualizar').click(function(e){
+ 	$('#actualizar').click(function(e){
 	   var idCliente = $("#Clv_C").val();
 	   var Nom_Cte = $("#Nom_Cte").val();
 	   var Tel_Cte = $("#Tel_Cte").val();

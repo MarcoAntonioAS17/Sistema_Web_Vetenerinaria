@@ -68,7 +68,15 @@
     <canvas id="MiGrafica" ></canvas>
     </div>
    <div id="contenido1" class="contenido"  >
-        <h1>Historial de ventas</h1>
+   		<div id="titulo_ventas">
+        <label for="ver">Historial de ventas</label>
+        (<select id="ver" >
+              <option value="1">Todo</option>
+              <option value="2">Productos</option>
+              <option value="3">Servicios</option>
+        </select>)	
+        </div>
+              
             <form id="busqueda">
               <label>Buscar</label>
               <select id="opciones" name="opciones">

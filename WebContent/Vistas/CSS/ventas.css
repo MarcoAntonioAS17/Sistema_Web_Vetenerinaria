@@ -13,6 +13,12 @@ body {
 
 #div-cambio > input{
 	margin-left: 10px;
+	
+}
+
+#div-cambio > label{
+	width: 18%;
+	
 }
 
 .hide{

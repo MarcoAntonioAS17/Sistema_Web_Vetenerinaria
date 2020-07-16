@@ -73,7 +73,9 @@
 						$("#Email_Pro").val(datos.Correo);
 			    	   
 						$("#title_form").text("EDITAR PROVEEDOR");
-		        	  alert("Baja para modificar los datos");
+						$('html, body').animate({
+							   scrollTop: $("#title_form").offset().top
+						   }, 1000);
 		        	  $('#guardar').hide(500);
 		        	  $('#actualizar').show(500);
 		        	  $("#Clv_Pro").prop("readonly", true);

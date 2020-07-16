@@ -115,14 +115,16 @@
     <%if(Tipo == 1){ %>
     <form action="" class="formulario">
         <h1 id="title_form">AGREGAR CLIENTE</h1><br><br>
+        	
+        	<input id="Clv_C" type="hidden">
             
-            <input id="Nom_Cte" name="Nom_Cte" type="text" class="formulario__input" required="required"> 
+            <input id="Nom_Cte" name="Nom_Cte" type="text" class="formulario__input" required="required" maxlength="45"> 
             <label for="Nom_Cte" class="formulario__label">Nombre del Cliente</label>
             
-            <input id="Tel_Cte" name="Tel_Cte" type="number" class="formulario__input"> 
+            <input id="Tel_Cte" name="Tel_Cte" type="number" class="formulario__input" > 
             <label for="Tel_Cte" class="formulario__label">Teléfono</label>
             
-            <input id="Mail_Cte" name="Mail_Cte" type="email" class="formulario__input"> 
+            <input id="Mail_Cte" name="Mail_Cte" type="email" class="formulario__input" maxlength="45"> 
             <label for="Mail_Cte" class="formulario__label">Correo Eléctronico</label>
         
         <div >

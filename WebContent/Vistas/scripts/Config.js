@@ -67,7 +67,6 @@
     			   $("#Contra").css({"border-color":"red","color":"red"});
     		   return;
     	   }
-    	   alert(varNombreA+" "+ varPassA);
           $.post("../../Configurar",{
         	  accion : "validar_admin",
         	  NombreA : varNombreA,

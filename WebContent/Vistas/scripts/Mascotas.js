@@ -1,6 +1,6 @@
 	//Guardar datos en BD
    $(document).ready(function(){
-		   
+	   
 		   mostrar_registros(1,"");
 		   limpiar_campos();
 		   
@@ -138,8 +138,6 @@ function mostrar_registros(opcion,busqueda){
    
 }
 
-
-
 function eliminar(codmas){
  	   var confirma = confirm("¿Estás seguro que deseas eliminar el registro?");
  	   
@@ -176,7 +174,9 @@ function editar_inicio(codmas){
 					
 		    	   
 			    	$("#title_form").text("Editar Mascota");
-	        	  alert("Baja para modificar los datos");
+			    	$('html, body').animate({
+						   scrollTop: $("#formulario-id").offset().top
+					   }, 1000);
 	        	  $('#guardar').hide(500);
 	        	  $('#actualizar').show(500);
 	          });

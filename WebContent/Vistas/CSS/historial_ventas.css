@@ -45,6 +45,23 @@ body {
 	
 }
 
+#titulo_ventas{
+	font-family: helvetica;
+    font-style: normal;
+    text-align: center;
+	background-color: #70a9d6;
+	width: 100%;
+	font-size: 22pt;
+}
+
+#titulo_ventas > select{
+	margin-left: 10px;
+	font-size: 18pt;
+	background-color:#70a9d6;
+	border: 0px;
+	
+}
+  
 
 	
 

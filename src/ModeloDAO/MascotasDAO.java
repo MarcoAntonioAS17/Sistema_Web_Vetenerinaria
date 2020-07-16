@@ -199,7 +199,7 @@ public class MascotasDAO {
 			this.query+="WHERE Descripcion like ? ORDER BY Descripcion;";
 			break;
 		case 7:
-			this.query+="WHERE Dueno like ? ORDER BY Dueno;";
+			this.query+="WHERE clientes.Nombre like ? ORDER BY Dueno;";
 			break;
 		default:
 			this.query+=";";

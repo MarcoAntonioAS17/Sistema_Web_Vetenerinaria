@@ -115,7 +115,7 @@
 });
    
 function limpiar_campos(){
-	$("#title_form").text("AGREGAR PRODUCTO");
+	$("#title_form").text("Agregar Producto");
 	$("#Clv_Pro").prop("readonly", false);
 	  $('#guardar').show(500);
 	  $('#actualizar').hide(500);
@@ -166,8 +166,10 @@ function editar_inicio(codvar){
 			    	$("#Proveedores").val(datos.Proveedor);
 			    	$("#Descrip").val(datos.Descripcion);
 		    	   
-					$("#title_form").text("EDITAR PRODUCTO");
-	        	  alert("Baja para modificar los datos");
+					$("#title_form").text("Editar Producto");
+					$('html, body').animate({
+						   scrollTop: $("#title_form").offset().top
+					   }, 1000);
 	        	  $('#guardar').hide(500);
 	        	  $('#actualizar').show(500);
 	        	  $("#Clv_Pro").prop("readonly", true);

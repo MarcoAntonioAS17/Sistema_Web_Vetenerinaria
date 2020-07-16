@@ -57,7 +57,7 @@ public class ClientesDAO  {
     public List<Clientes> listar(){
     	List<Clientes> datos = new ArrayList<Clientes>();
     	Conexion c = new Conexion();
-    	this.query = "SELECT * FROM Clientes;";
+    	this.query = "SELECT * FROM Clientes order by Nombre;";
     	
     	try {
             ps = c.getConnection().prepareStatement(query);

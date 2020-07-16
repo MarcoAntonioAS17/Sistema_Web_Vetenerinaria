@@ -90,9 +90,11 @@
                   <option value="6">Descripcion</option>
               </select>
             
-               <input id="busqueda_input" type="search" placeholder="Busqueda"> 
+               <input id="busqueda_input" type="search" placeholder="Busqueda">
+               
+               <button class="but-descargar" id="crearPDF">Guardar PDF</button> 
             </form>
-            <button class="but-descargar" id="crearPDF">Guardar PDF</button>
+            
             <table id="my-table">
                 <thead>
                     <tr>
@@ -117,11 +119,11 @@
     </div>
     <% if(Tipo==1){%>
     <form action="" class="formulario">
-        <h5 id="title_form">AGREGAR PRODUCTO</h5>
-      <input id="Clv_Pro" name="Clv_Pro" type="number" class="formulario__input" required="required">  
+        <h5 id="title_form">Agregar Producto</h5>
+      <input id="Clv_Pro" name="Clv_Pro" type="number" class="formulario__input" required="required" maxlength="15">  
         <label for="Clv_Pro" class="formulario__label">Código del producto</label>
         
-        <input id="Nombre_Pro" name="Nombre_Pro" type="text" class="formulario__input" required="required">  
+        <input id="Nombre_Pro" name="Nombre_Pro" type="text" class="formulario__input" required="required" maxlength="45">  
         <label for="Nombre_Pro" class="formulario__label">Nombre del producto</label>
         
         <label class="formulario__label_fija">Categoria</label>
@@ -165,7 +167,7 @@
            <%} %>
         </select>
         
-        <input id="Descrip" name="Descrip" type="text" class="formulario__input">   
+        <input id="Descrip" name="Descrip" type="text" class="formulario__input" maxlength="60">   
         <label for="Descrip" class="formulario__label">Descripción</label>
                 
         <div >

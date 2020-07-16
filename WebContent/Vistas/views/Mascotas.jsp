@@ -87,9 +87,10 @@
                   <option value="7">Dueño</option>
               </select>
             
-               <input id="busqueda-input" type="search" placeholder="Busqueda"> 
+               <input id="busqueda-input" type="search" placeholder="Busqueda">
+               <button class="but-descargar" id="crearPDF">Guardar PDF</button>
+             
             </form>
-            <button class="but-descargar" id="crearPDF">Guardar PDF</button>
             <table id="tables">
                 <thead>
                     <tr>
@@ -110,8 +111,8 @@
     </div>
     <br>
     <%if(Tipo !=3){ %>
-    <form action="" class="formulario">
-        <h1>Registrar Nueva Mascota</h1><br><br>
+    <form id="formulario-id" action="" class="formulario">
+        <h1 id="title_form">Registrar Nueva Mascota</h1><br><br>
             
             
             <input  id="Clv_Clie" list="list_prod" class="formulario__input ">
@@ -131,19 +132,19 @@
 	        <input id="clv" type="hidden" value="">
 	        <label for="Clv_Clie" class="formulario__label estatic">Clave del Cliente</label>
             
-            <input id="Nom_Mas" name="Nom_Mas" type="text" class="formulario__input" required="required"> 
+            <input id="Nom_Mas" name="Nom_Mas" type="text" class="formulario__input" required="required" maxlength="45"> 
             <label for="Nom_Mas" class="formulario__label">Nombre de la Mascota</label>
             
             <input id="Edad_Mas" name="Edad_Mas" type="date" class="formulario__input" required="required"> 
-            <label for="Edad_Mas" class="formulario__label estatic">Edad (En Meses)</label>
+            <label for="Edad_Mas" class="formulario__label estatic">Nacimiento</label>
             
-            <input id="Tipo_Mas" name="Tipo_Mas" type="text" class="formulario__input" required="required"> 
+            <input id="Tipo_Mas" name="Tipo_Mas" type="text" class="formulario__input" required="required" maxlength="20"> 
             <label for="Tipo_Mas" class="formulario__label">Tipo de Mascota</label>
             
-            <input id="Raz_Mas" name="Raz_Mas" type="text" class="formulario__input" required="required"> 
+            <input id="Raz_Mas" name="Raz_Mas" type="text" class="formulario__input" required="required" maxlength="45"> 
             <label for="Raz_Mas" class="formulario__label">Raza de la Mascota</label>
             
-            <input id="Des_Mas" name="Des_Mas" type="text" class="formulario__input" required="required"> 
+            <input id="Des_Mas" name="Des_Mas" type="text" class="formulario__input" required="required" maxlength="50"> 
             <label for="Des_Mas" class="formulario__label">Descripción</label>
         
         <div >

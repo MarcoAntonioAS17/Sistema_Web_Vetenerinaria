@@ -61,6 +61,7 @@ function mostrar_registros(opcion,busqueda){
 			valor : opcion,
 			search: busqueda,
 			marcado: "Si",
+			Ver: "1",
 			fecha_men: varFechaMe,
 			fecha_may: varFechaMa
 		},
@@ -78,7 +79,8 @@ function mostrar_registros(opcion,busqueda){
 			accion : "mostrar_ventas",
 			valor : opcion,
 			search: busqueda,
-			marcado: "No"
+			marcado: "No",
+			Ver: "1",
 		},
 		function(responseJson){
 			var datos = JSON.parse(responseJson);
