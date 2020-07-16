@@ -71,6 +71,16 @@
         	<input id="cliente" type="hidden" value="<%=Cliente%>">
         	<input id="mascota" type="hidden" value="<%=Mascota%>">
 			
+			<div id="fecha-bus">
+			<input id="busc_calendar" type="checkbox">
+            <label id="fbusc_calendar" for="busc_calendar">Buscar entre fechas</label>
+            
+            <label class="busq_fecha" for="Fecha_Men">Desde: </label>
+            <input class="busq_fecha" id="Fecha_Men" type="date">
+            
+            <label class="busq_fecha" for="Fecha_May">Hasta: </label>
+            <input class="busq_fecha" id="Fecha_May" type="date">
+			</div>
 			<button class="but-descargar" id="crearPDF">Guardar PDF</button>
             <button class="but-descargar" id="crearPDF-detall">Guardar PDF Detallado</button>
                   

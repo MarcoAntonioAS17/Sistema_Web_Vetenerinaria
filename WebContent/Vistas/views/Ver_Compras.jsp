@@ -78,6 +78,15 @@
               </select>
             
                <input id="busqueda_input" type="search" placeholder="Busqueda"> 
+               
+               <input id="busc_calendar" type="checkbox">
+	           <label id="fbusc_calendar" for="busc_calendar">Buscar entre fechas</label>
+	           
+	           <label class="busq_fecha" for="Fecha_Men">Desde: </label>
+	           <input class="busq_fecha" id="Fecha_Men" type="date">
+	           
+	           <label class="busq_fecha" for="Fecha_May">Hasta: </label>
+	           <input class="busq_fecha" id="Fecha_May" type="date">
             </form>
             
          	<button class="but-descargar" id="crearPDF">Guardar PDF</button>

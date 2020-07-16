@@ -19,7 +19,7 @@ body {
     margin-bottom: 20px;
 }
 
-.bt-menos{
+.bt-menos, .busq_fecha{
 	display: none;
 }
 
@@ -39,4 +39,12 @@ body {
     font-size: .9rem;
     margin-left: 20%;
 }
+
+#busc_calendar{
+	margin-left: 15% !important;
+	
+}
+
+
+	
 

@@ -127,7 +127,7 @@ public class VentaDAO {
     	
 	}
 	
-	public String mostrar_ventas(int key, String busq) {
+	public String mostrar_ventas(int key, String busq, boolean cFecha, String fecha_men, String fecha_may) {
 		
 		Conexion conect = new Conexion();
 		
@@ -158,10 +158,20 @@ public class VentaDAO {
 				break;
 		}
 		
+		if(cFecha) {
+			this.query+="and Fecha >=? and Fecha <= ? ";
+		}
+		
 		this.query+="group by idVentas order by Fecha desc;";
 		try {
             ps2 = conect.getConnection().prepareStatement(query);
             ps2.setString(1,"%"+busq+"%");
+            
+            if(cFecha) {
+            	
+            	ps2.setString(2,fecha_men);
+                ps2.setString(3,fecha_may);
+            }
             rs2 = ps2.executeQuery();
             
             while(rs2.next()) {

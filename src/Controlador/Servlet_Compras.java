@@ -157,7 +157,16 @@ public class Servlet_Compras extends HttpServlet {
 				int opcion = Integer.parseInt(request.getParameter("valor"));
 				String busq = request.getParameter("search");
 				
-				response.getWriter().write(dao.mostrar_compras(opcion,busq));
+				String conFecha = request.getParameter("marcado");
+				
+				if(conFecha.equals("Si")) {
+					String fecha_men = request.getParameter("fecha_men");
+					String fecha_may = request.getParameter("fecha_may");
+					
+					response.getWriter().write(dao.mostrar_compras(opcion,busq,true,fecha_men,fecha_may));
+				}else {
+					response.getWriter().write(dao.mostrar_compras(opcion,busq,false,null,null));
+				}
 		}
 			
 		}

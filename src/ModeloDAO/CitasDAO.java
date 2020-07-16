@@ -248,7 +248,7 @@ public class CitasDAO {
     	return retorno;
 	}
     
-public String mostrar_citas_todas_de(String nombre, String mascota) {
+public String mostrar_citas_todas_de(String nombre, String mascota, boolean cFecha, String fecha_men, String fecha_may) {
 		
 		Conexion conect = new Conexion();
 		PreparedStatement ps = null;
@@ -258,13 +258,20 @@ public String mostrar_citas_todas_de(String nombre, String mascota) {
 		this.query = "SELECT idCitas, clientes.Nombre, Fecha, date_add(Hora, Interval 1 hour) as Horas, citas.Tipo, mascotas.Nombre, Notas FROM veterinaria.citas " + 
 				"inner join clientes on R_Cliente =idClientes " + 
 				"inner join mascotas on  R_Mascota=idMascotas " + 
-				"where clientes.Nombre = ? and mascotas.Nombre = ? " +
-				"order by fecha desc; ";
+				"where clientes.Nombre = ? and mascotas.Nombre = ? ";
+		if(cFecha) {
+			this.query+="and Fecha >= ? and Fecha <= ? ";
+		}
+		this.query+="order by fecha desc; ";
 		
 		try {
             ps = conect.getConnection().prepareStatement(query);
             ps.setString(1, nombre);
             ps.setString(2, mascota);
+            if(cFecha) {
+            	ps.setString(3,fecha_men);
+                ps.setString(4,fecha_may);
+            }
             rs = ps.executeQuery();
             
             while(rs.next()) {
@@ -304,7 +311,7 @@ public String mostrar_citas_todas_de(String nombre, String mascota) {
     	return retorno;
 	}
     
-    public String mostrar_citas_todas() {
+    public String mostrar_citas_todas(boolean cFecha, String fecha_men, String fecha_may) {
 		
 		Conexion conect = new Conexion();
 		PreparedStatement ps = null;
@@ -313,12 +320,19 @@ public String mostrar_citas_todas_de(String nombre, String mascota) {
 		String retorno = new String("[");
 		this.query = "SELECT idCitas, clientes.Nombre, Fecha, date_add(Hora, Interval 1 hour) as Horas, citas.Tipo, mascotas.Nombre, Notas FROM veterinaria.citas " + 
 				"inner join clientes on R_Cliente =idClientes " + 
-				"inner join mascotas on  R_Mascota=idMascotas " + 
-				"order by fecha desc; ";
+				"inner join mascotas on  R_Mascota=idMascotas "; 
+				
+		if(cFecha)
+			this.query+="and Fecha >=? and Fecha <= ? ";
+		this.query+="order by fecha desc; ";
 		
 		try {
             ps = conect.getConnection().prepareStatement(query);
             
+            if(cFecha) {	
+            	ps.setString(1,fecha_men);
+                ps.setString(2,fecha_may);
+            }
             rs = ps.executeQuery();
             
             while(rs.next()) {
@@ -708,7 +722,7 @@ public String mostrar_citas_todas_de(String nombre, String mascota) {
 		int retorno=0;
 		
 		this.query = "SELECT count(idCitas) from citas " + 
-				"where Fecha like ? and Tipo like \"Consulta\"; ";
+				"where Fecha like ? and Tipo like \"%onsult%\"; ";
     	
     	try {
             ps = conect.getConnection().prepareStatement(query);

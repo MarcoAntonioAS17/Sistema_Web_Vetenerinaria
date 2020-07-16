@@ -37,7 +37,17 @@ public class Servlet_Citas extends HttpServlet {
 			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
 			
-			response.getWriter().write(dao.mostrar_citas_todas());
+			String conFecha = request.getParameter("marcado");
+			
+			if(conFecha.equals("Si")) {
+				String fecha_men = request.getParameter("fecha_men");
+				String fecha_may = request.getParameter("fecha_may");
+				
+				response.getWriter().write(dao.mostrar_citas_todas(true,fecha_men,fecha_may));
+			}else {
+				response.getWriter().write(dao.mostrar_citas_todas(false,null,null));
+			}
+			
 			return;
 		}
 		if(accion.equals("mostrar_todas_de")) {
@@ -48,7 +58,16 @@ public class Servlet_Citas extends HttpServlet {
 			String mascota = request.getParameter("Mascota");
 			String cliente = request.getParameter("Cliente");
 			
-			response.getWriter().write(dao.mostrar_citas_todas_de(cliente, mascota));
+			String conFecha = request.getParameter("marcado");
+			
+			if(conFecha.equals("Si")) {
+				String fecha_men = request.getParameter("fecha_men");
+				String fecha_may = request.getParameter("fecha_may");
+				response.getWriter().write(dao.mostrar_citas_todas_de(cliente, mascota,true,fecha_men,fecha_may));
+			}else {
+				response.getWriter().write(dao.mostrar_citas_todas_de(cliente,mascota,false,null,null));
+			}
+			
 			return;
 		}
 		if(accion.equals("mostrar")) {

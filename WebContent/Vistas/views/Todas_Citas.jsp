@@ -76,26 +76,39 @@
     <div class="contenido">
         <h1>Citas</h1>
         
-            <table>
-                <thead>
-                    <tr>
-                        <th>Clave</th>
-                        <th>Tipo</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Cliente</th>
-                        <th>Mascota</th>
-                        <th>Notas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
+        <div id="fecha-bus" >
+        	<input id="busc_calendar" type="checkbox">
+            <label id="fbusc_calendar" for="busc_calendar">Buscar entre fechas</label>
+            
+            <label class="busq_fecha" for="Fecha_Men">Desde: </label>
+            <input class="busq_fecha" id="Fecha_Men" type="date">
+            
+            <label class="busq_fecha" for="Fecha_May">Hasta: </label>
+            <input class="busq_fecha" id="Fecha_May" type="date">
+        </div>
+        <button class="but-descargar" id="crearPDF">Guardar PDF</button>
+        
+	    <table id="reporte">
+	        <thead>
+	            <tr>
+	                <th>Clave</th>
+	                <th>Tipo</th>
+	                <th>Fecha</th>
+	                <th>Hora</th>
+	                <th>Cliente</th>
+	                <th>Mascota</th>
+	                <th>Notas</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            
+	        </tbody>
+	    </table>
         
     </div>
     <br>
-    
+    <script type="text/javascript" src="../scripts/jspdf.min.js"></script>
+	<script type="text/javascript" src="../scripts/jspdf.plugin.autotable.min.js"></script>
     <script type="text/javascript" src="../scripts/Chart.js"></script>
 
     <script type="text/javascript" src="../scripts/jquery.min.js"></script>

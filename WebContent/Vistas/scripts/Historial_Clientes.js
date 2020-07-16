@@ -1,8 +1,32 @@
 $(document).ready(function(){
 	
+	$("#busc_calendar").prop("checked", false);
+	
 	$("#crearPDF").click(function(){
 		$(".odd").next("tr").hide();
 		crear_documento();
+	});
+	
+	$("#busc_calendar").change(function() {
+		$("#Fecha_Men").val("");
+		$("#Fecha_May").val("");
+		mostrar_registros(2,$("#cliente").val());
+		mostrar_registros_citas($("#cliente").val(),$("#mascota").val());
+		$(".busq_fecha").toggle(500);
+	});
+	
+	$("#Fecha_Men").change(function() {
+		if($("#Fecha_May").val()!=""){
+			mostrar_registros(2,$("#cliente").val());
+			mostrar_registros_citas($("#cliente").val(),$("#mascota").val());
+		}
+	});
+	
+	$("#Fecha_May").change(function() {
+		if($("#Fecha_Men").val()!=""){
+			mostrar_registros(2,$("#cliente").val());
+			mostrar_registros_citas($("#cliente").val(),$("#mascota").val());
+		}
 	});
 	
 	$("#crearPDF-detall").click(function(){
@@ -14,86 +38,125 @@ $(document).ready(function(){
 	mostrar_registros(2,$("#cliente").val());
 	mostrar_registros_citas($("#cliente").val(),$("#mascota").val());
 
+	$("#Fecha_Men").val("");
+	$("#Fecha_May").val("");
+
 });
 
 function mostrar_registros(opcion,busqueda){
-	$("tbody").empty();
-	$.post("../../Ventas",{
-		accion : "mostrar_ventas",
-		valor : opcion,
-		search: busqueda
-	},
-	function(responseJson){
+	
+	
+	if($("#busc_calendar").prop('checked')){
 		
-		var datos = JSON.parse(responseJson);
-		llenar_tabla2(datos);
-		var suma=0;
+		var varFechaMe = $("#Fecha_Men").val();
+		var varFechaMa = $("#Fecha_May").val();
 		
-		const options2 = { style: 'currency', currency: 'USD' };
-		const numberFormat2 = new Intl.NumberFormat('en-US', options2);
-		var date;
-		var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+		if(varFechaMa=="" || varFechaMe==""){
+			alert("Favor de poner FECHAS de busqueda");
+			return;
+		}
+		$("tbody").empty();
+		$.post("../../Ventas",{
+			accion : "mostrar_ventas",
+			valor : opcion,
+			search: busqueda,
+			marcado: "Si",
+			fecha_men: varFechaMe,
+			fecha_may: varFechaMa
+		},
+		function(responseJson){
+			var datos = JSON.parse(responseJson);
+			
+			llenar_tabla2(datos);
+			llenar_tabla(datos);
+			
+		});
+	}
+	else{
+		$("tbody").empty();
+		$.post("../../Ventas",{
+			accion : "mostrar_ventas",
+			valor : opcion,
+			search: busqueda,
+			marcado: "No"
+		},
+		function(responseJson){
+			var datos = JSON.parse(responseJson);
+			
+			llenar_tabla2(datos);
+			llenar_tabla(datos);
+			
+		});
+	}
 		
-		for(var i in datos){
-			date = new Date(datos[i].Fecha);
-			date.setDate(date.getDate() + 1);
-			
-			$("#tbody1").append("<tr id=\"R"+datos[i].Codigo+"\" onclick=\"extender("+datos[i].Codigo+")\" class=\"odd\">" +
-					"<td>"+datos[i].Codigo+"</td>" +
-					"<td>"+datos[i].Nombre+"</td>" +
-					"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
-					"<td>"+datos[i].Hora[0]+datos[i].Hora[1]+datos[i].Hora[2]+datos[i].Hora[3]+datos[i].Hora[4]+"</td>" +
-					"<td> "+numberFormat2.format(datos[i].Total)+"</td>"+
-					
-					"<td>"+
-					"<button type=\"button\" class=\"editar_pro but_"+datos[i].Codigo+"\"> <img width=\"25px\"  alt=\"icono-mas-info\" src=\"../img/mas-icono.svg\"></button>"+
-					"<button type=\"button\" class=\"editar_pro bt-menos but_"+datos[i].Codigo+"\"> <img width=\"25px\"  alt=\"icono-menos-info\" src=\"../img/menos-icono.svg\"></button>"+
-					"</td>"+
-	                "</tr>");
-			suma+=parseInt(datos[i].Total,10);
-			
-			$("#tbody1").append("<tr> <td colspan=\"6\">" +
-					"<table>"+
-	                			"<thead>"+
-	                			"<tr>"+
-	                		    "<th>Codigo</th>"+
-	                		    "<th>Nombre</th>"+
-	                		    "<th>Cantidad</th>"+
-	                		    "<th>Precio Unitario</th>"+
-	                		    "<th>Precio Total</th>"+
-	                		    "</tr>"+
-	                			"</thead>" +
-	                			"<tbody id=\"Tb"+datos[i].Codigo+"\""+
-	                			"</tbody>"+
-	                	"</table>" +
-	                	"</tr>");
-			var codigoT="#Tb"+datos[i].Codigo;
-			
-			for(j in datos[i].Ventas){
-				$(codigoT).append("<tr class=\"odd\" >" +
-						"<td>"+datos[i].Ventas[j][0]+"</td>" +
-						"<td>"+datos[i].Ventas[j][1]+"</td>" +
-						"<td>"+datos[i].Ventas[j][2]+"</td>" +
-						"<td>"+numberFormat2.format(datos[i].Ventas[j][3])+"</td>" +
-						"<td> "+numberFormat2.format(datos[i].Ventas[j][3]*datos[i].Ventas[j][2])+"</td>"+
-						"</tr>");
-			}
-			
+}
+
+function llenar_tabla(datos){
+	var suma=0;
+	
+	const options2 = { style: 'currency', currency: 'USD' };
+	const numberFormat2 = new Intl.NumberFormat('en-US', options2);
+	var date;
+	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	
+	for(var i in datos){
+		date = new Date(datos[i].Fecha);
+		date.setDate(date.getDate() + 1);
+		
+		$("#tbody1").append("<tr id=\"R"+datos[i].Codigo+"\" onclick=\"extender("+datos[i].Codigo+")\" class=\"odd\">" +
+				"<td>"+datos[i].Codigo+"</td>" +
+				"<td>"+datos[i].Nombre+"</td>" +
+				"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
+				"<td>"+datos[i].Hora[0]+datos[i].Hora[1]+datos[i].Hora[2]+datos[i].Hora[3]+datos[i].Hora[4]+"</td>" +
+				"<td> "+numberFormat2.format(datos[i].Total)+"</td>"+
+				
+				"<td>"+
+				"<button type=\"button\" class=\"editar_pro but_"+datos[i].Codigo+"\"> <img width=\"25px\"  alt=\"icono-mas-info\" src=\"../img/mas-icono.svg\"></button>"+
+				"<button type=\"button\" class=\"editar_pro bt-menos but_"+datos[i].Codigo+"\"> <img width=\"25px\"  alt=\"icono-menos-info\" src=\"../img/menos-icono.svg\"></button>"+
+				"</td>"+
+                "</tr>");
+		suma+=parseInt(datos[i].Total,10);
+		
+		$("#tbody1").append("<tr> <td colspan=\"6\">" +
+				"<table>"+
+                			"<thead>"+
+                			"<tr>"+
+                		    "<th>Codigo</th>"+
+                		    "<th>Nombre</th>"+
+                		    "<th>Cantidad</th>"+
+                		    "<th>Precio Unitario</th>"+
+                		    "<th>Precio Total</th>"+
+                		    "</tr>"+
+                			"</thead>" +
+                			"<tbody id=\"Tb"+datos[i].Codigo+"\""+
+                			"</tbody>"+
+                	"</table>" +
+                	"</tr>");
+		var codigoT="#Tb"+datos[i].Codigo;
+		
+		for(j in datos[i].Ventas){
+			$(codigoT).append("<tr class=\"odd\" >" +
+					"<td>"+datos[i].Ventas[j][0]+"</td>" +
+					"<td>"+datos[i].Ventas[j][1]+"</td>" +
+					"<td>"+datos[i].Ventas[j][2]+"</td>" +
+					"<td>"+numberFormat2.format(datos[i].Ventas[j][3])+"</td>" +
+					"<td> "+numberFormat2.format(datos[i].Ventas[j][3]*datos[i].Ventas[j][2])+"</td>"+
+					"</tr>");
 		}
 		
-		
-		$("#tbody1").append("<tr class=\"odd\">" +
-				"<td></td><td></td>" +
-				"<td></td>" +
-				"<td> Total </td>" +
-				"<td> "+numberFormat2.format(suma)+"</td>" +
-				"<td></td>"+
-	            "</tr>");
-		
-		$("#reporte tr:not(.odd)").hide();
-	    $("#reporte tr:first-child").show();
-	});
+	}
 	
+	
+	$("#tbody1").append("<tr class=\"odd\">" +
+			"<td></td><td></td>" +
+			"<td></td>" +
+			"<td> Total </td>" +
+			"<td> "+numberFormat2.format(suma)+"</td>" +
+			"<td></td>"+
+            "</tr>");
+	
+	$("#reporte tr:not(.odd)").hide();
+    $("#reporte tr:first-child").show();
 }
 
 function llenar_tabla2(datos) {
@@ -155,43 +218,72 @@ function llenar_tabla2(datos) {
 
 function mostrar_registros_citas(varCliente, varMascota){
 	
-	$.post("../../SCitas",{
-		accion : "mostrar_todas_de",
-		Cliente: varCliente,
-		Mascota: varMascota
-	},function(responseJson){
+	if($("#busc_calendar").prop('checked')){
 		
-		var datos = JSON.parse(responseJson);
-		var date;
-		var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+		var varFechaMe = $("#Fecha_Men").val();
+		var varFechaMa = $("#Fecha_May").val();
 		
-		for(var i in datos){
-			date = new Date(datos[i].Fecha); 
-			date.setDate(date.getDate() + 1);
-			if(datos[i].Hora == "null"){
-				 $("#body_citas").append("<tr>" +
-							"<td>"+datos[i].IDCita+"</td>" +
-							"<td>"+datos[i].Tipo+"</td>" +
-							"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
-							"<td>"+datos[i].Hora+"</td>" +
-							"<td> "+datos[i].NombreC+"</td>" +
-							"<td>"+datos[i].NombreM+"</td>" +
-							"<td>"+datos[i].Notas+"</td>" +
-							"</tr>");
-			 }else{
-				 $("#body_citas").append("<tr>" +
-							"<td>"+datos[i].IDCita+"</td>" +
-							"<td>"+datos[i].Tipo+"</td>" +
-							"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
-							"<td>"+datos[i].Hora[0]+datos[i].Hora[1]+datos[i].Hora[2]+datos[i].Hora[3]+datos[i].Hora[4]+"</td>" +
-							"<td> "+datos[i].NombreC+"</td>" +
-							"<td>"+datos[i].NombreM+"</td>" +
-							"<td>"+datos[i].Notas+"</td>" +
-							"</tr>");
-			 }
-		}		
+		if(varFechaMa=="" || varFechaMe==""){
+			return;
+		}
+		$.post("../../SCitas",{
+			accion : "mostrar_todas_de",
+			Cliente: varCliente,
+			Mascota: varMascota,
+			marcado: "Si",
+			fecha_men: varFechaMe,
+			fecha_may: varFechaMa
+		},function(responseJson){
+			
+			var datos = JSON.parse(responseJson);
+			llenar_tabla_citas(datos);
+		});
 	}
-	);
+	else{
+		$.post("../../SCitas",{
+			accion : "mostrar_todas_de",
+			Cliente: varCliente,
+			Mascota: varMascota,
+			marcado: "No",
+		},function(responseJson){
+			
+			var datos = JSON.parse(responseJson);
+			llenar_tabla_citas(datos);
+		});
+		
+	}
+	
+}
+
+function llenar_tabla_citas(datos){
+	var date;
+	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	
+	for(var i in datos){
+		date = new Date(datos[i].Fecha); 
+		date.setDate(date.getDate() + 1);
+		if(datos[i].Hora == "null"){
+			 $("#body_citas").append("<tr>" +
+						"<td>"+datos[i].IDCita+"</td>" +
+						"<td>"+datos[i].Tipo+"</td>" +
+						"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
+						"<td>"+datos[i].Hora+"</td>" +
+						"<td> "+datos[i].NombreC+"</td>" +
+						"<td>"+datos[i].NombreM+"</td>" +
+						"<td>"+datos[i].Notas+"</td>" +
+						"</tr>");
+		 }else{
+			 $("#body_citas").append("<tr>" +
+						"<td>"+datos[i].IDCita+"</td>" +
+						"<td>"+datos[i].Tipo+"</td>" +
+						"<td>"+date.toLocaleDateString("es-ES", options)+"</td>" +
+						"<td>"+datos[i].Hora[0]+datos[i].Hora[1]+datos[i].Hora[2]+datos[i].Hora[3]+datos[i].Hora[4]+"</td>" +
+						"<td> "+datos[i].NombreC+"</td>" +
+						"<td>"+datos[i].NombreM+"</td>" +
+						"<td>"+datos[i].Notas+"</td>" +
+						"</tr>");
+		 }
+	}		
 }
 
 function crear_documento(){
@@ -215,6 +307,19 @@ function crear_documento(){
 		      
 		      doc.text('Historial de Cliente: '+$("#cliente").val(), data.settings.margin.left + 55, 22)
 		      
+		      var options = { year: 'numeric', month: 'long', day: 'numeric' };
+		      
+		      if($("#Fecha_Men").val()!="" && $("#Fecha_May").val()!=""){
+		    	  var FechaMen = new Date($("#Fecha_Men").val());
+			      var FechaMay = new Date($("#Fecha_May").val());
+			      FechaMay.setDate(FechaMay.getDate() + 1);
+			      FechaMen.setDate(FechaMen.getDate() + 1);
+			      
+		    	  doc.setFontSize(10)
+			      doc.text('Desde: '+FechaMen.toLocaleDateString("es-ES", options)+"    Hasta: "+FechaMay.toLocaleDateString("es-ES", options), data.settings.margin.left + 55, 27)
+			      doc.setFontSize(20)
+		      }
+		      
 		      doc.addImage(imgData, 'JPEG', data.settings.margin.left, 13, 50, 15)
 
 		        // Footer
@@ -232,8 +337,7 @@ function crear_documento(){
 		      var pageSize = doc.internal.pageSize
 		      var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight()
 
- 		  var options = { year: 'numeric', month: 'long', day: 'numeric' };
- 		  var f = new Date();
+    		  var f = new Date();
 		      
 		      doc.text(str, data.settings.margin.left, pageHeight - 10)
 		          doc.text("Fecha: "+f.toLocaleDateString("es-ES", options),data.settings.margin.left+140, pageHeight - 10)
@@ -256,7 +360,18 @@ function crear_documento(){
 			      doc.setTextColor(11, 83, 142)
 			      
 			      doc.text('Historial de Cliente: '+$("#cliente").val(), data.settings.margin.left + 55, 22)
+			      var options = { year: 'numeric', month: 'long', day: 'numeric' };
 			      
+			      if($("#Fecha_Men").val()!="" && $("#Fecha_May").val()!=""){
+			    	  var FechaMen = new Date($("#Fecha_Men").val());
+				      var FechaMay = new Date($("#Fecha_May").val());
+				      FechaMay.setDate(FechaMay.getDate() + 1);
+				      FechaMen.setDate(FechaMen.getDate() + 1);
+				      
+			    	  doc.setFontSize(10)
+				      doc.text('Desde: '+FechaMen.toLocaleDateString("es-ES", options)+"    Hasta: "+FechaMay.toLocaleDateString("es-ES", options), data.settings.margin.left + 55, 27)
+				      doc.setFontSize(20)
+			      }
 			      doc.addImage(imgData, 'JPEG', data.settings.margin.left, 13, 50, 15)
 
 		        // Footer
@@ -274,7 +389,6 @@ function crear_documento(){
 			      var pageSize = doc.internal.pageSize
 			      var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight()
 
-	  		  var options = { year: 'numeric', month: 'long', day: 'numeric' };
 	  		  var f = new Date();
 			      
 	  		  doc.text(str, data.settings.margin.left, pageHeight - 10)
@@ -313,6 +427,18 @@ function crear_documento2(){
 		      
 		      doc.text('Historial de Cliente: '+$("#cliente").val(), data.settings.margin.left + 55, 22)
 		      
+		      var options = { year: 'numeric', month: 'long', day: 'numeric' };
+		      
+		      if($("#Fecha_Men").val()!="" && $("#Fecha_May").val()!=""){
+		    	  var FechaMen = new Date($("#Fecha_Men").val());
+			      var FechaMay = new Date($("#Fecha_May").val());
+			      FechaMay.setDate(FechaMay.getDate() + 1);
+			      FechaMen.setDate(FechaMen.getDate() + 1);
+			      
+		    	  doc.setFontSize(10)
+			      doc.text('Desde: '+FechaMen.toLocaleDateString("es-ES", options)+"    Hasta: "+FechaMay.toLocaleDateString("es-ES", options), data.settings.margin.left + 55, 27)
+			      doc.setFontSize(20)
+		      }
 		      doc.addImage(imgData, 'JPEG', data.settings.margin.left, 13, 50, 15)
 
 		        // Footer
@@ -330,8 +456,7 @@ function crear_documento2(){
 		      var pageSize = doc.internal.pageSize
 		      var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight()
 
-  		  var options = { year: 'numeric', month: 'long', day: 'numeric' };
-  		  var f = new Date();
+    		  var f = new Date();
 		      
 		      doc.text(str, data.settings.margin.left, pageHeight - 10)
 		          doc.text("Fecha: "+f.toLocaleDateString("es-ES", options),data.settings.margin.left+140, pageHeight - 10)
@@ -354,7 +479,18 @@ function crear_documento2(){
 			      doc.setTextColor(11, 83, 142)
 			      
 			      doc.text('Historial de Cliente: '+$("#cliente").val(), data.settings.margin.left + 55, 22)
+			      var options = { year: 'numeric', month: 'long', day: 'numeric' };
 			      
+			      if($("#Fecha_Men").val()!="" && $("#Fecha_May").val()!=""){
+			    	  var FechaMen = new Date($("#Fecha_Men").val());
+				      var FechaMay = new Date($("#Fecha_May").val());
+				      FechaMay.setDate(FechaMay.getDate() + 1);
+				      FechaMen.setDate(FechaMen.getDate() + 1);
+				      
+			    	  doc.setFontSize(10)
+				      doc.text('Desde: '+FechaMen.toLocaleDateString("es-ES", options)+"    Hasta: "+FechaMay.toLocaleDateString("es-ES", options), data.settings.margin.left + 55, 27)
+				      doc.setFontSize(20)
+			      }
 			      doc.addImage(imgData, 'JPEG', data.settings.margin.left, 13, 50, 15)
 
 		        // Footer
@@ -372,7 +508,6 @@ function crear_documento2(){
 			      var pageSize = doc.internal.pageSize
 			      var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight()
 
-	  		  var options = { year: 'numeric', month: 'long', day: 'numeric' };
 	  		  var f = new Date();
 			      
 	  		  doc.text(str, data.settings.margin.left, pageHeight - 10)

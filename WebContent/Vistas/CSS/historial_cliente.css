@@ -16,12 +16,16 @@ body {
     margin-bottom: 20px;
 }
 
-.bt-menos{
+.bt-menos, .busq_fecha{
 	display: none;
 }
 
 #reporte2{
 	display: none;
+}
+#busc_calendar{
+	margin-left: 35% !important;
+	
 }
 
 .but-descargar{
@@ -37,4 +41,11 @@ body {
     margin-left: 20%;
 }
 
+#fecha-bus{
+	margin: 10px;
+}
+
+#fecha-bus input, #fecha-bus label{
+	margin-left: 10px;
+}
 
